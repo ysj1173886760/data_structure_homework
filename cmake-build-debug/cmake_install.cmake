@@ -1,4 +1,4 @@
-# Install script for directory: /home/data/data_structure_homework
+# Install script for directory: /home/shrimp/CLionProjects/data_structure_homework
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/data/data_structure_homework/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/shrimp/CLionProjects/data_structure_homework/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
