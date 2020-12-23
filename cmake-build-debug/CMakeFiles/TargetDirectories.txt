@@ -1,3 +1,8 @@
-/Users/dbdxzwh/Desktop/data_structure_A/data_structure_homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/dbdxzwh/Desktop/data_structure_A/data_structure_homework/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/dbdxzwh/Desktop/data_structure_A/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir
+/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/testmulti.dir
+/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir
+/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/rebuild_cache.dir
+/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/edit_cache.dir
+/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/gtest_main.dir
+/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/gtest.dir

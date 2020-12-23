@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/data_structure_homework.dir/main.cpp.o"
-  "data_structure_homework"
-  "data_structure_homework.pdb"
+  "../bin/data_structure_homework"
+  "../bin/data_structure_homework.pdb"
+  "CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.
