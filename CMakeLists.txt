@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD 20)
 #do not change it pls
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 
-include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include)
+include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include ${CMAKE_CURRENT_SOURCE_DIR}/json)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
@@ -29,13 +29,15 @@ set(WORK ${dir_srcs})
 
 add_executable(data_structure_homework ${WORK})
 
+target_link_libraries(data_structure_homework jsoncpp)
+
 # add test files here
 # after adding your test file, change the configurations on the top right corner
 # then go for it, here`s an example
 
-#set(testmulti test/test.cpp)
+set(testjson test/json_test.cpp)
 
-#add_executable(testmulti ${testmulti})
+add_executable(testjson ${testjson})
 
-#linking google test lib to your test file
-#target_link_libraries(testmulti gtest)
+# linking google test lib to your test file
+target_link_libraries(testjson jsoncpp)

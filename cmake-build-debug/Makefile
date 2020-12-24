@@ -131,17 +131,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named testmulti
+# Target rules for targets named testjson
 
 # Build rule for target.
-testmulti: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testmulti
-.PHONY : testmulti
+testjson: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testjson
+.PHONY : testjson
 
 # fast build rule for target.
-testmulti/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testmulti.dir/build.make CMakeFiles/testmulti.dir/build
-.PHONY : testmulti/fast
+testjson/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/build
+.PHONY : testjson/fast
 
 #=============================================================================
 # Target rules for targets named data_structure_homework
@@ -182,6 +182,33 @@ gtest/fast:
 	$(MAKE) $(MAKESILENT) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
+src/DB.o: src/DB.cpp.o
+
+.PHONY : src/DB.o
+
+# target to build an object file
+src/DB.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
+.PHONY : src/DB.cpp.o
+
+src/DB.i: src/DB.cpp.i
+
+.PHONY : src/DB.i
+
+# target to preprocess a source file
+src/DB.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
+.PHONY : src/DB.cpp.i
+
+src/DB.s: src/DB.cpp.s
+
+.PHONY : src/DB.s
+
+# target to generate assembly for a file
+src/DB.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
+.PHONY : src/DB.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -209,32 +236,32 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-test/test.o: test/test.cpp.o
+test/json_test.o: test/json_test.cpp.o
 
-.PHONY : test/test.o
+.PHONY : test/json_test.o
 
 # target to build an object file
-test/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testmulti.dir/build.make CMakeFiles/testmulti.dir/test/test.cpp.o
-.PHONY : test/test.cpp.o
+test/json_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/test/json_test.cpp.o
+.PHONY : test/json_test.cpp.o
 
-test/test.i: test/test.cpp.i
+test/json_test.i: test/json_test.cpp.i
 
-.PHONY : test/test.i
+.PHONY : test/json_test.i
 
 # target to preprocess a source file
-test/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testmulti.dir/build.make CMakeFiles/testmulti.dir/test/test.cpp.i
-.PHONY : test/test.cpp.i
+test/json_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/test/json_test.cpp.i
+.PHONY : test/json_test.cpp.i
 
-test/test.s: test/test.cpp.s
+test/json_test.s: test/json_test.cpp.s
 
-.PHONY : test/test.s
+.PHONY : test/json_test.s
 
 # target to generate assembly for a file
-test/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testmulti.dir/build.make CMakeFiles/testmulti.dir/test/test.cpp.s
-.PHONY : test/test.cpp.s
+test/json_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/test/json_test.cpp.s
+.PHONY : test/json_test.cpp.s
 
 # Help Target
 help:
@@ -247,13 +274,16 @@ help:
 	@echo "... data_structure_homework"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... testmulti"
+	@echo "... testjson"
+	@echo "... src/DB.o"
+	@echo "... src/DB.i"
+	@echo "... src/DB.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... test/test.o"
-	@echo "... test/test.i"
-	@echo "... test/test.s"
+	@echo "... test/json_test.o"
+	@echo "... test/json_test.i"
+	@echo "... test/json_test.s"
 .PHONY : help
 
 

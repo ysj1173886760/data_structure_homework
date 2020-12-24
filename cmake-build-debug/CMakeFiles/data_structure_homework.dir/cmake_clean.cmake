@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "../bin/data_structure_homework"
   "../bin/data_structure_homework.pdb"
+  "CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
 )
 

@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++2a
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/data/data_structure_homework/include -I/home/data/data_structure_homework/googletest/include 
+CXX_INCLUDES = -I/home/data/data_structure_homework/include -I/home/data/data_structure_homework/googletest/include -I/home/data/data_structure_homework/json 
 
