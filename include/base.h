@@ -28,10 +28,10 @@ public:
 
 class UserData: public Base {
 public:
-    std::string real_name
-    std::string user_name
-    std::string pass_word
-    std::string phone_number
+    std::string real_name;
+    std::string user_name;
+    std::string pass_word;
+    std::string phone_number;
     //etc
 };
 

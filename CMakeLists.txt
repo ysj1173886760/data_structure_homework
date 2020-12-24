@@ -33,9 +33,9 @@ add_executable(data_structure_homework ${WORK})
 # after adding your test file, change the configurations on the top right corner
 # then go for it, here`s an example
 
-set(testmulti test/test.cpp)
+#set(testmulti test/test.cpp)
 
-add_executable(testmulti ${testmulti})
+#add_executable(testmulti ${testmulti})
 
 #linking google test lib to your test file
-target_link_libraries(testmulti gtest)
+#target_link_libraries(testmulti gtest)
