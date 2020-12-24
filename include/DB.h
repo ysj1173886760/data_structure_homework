@@ -7,13 +7,17 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <fstream>
+#include <assert.h>
+#include <iostream>
 #include "base.h"
 #include "json.h"
 
 class DB {
 private:
-    std::vector<UserData> user_data;
-    std::vector<ItemData> item_data;
+    std::unordered_map<std::string, UserData> user_data;
+    std::unordered_map<std::string, ItemData> item_data;
 
     void load_user_data(std::string);
     void load_item_data(std::string);
@@ -21,7 +25,15 @@ private:
     void save_user_data(std::string);
     void save_item_data(std::string);
 
+    DB() {}
+
+    static DB instance;
+
 public:
+    static DB getInstance() {
+        return instance;
+    }
+
     void open();
     void close();
 
