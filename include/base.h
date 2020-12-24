@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 class Base {
 public:
@@ -37,6 +38,13 @@ public:
     std::string price;
     std::string time;
     int buy_num;
+
+    void print() const {
+        std::cout << "item_id: " << item_id << std::endl;
+        std::cout << "price: " << price << std::endl;
+        std::cout << "time: " << time << std::endl;
+        std::cout << "buy_num: " << buy_num << std::endl;
+    }
 };
 
 class UserData: public Base {
@@ -57,6 +65,39 @@ public:
     std::vector<std::string> shop_list;
     std::vector<std::string> history_item;
     //etc
+
+    // print them out, easy to debug
+    void print() const {
+        std::cout << "account: " << account << std::endl;
+        std::cout << "password: " << password << std::endl;
+        std::cout << "real_name: " << real_name << std::endl;
+        std::cout << "user_name: " << user_name << std::endl;
+        std::cout << "phone_number: " << phone_number << std::endl;
+        std::cout << "email: " << email << std::endl;
+        std::cout << "id_number: " << id_number << std::endl;
+        std::cout << "age: " << age << std::endl;
+        std::cout << "gender: " << gender << std::endl;
+
+        std::cout << "history_order_num: " << history_order.size() << std::endl;
+        for (const auto &x: history_order) {
+            x.print();
+        }
+
+        std::cout << "message_num: " << message.size() << std::endl;
+        for (const auto &x: message) {
+            std::cout << x << std::endl;
+        }
+
+        std::cout << "shop_list_num: " << shop_list.size() << std::endl;
+        for (const auto &x: shop_list) {
+            std::cout << x << std::endl;
+        }
+
+        std::cout << "history_item_num: " << history_item.size() << std::endl;
+        for (const auto &x: history_item) {
+            std::cout << x << std::endl;
+        }
+    }
 };
 
 class ManagerData: public Base {

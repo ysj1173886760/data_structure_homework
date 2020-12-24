@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/testjson.dir/all
+all: CMakeFiles/testdb.dir/all
 all: CMakeFiles/data_structure_homework.dir/all
 all: googletest/all
 
@@ -85,7 +85,7 @@ preinstall: googletest/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/testjson.dir/clean
+clean: CMakeFiles/testdb.dir/clean
 clean: CMakeFiles/data_structure_homework.dir/clean
 clean: googletest/clean
 
@@ -112,31 +112,31 @@ googletest/clean: googletest/CMakeFiles/gtest.dir/clean
 .PHONY : googletest/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/testjson.dir
+# Target rules for target CMakeFiles/testdb.dir
 
 # All Build rule for target.
-CMakeFiles/testjson.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=8,9 "Built target testjson"
-.PHONY : CMakeFiles/testjson.dir/all
+CMakeFiles/testdb.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=8,9,10 "Built target testdb"
+.PHONY : CMakeFiles/testdb.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/testjson.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/testjson.dir/all
+CMakeFiles/testdb.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/testdb.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/testjson.dir/rule
+.PHONY : CMakeFiles/testdb.dir/rule
 
 # Convenience name for target.
-testjson: CMakeFiles/testjson.dir/rule
+testdb: CMakeFiles/testdb.dir/rule
 
-.PHONY : testjson
+.PHONY : testdb
 
 # clean rule for target.
-CMakeFiles/testjson.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/clean
-.PHONY : CMakeFiles/testjson.dir/clean
+CMakeFiles/testdb.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/clean
+.PHONY : CMakeFiles/testdb.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/data_structure_homework.dir

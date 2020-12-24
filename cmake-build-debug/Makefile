@@ -131,17 +131,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named testjson
+# Target rules for targets named testdb
 
 # Build rule for target.
-testjson: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testjson
-.PHONY : testjson
+testdb: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testdb
+.PHONY : testdb
 
 # fast build rule for target.
-testjson/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/build
-.PHONY : testjson/fast
+testdb/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/build
+.PHONY : testdb/fast
 
 #=============================================================================
 # Target rules for targets named data_structure_homework
@@ -188,6 +188,7 @@ src/DB.o: src/DB.cpp.o
 
 # target to build an object file
 src/DB.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
 .PHONY : src/DB.cpp.o
 
@@ -197,6 +198,7 @@ src/DB.i: src/DB.cpp.i
 
 # target to preprocess a source file
 src/DB.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
 .PHONY : src/DB.cpp.i
 
@@ -206,6 +208,7 @@ src/DB.s: src/DB.cpp.s
 
 # target to generate assembly for a file
 src/DB.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
 .PHONY : src/DB.cpp.s
 
@@ -236,32 +239,32 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-test/json_test.o: test/json_test.cpp.o
+test/db_test.o: test/db_test.cpp.o
 
-.PHONY : test/json_test.o
+.PHONY : test/db_test.o
 
 # target to build an object file
-test/json_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/test/json_test.cpp.o
-.PHONY : test/json_test.cpp.o
+test/db_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/test/db_test.cpp.o
+.PHONY : test/db_test.cpp.o
 
-test/json_test.i: test/json_test.cpp.i
+test/db_test.i: test/db_test.cpp.i
 
-.PHONY : test/json_test.i
+.PHONY : test/db_test.i
 
 # target to preprocess a source file
-test/json_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/test/json_test.cpp.i
-.PHONY : test/json_test.cpp.i
+test/db_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/test/db_test.cpp.i
+.PHONY : test/db_test.cpp.i
 
-test/json_test.s: test/json_test.cpp.s
+test/db_test.s: test/db_test.cpp.s
 
-.PHONY : test/json_test.s
+.PHONY : test/db_test.s
 
 # target to generate assembly for a file
-test/json_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testjson.dir/build.make CMakeFiles/testjson.dir/test/json_test.cpp.s
-.PHONY : test/json_test.cpp.s
+test/db_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/test/db_test.cpp.s
+.PHONY : test/db_test.cpp.s
 
 # Help Target
 help:
@@ -274,16 +277,16 @@ help:
 	@echo "... data_structure_homework"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... testjson"
+	@echo "... testdb"
 	@echo "... src/DB.o"
 	@echo "... src/DB.i"
 	@echo "... src/DB.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... test/json_test.o"
-	@echo "... test/json_test.i"
-	@echo "... test/json_test.s"
+	@echo "... test/db_test.o"
+	@echo "... test/db_test.i"
+	@echo "... test/db_test.s"
 .PHONY : help
 
 

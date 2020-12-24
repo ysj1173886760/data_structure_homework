@@ -4,6 +4,13 @@
 
 #include "DB.h"
 
+void DB::open() {
+    std::cout << "loading userdata..." << std::endl;
+    load_user_data("../data/data.json");
+
+    std::cout << "data load complete" << std::endl;
+}
+
 void DB::load_user_data(std::string filename) {
     std::ifstream ifs;
     ifs.open(filename);
@@ -57,4 +64,20 @@ void DB::load_user_data(std::string filename) {
         this->user_data[id] = newUser;
     }
     ifs.close();
+}
+
+std::vector<UserData> DB::select_all_user_data() {
+    std::vector<UserData> return_value;
+    for (const auto &[id, value]: this->user_data) {
+        return_value.push_back(value);
+    }
+    return return_value;
+}
+
+void DB::insert_user_data(UserData) {
+
+}
+
+void DB::delete_user_data(UserData) {
+
 }
