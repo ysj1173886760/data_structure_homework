@@ -22,17 +22,31 @@ void DB::load_user_data(const std::string &filename) {
     std::ifstream ifs;
     ifs.open(filename);
 
-    // TODO: assert is slow, find a way to change it
-    assert(ifs.is_open());
+    if (!ifs.is_open()) {
+        std::cout << "error opening file: " << filename << std::endl;
+        return;
+    }
 
-    Json::Reader reader;
+    std::string line, json_str;
+    while (getline(ifs, line)) {
+        json_str.append(line);
+    }
+
+    Json::CharReaderBuilder char_reader_builder;
+    std::unique_ptr<Json::CharReader> const json_reader(char_reader_builder.newCharReader());
+
     Json::Value root;
-
     root.clear();
 
-    if (!reader.parse(ifs, root, false))
-    {
-        std::cout << "reader parse error: " << strerror(errno) << std::endl;
+    bool res;
+    JSONCPP_STRING errors;
+
+    res = json_reader->parse(json_str.c_str(), json_str.c_str() + json_str.length(),
+                             &root, &errors);
+
+    if (!res || !errors.empty()) {
+        std::cout << "parsing error" << errors << std::endl;
+        ifs.close();
         return;
     }
 
