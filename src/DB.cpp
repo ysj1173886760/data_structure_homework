@@ -18,13 +18,13 @@ void DB::close() {
     std::cout << "data save complete" << std::endl;
 }
 
-void DB::load_user_data(const std::string &filename) {
+bool DB::parse_json_from_file(const std::string &filename, Json::Value &root) {
     std::ifstream ifs;
     ifs.open(filename);
 
     if (!ifs.is_open()) {
         std::cout << "error opening file: " << filename << std::endl;
-        return;
+        return false;
     }
 
     std::string line, json_str;
@@ -32,10 +32,11 @@ void DB::load_user_data(const std::string &filename) {
         json_str.append(line);
     }
 
+    ifs.close();
+
     Json::CharReaderBuilder char_reader_builder;
     std::unique_ptr<Json::CharReader> const json_reader(char_reader_builder.newCharReader());
 
-    Json::Value root;
     root.clear();
 
     bool res;
@@ -46,7 +47,35 @@ void DB::load_user_data(const std::string &filename) {
 
     if (!res || !errors.empty()) {
         std::cout << "parsing error" << errors << std::endl;
-        ifs.close();
+        return false;
+    }
+
+    return true;
+}
+
+bool DB::save_json_to_file(const std::string &filename, const Json::Value &root) {
+    std::ofstream ofs;
+    ofs.open(filename);
+
+    if (!ofs.is_open()) {
+        std::cout << "error opening file: " << filename << std::endl;
+        return false;
+    }
+
+    Json::StreamWriterBuilder writer_builder;
+    std::unique_ptr<Json::StreamWriter> json_writer(writer_builder.newStreamWriter());
+    json_writer->write(root, &ofs);
+    ofs.close();
+
+    return true;
+}
+
+// this is about user data
+
+void DB::load_user_data(const std::string &filename) {
+    Json::Value root;
+
+    if (!parse_json_from_file(filename, root)) {
         return;
     }
 
@@ -84,7 +113,6 @@ void DB::load_user_data(const std::string &filename) {
         }
         this->user_data[id] = new_user;
     }
-    ifs.close();
 }
 
 void DB::save_user_data(const std::string &filename) {
@@ -140,14 +168,9 @@ void DB::save_user_data(const std::string &filename) {
         root.append(new_user_data);
     }
 
-    std::ofstream ofs;
-    ofs.open(filename);
-    assert(ofs.is_open());
-
-    Json::StreamWriterBuilder writer_builder;
-    std::unique_ptr<Json::StreamWriter> json_writer(writer_builder.newStreamWriter());
-    json_writer->write(root, &ofs);
-    ofs.close();
+    if (!save_json_to_file(filename, root)) {
+        return;
+    }
 }
 
 std::vector<UserData> DB::select_all_user_data() {
@@ -178,3 +201,93 @@ UserData DB::select_user_data(const std::string &id) {
     }
     return return_value;
 }
+
+// user data end
+
+// this is item data
+
+void DB::load_item_data(const std::string &filename) {
+    Json::Value root;
+
+    if (!parse_json_from_file(filename, root)) {
+        return;
+    }
+
+    for (auto it = root.begin(); it != root.end(); it++) {
+        Json::Value temp = *it;
+        std::string id = temp["id"].asString();
+        ItemData new_item;
+        new_item.owner = temp["owner"].asString();
+        new_item.name = temp["name"].asString();
+        new_item.price = temp["price"].asDouble();
+        new_item.des = temp["des"].asString();
+        new_item.sell_num = temp["sell_num"].asInt();
+        new_item.store_num = temp["store_num"].asInt();
+
+        for (int i = 0; i < temp["label"].size(); i++) {
+            new_item.label.emplace_back(temp["label"][i].asString());
+        }
+
+        this->item_data[id] = new_item;
+    }
+}
+
+void DB::save_item_data(const std::string &filename) {
+    Json::Value root;
+
+    Json::Value new_item_data;
+    for (const auto &[id, value]: this->item_data) {
+        new_item_data.clear();
+
+        new_item_data["owner"] = value.owner;
+        new_item_data["name"] = value.name;
+        new_item_data["price"] = value.price;
+        new_item_data["des"] = value.des;
+        new_item_data["sell_num"] = value.sell_num;
+        new_item_data["store_num"] = value.store_num;
+
+        Json::Value label;
+        label.clear();
+        for (int i = 0; i < value.label.size(); i++) {
+            label[i] = value.label[i];
+        }
+        new_item_data["label"] = label;
+
+        root.append(new_item_data);
+    }
+
+    if (!save_json_to_file(filename, root)) {
+        return;
+    }
+}
+
+std::vector<ItemData> DB::select_all_item_data() {
+    std::vector<ItemData> return_value;
+    for (const auto &[id, value]: this->item_data) {
+        return_value.push_back(value);
+    }
+    return return_value;
+}
+
+std::string DB::insert_item_data(const ItemData &inserted_user_data) {
+    // TODO: id generator
+    ItemData new_item_data = inserted_user_data;
+    this->item_data[new_item_data.id] = new_item_data;
+    return new_item_data.id;
+}
+
+void DB::delete_item_data(const std::string &id) {
+    if (this->item_data.count(id)) {
+        this->item_data.erase(id);
+    }
+}
+
+ItemData DB::select_item_data(const std::string &id) {
+    ItemData return_value;
+    if (this->item_data.count(id)) {
+        return_value = item_data[id];
+    }
+    return return_value;
+}
+
+// item data end

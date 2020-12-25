@@ -19,6 +19,9 @@ private:
     std::unordered_map<std::string, UserData> user_data;
     std::unordered_map<std::string, ItemData> item_data;
 
+    bool parse_json_from_file(const std::string&, Json::Value&);
+    bool save_json_to_file(const std::string&, const Json::Value&);
+
     void load_user_data(const std::string&);
     void load_item_data(const std::string&);
 
