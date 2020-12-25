@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/137/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /usr/local/clion-2020.3/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/137/bin/cmake/linux/bin/cmake -E rm -f
+RM = /usr/local/clion-2020.3/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/data/data_structure_homework
+CMAKE_SOURCE_DIR = /home/shrimp/data/CLionProjects/data_structure_homework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
+CMAKE_BINARY_DIR = /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/137/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/clion-2020.3/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -90,7 +90,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/137/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/usr/local/clion-2020.3/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles /home/data/data_structure_homework/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -131,17 +131,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named testdb
+# Target rules for targets named login_test
 
 # Build rule for target.
-testdb: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testdb
-.PHONY : testdb
+login_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 login_test
+.PHONY : login_test
 
 # fast build rule for target.
-testdb/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/build
-.PHONY : testdb/fast
+login_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/build
+.PHONY : login_test/fast
 
 #=============================================================================
 # Target rules for targets named data_structure_homework
@@ -188,7 +188,7 @@ src/DB.o: src/DB.cpp.o
 
 # target to build an object file
 src/DB.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/src/DB.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
 .PHONY : src/DB.cpp.o
 
@@ -198,7 +198,7 @@ src/DB.i: src/DB.cpp.i
 
 # target to preprocess a source file
 src/DB.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/src/DB.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
 .PHONY : src/DB.cpp.i
 
@@ -208,9 +208,66 @@ src/DB.s: src/DB.cpp.s
 
 # target to generate assembly for a file
 src/DB.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/src/DB.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
 .PHONY : src/DB.cpp.s
+
+src/LoginSystem.o: src/LoginSystem.cpp.o
+
+.PHONY : src/LoginSystem.o
+
+# target to build an object file
+src/LoginSystem.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/src/LoginSystem.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o
+.PHONY : src/LoginSystem.cpp.o
+
+src/LoginSystem.i: src/LoginSystem.cpp.i
+
+.PHONY : src/LoginSystem.i
+
+# target to preprocess a source file
+src/LoginSystem.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/src/LoginSystem.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.i
+.PHONY : src/LoginSystem.cpp.i
+
+src/LoginSystem.s: src/LoginSystem.cpp.s
+
+.PHONY : src/LoginSystem.s
+
+# target to generate assembly for a file
+src/LoginSystem.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/src/LoginSystem.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.s
+.PHONY : src/LoginSystem.cpp.s
+
+src/Register.o: src/Register.cpp.o
+
+.PHONY : src/Register.o
+
+# target to build an object file
+src/Register.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/Register.cpp.o
+.PHONY : src/Register.cpp.o
+
+src/Register.i: src/Register.cpp.i
+
+.PHONY : src/Register.i
+
+# target to preprocess a source file
+src/Register.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/Register.cpp.i
+.PHONY : src/Register.cpp.i
+
+src/Register.s: src/Register.cpp.s
+
+.PHONY : src/Register.s
+
+# target to generate assembly for a file
+src/Register.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/Register.cpp.s
+.PHONY : src/Register.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -239,32 +296,32 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-test/db_test.o: test/db_test.cpp.o
+test/login_test.o: test/login_test.cpp.o
 
-.PHONY : test/db_test.o
+.PHONY : test/login_test.o
 
 # target to build an object file
-test/db_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/test/db_test.cpp.o
-.PHONY : test/db_test.cpp.o
+test/login_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/test/login_test.cpp.o
+.PHONY : test/login_test.cpp.o
 
-test/db_test.i: test/db_test.cpp.i
+test/login_test.i: test/login_test.cpp.i
 
-.PHONY : test/db_test.i
+.PHONY : test/login_test.i
 
 # target to preprocess a source file
-test/db_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/test/db_test.cpp.i
-.PHONY : test/db_test.cpp.i
+test/login_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/test/login_test.cpp.i
+.PHONY : test/login_test.cpp.i
 
-test/db_test.s: test/db_test.cpp.s
+test/login_test.s: test/login_test.cpp.s
 
-.PHONY : test/db_test.s
+.PHONY : test/login_test.s
 
 # target to generate assembly for a file
-test/db_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/test/db_test.cpp.s
-.PHONY : test/db_test.cpp.s
+test/login_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/test/login_test.cpp.s
+.PHONY : test/login_test.cpp.s
 
 # Help Target
 help:
@@ -277,16 +334,22 @@ help:
 	@echo "... data_structure_homework"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... testdb"
+	@echo "... login_test"
 	@echo "... src/DB.o"
 	@echo "... src/DB.i"
 	@echo "... src/DB.s"
+	@echo "... src/LoginSystem.o"
+	@echo "... src/LoginSystem.i"
+	@echo "... src/LoginSystem.s"
+	@echo "... src/Register.o"
+	@echo "... src/Register.i"
+	@echo "... src/Register.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... test/db_test.o"
-	@echo "... test/db_test.i"
-	@echo "... test/db_test.s"
+	@echo "... test/login_test.o"
+	@echo "... test/login_test.i"
+	@echo "... test/login_test.s"
 .PHONY : help
 
 

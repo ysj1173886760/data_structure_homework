@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/data/data_structure_homework/src/DB.cpp" "/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
-  "/home/data/data_structure_homework/src/main.cpp" "/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/DB.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSystem.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/Register.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/Register.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/main.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

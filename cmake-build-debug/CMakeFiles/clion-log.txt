@@ -1,4 +1,4 @@
-/snap/clion/137/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/data/data_structure_homework
+/usr/local/clion-2020.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/shrimp/data/CLionProjects/data_structure_homework
 CMake Warning at googletest/CMakeLists.txt:54 (project):
   VERSION keyword not followed by a value or was followed by a value that
   expanded to nothing.
@@ -6,4 +6,4 @@ CMake Warning at googletest/CMakeLists.txt:54 (project):
 
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/data/data_structure_homework/cmake-build-debug
+-- Build files have been written to: /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug

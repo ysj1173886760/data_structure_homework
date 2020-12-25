@@ -1,4 +1,4 @@
-# Install script for directory: /home/data/data_structure_homework/googletest
+# Install script for directory: /home/shrimp/data/CLionProjects/data_structure_homework/googletest
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
