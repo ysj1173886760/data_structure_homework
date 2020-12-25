@@ -270,7 +270,6 @@ std::vector<ItemData> DB::select_all_item_data() {
 }
 
 std::string DB::insert_item_data(const ItemData &inserted_user_data) {
-    // TODO: id generator
     ItemData new_item_data = inserted_user_data;
     this->item_data[new_item_data.id] = new_item_data;
     return new_item_data.id;
