@@ -1,4 +1,6 @@
 /snap/clion/137/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/data/data_structure_homework
+-- Boost_INCLUDE_DIRS: /usr/local/include
+-- Boost_LIBRARIES: 
 CMake Warning at googletest/CMakeLists.txt:54 (project):
   VERSION keyword not followed by a value or was followed by a value that
   expanded to nothing.

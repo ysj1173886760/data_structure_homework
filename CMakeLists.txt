@@ -11,6 +11,19 @@ set(CMAKE_CXX_STANDARD 20)
 #obviously failed, bu kui shi wo
 
 #do not change it pls
+# boost stuff
+set(BOOST_MIN_VERSION "1.67.0")
+
+FIND_PACKAGE(Boost ${BOOST_MIN_VERSION} REQUIRED)
+if(NOT Boost_FOUND)
+    message(FATAL_ERROR "Boost error.\n")
+endif()
+message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
+message(STATUS "Boost_LIBRARIES: ${BOOST_LIBRARY_DIRS}")
+
+include_directories(${Boost_INCLUDE_DIRS})
+LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+#
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 
 include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include ${CMAKE_CURRENT_SOURCE_DIR}/json)
@@ -39,5 +52,9 @@ set(testdb test/db_test.cpp src/DB.cpp)
 
 add_executable(testdb ${testdb})
 
+add_executable(boost test/boost_test.cpp)
+
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp)
+
+target_link_libraries(boost ${Boost_LIBRARIES})

@@ -31,6 +31,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/Compiler/GNU-C.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/Compiler/GNU-CXX.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/Compiler/GNU.cmake"
+  "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/FindBoost.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/FindPackageHandleStandardArgs.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/FindPackageMessage.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/FindPythonInterp.cmake"
@@ -42,6 +43,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/Platform/Linux.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/Platform/UnixPaths.cmake"
   "/snap/clion/137/bin/cmake/linux/share/cmake-3.17/Modules/ProcessorCount.cmake"
+  "/usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake"
+  "/usr/local/lib/cmake/Boost-1.75.0/BoostConfigVersion.cmake"
+  "/usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config-version.cmake"
+  "/usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config.cmake"
   )
 
 # The corresponding makefile is:
@@ -58,8 +63,9 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/testdb.dir/DependInfo.cmake"
   "CMakeFiles/data_structure_homework.dir/DependInfo.cmake"
+  "CMakeFiles/testdb.dir/DependInfo.cmake"
+  "CMakeFiles/boost.dir/DependInfo.cmake"
   "googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   "googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
   )

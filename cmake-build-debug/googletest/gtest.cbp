@@ -5,7 +5,7 @@
 		<Option title="gtest"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\googletest\;CMake Files\googletest\cmake\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\usr\;CMake Files\..\..\..\usr\local\;CMake Files\..\..\..\usr\local\lib\;CMake Files\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\usr\local\lib\cmake\Boost-1.75.0\;CMake Files\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\;CMake Files\googletest\;CMake Files\googletest\cmake\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/data/data_structure_homework/cmake-build-debug/googletest"/>
@@ -126,6 +126,18 @@
 		</Unit>
 		<Unit filename="/home/data/data_structure_homework/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\Boost-1.75.0\"/>
+		</Unit>
+		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/Boost-1.75.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\Boost-1.75.0\"/>
+		</Unit>
+		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\"/>
+		</Unit>
+		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\"/>
 		</Unit>
 		<Unit filename="/home/data/data_structure_homework/googletest/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\googletest\"/>

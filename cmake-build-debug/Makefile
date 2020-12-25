@@ -131,6 +131,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named data_structure_homework
+
+# Build rule for target.
+data_structure_homework: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_structure_homework
+.PHONY : data_structure_homework
+
+# fast build rule for target.
+data_structure_homework/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/build
+.PHONY : data_structure_homework/fast
+
+#=============================================================================
 # Target rules for targets named testdb
 
 # Build rule for target.
@@ -144,17 +157,17 @@ testdb/fast:
 .PHONY : testdb/fast
 
 #=============================================================================
-# Target rules for targets named data_structure_homework
+# Target rules for targets named boost
 
 # Build rule for target.
-data_structure_homework: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_structure_homework
-.PHONY : data_structure_homework
+boost: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 boost
+.PHONY : boost
 
 # fast build rule for target.
-data_structure_homework/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/build
-.PHONY : data_structure_homework/fast
+boost/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/boost.dir/build.make CMakeFiles/boost.dir/build
+.PHONY : boost/fast
 
 #=============================================================================
 # Target rules for targets named gtest_main
@@ -188,8 +201,8 @@ src/DB.o: src/DB.cpp.o
 
 # target to build an object file
 src/DB.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.o
 .PHONY : src/DB.cpp.o
 
 src/DB.i: src/DB.cpp.i
@@ -198,8 +211,8 @@ src/DB.i: src/DB.cpp.i
 
 # target to preprocess a source file
 src/DB.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.i
 .PHONY : src/DB.cpp.i
 
 src/DB.s: src/DB.cpp.s
@@ -208,8 +221,8 @@ src/DB.s: src/DB.cpp.s
 
 # target to generate assembly for a file
 src/DB.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.s
 .PHONY : src/DB.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -238,6 +251,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+test/boost_test.o: test/boost_test.cpp.o
+
+.PHONY : test/boost_test.o
+
+# target to build an object file
+test/boost_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/boost.dir/build.make CMakeFiles/boost.dir/test/boost_test.cpp.o
+.PHONY : test/boost_test.cpp.o
+
+test/boost_test.i: test/boost_test.cpp.i
+
+.PHONY : test/boost_test.i
+
+# target to preprocess a source file
+test/boost_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/boost.dir/build.make CMakeFiles/boost.dir/test/boost_test.cpp.i
+.PHONY : test/boost_test.cpp.i
+
+test/boost_test.s: test/boost_test.cpp.s
+
+.PHONY : test/boost_test.s
+
+# target to generate assembly for a file
+test/boost_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/boost.dir/build.make CMakeFiles/boost.dir/test/boost_test.cpp.s
+.PHONY : test/boost_test.cpp.s
 
 test/db_test.o: test/db_test.cpp.o
 
@@ -274,6 +314,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... boost"
 	@echo "... data_structure_homework"
 	@echo "... gtest"
 	@echo "... gtest_main"
@@ -284,6 +325,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... test/boost_test.o"
+	@echo "... test/boost_test.i"
+	@echo "... test/boost_test.s"
 	@echo "... test/db_test.o"
 	@echo "... test/db_test.i"
 	@echo "... test/db_test.s"
