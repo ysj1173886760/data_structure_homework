@@ -24,13 +24,27 @@ message(STATUS "Boost_LIBRARIES: ${BOOST_LIBRARY_DIRS}")
 include_directories(${Boost_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 #
+message(STATUS "operating system is ${CMAKE_SYSTEM}")
+message(STATUS "operating system name is ${CMAKE_SYSTEM_NAME}")
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 
 include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include ${CMAKE_CURRENT_SOURCE_DIR}/json)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib ${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+
+include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include ${CMAKE_CURRENT_SOURCE_DIR}/json)
+
+set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/linux)
+elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/mac)
+endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 

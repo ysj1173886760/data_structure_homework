@@ -1,20 +1,5 @@
 [
 	{
-		"account" : "sheep3",
-		"age" : "",
-		"email" : "321",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "12312313",
-		"id_number" : "",
-		"message" : null,
-		"password" : "000",
-		"real_name" : "real_name",
-		"shop_list" : null,
-		"user_name" : "sheep"
-	},
-	{
 		"account" : "sheep",
 		"age" : "20",
 		"email" : "117@qq.com",
@@ -95,5 +80,20 @@
 			"item321"
 		],
 		"user_name" : "phone_number"
+	},
+	{
+		"account" : "sheep3",
+		"age" : "",
+		"email" : "321",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "12312313",
+		"id_number" : "",
+		"message" : null,
+		"password" : "000",
+		"real_name" : "real_name",
+		"shop_list" : null,
+		"user_name" : "sheep"
 	}
 ]
