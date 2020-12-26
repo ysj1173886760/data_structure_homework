@@ -714,3 +714,82 @@ SellerData DB::select_seller_data(const std::string &id) {
 }
 
 // seller data done
+
+// register request data stuff
+
+void DB::load_register_request_data(const std::string &filename) {
+    Json::Value root;
+
+    if (!parse_json_from_file(filename, root)) {
+        return;
+    }
+
+    for (auto it = root.begin(); it != root.end(); it++) {
+        Json::Value temp = *it;
+        std::string id = temp["id"].asString();
+        RegisterRequestData new_register_request_data;
+        new_register_request_data.id = id;
+        new_register_request_data.shop_owner_id_number = temp["shop_owner_id_number"].asString();
+        new_register_request_data.shop_owner_phone_number = temp["shop_owner_phone_number"].asString();
+        new_register_request_data.shop_owner_name = temp["shop_owner_name"].asString();
+        new_register_request_data.shop_address = temp["shop_address"].asString();
+        new_register_request_data.password = temp["password"].asString();
+        new_register_request_data.account = temp["account"].asString();
+
+        this->register_request_data[id] = new_register_request_data;
+    }
+}
+
+void DB::save_register_request_data(const std::string &filename) {
+    Json::Value root;
+
+    Json::Value new_register_request_data;
+    for (const auto &[id, value]: this->register_request_data) {
+        new_register_request_data.clear();
+
+        new_register_request_data["account"] = value.account;
+        new_register_request_data["password"] = value.password;
+        new_register_request_data["id"] = value.id;
+        new_register_request_data["shop_name"] = value.shop_name;
+        new_register_request_data["shop_address"] = value.shop_address;
+        new_register_request_data["shop_owner_name"] = value.shop_owner_name;
+        new_register_request_data["shop_owner_phone_number"] = value.shop_owner_phone_number;
+        new_register_request_data["shop_owner_id_number"] = value.shop_owner_id_number;
+
+        root.append(new_register_request_data);
+    }
+
+    if (!save_json_to_file(filename, root)) {
+        return;
+    }
+}
+
+std::vector<RegisterRequestData> DB::select_all_register_request_data() {
+    std::vector<RegisterRequestData> return_value;
+    for (const auto &[id, value]: this->register_request_data) {
+        return_value.push_back(value);
+    }
+    return return_value;
+}
+
+std::string DB::insert_register_request_data(const RegisterRequestData &inserted_register_request_data) {
+    RegisterRequestData new_register_data = inserted_register_request_data;
+    this->register_request_data[new_register_data.id] = new_register_data;
+    return new_register_data.id;
+}
+
+void DB::delete_register_request_data(const std::string &id) {
+    if (this->register_request_data.count(id)) {
+        this->register_request_data.erase(id);
+    }
+}
+
+RegisterRequestData DB::select_register_request_data(const std::string &id) {
+    RegisterRequestData return_value;
+    if (this->register_request_data.count(id)) {
+        return_value = this->register_request_data[id];
+    }
+    return return_value;
+}
+
+// register request data done

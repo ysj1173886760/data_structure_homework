@@ -158,8 +158,14 @@ public:
 };
 
 enum class Type {
-    user=1, seller, manager, item, orderlist,
-    ChangeItemRequest, BuyItemRequest, RegisterRequest
+    User = 1,
+    Seller,
+    Manager,
+    Item,
+    OrderList,
+    ChangeItemRequest,
+    BuyItemRequest,
+    RegisterRequest
 };
 
 // TODO: money system
