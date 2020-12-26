@@ -113,14 +113,16 @@ public:
 };
 
 class ChangeItemRequestData: public Base {
+public:
     std::string item_id;
     std::string des;
     std::string time;
 };
 
 class BuyItemRequestData: public Base {
+public:
     std::string item_id;
-    std::string remake;
+    std::string remark;
     std::string user_id;
     std::string time;
 };
@@ -142,6 +144,7 @@ public:
 };
 
 class RegisterRequestData: public Base {
+public:
     std::string account;
     std::string password;
     std::string shop_name;
