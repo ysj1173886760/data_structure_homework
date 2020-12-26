@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/login_test.dir/test/login_test.cpp.o CMakeFiles/login_test.dir/src/LoginSystem.cpp.o CMakeFiles/login_test.dir/src/DB.cpp.o  -o ../bin/login_test   -L/home/data/data_structure_homework/lib  -L/home/data/data_structure_homework/googletest  -Wl,-rpath,/home/data/data_structure_homework/lib:/home/data/data_structure_homework/googletest -ljsoncpp 
