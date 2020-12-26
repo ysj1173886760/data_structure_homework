@@ -1,9 +1,8 @@
-/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir
-/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/testdb.dir
-/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/boost.dir
-/home/data/data_structure_homework/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/rebuild_cache.dir
-/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/edit_cache.dir
-/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/gtest_main.dir
-/home/data/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/gtest.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/login_test.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/rebuild_cache.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/edit_cache.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/gtest_main.dir
+/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/googletest/CMakeFiles/gtest.dir
