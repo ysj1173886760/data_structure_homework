@@ -118,7 +118,7 @@ googletest/clean: googletest/CMakeFiles/gtest.dir/clean
 CMakeFiles/register.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=10,11,12,13 "Built target register"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=13,14,15,16 "Built target register"
 .PHONY : CMakeFiles/register.dir/all
 
 # Build rule for subdir invocation for target.
@@ -145,12 +145,12 @@ CMakeFiles/register.dir/clean:
 CMakeFiles/data_structure_homework.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target data_structure_homework"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target data_structure_homework"
 .PHONY : CMakeFiles/data_structure_homework.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/data_structure_homework.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/data_structure_homework.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/data_structure_homework.dir/rule
@@ -172,7 +172,7 @@ CMakeFiles/data_structure_homework.dir/clean:
 googletest/CMakeFiles/gtest_main.dir/all: googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=8,9 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target gtest_main"
 .PHONY : googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -199,7 +199,7 @@ googletest/CMakeFiles/gtest_main.dir/clean:
 googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) $(MAKESILENT) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) $(MAKESILENT) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target gtest"
 .PHONY : googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.

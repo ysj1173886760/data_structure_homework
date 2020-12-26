@@ -4,8 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/BasicOperation.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/BasicOperation.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/DB.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/IDgenerator.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSystem.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/QuestionSystem.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/Register.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/Register.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/main.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
   )

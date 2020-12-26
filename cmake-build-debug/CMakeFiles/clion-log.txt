@@ -1,5 +1,4 @@
 /usr/local/clion-2020.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/shrimp/data/CLionProjects/data_structure_homework
--- Found Boost: /usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake (found suitable version "1.75.0", minimum required is "1.67.0")  
 -- Boost_INCLUDE_DIRS: /usr/local/include
 -- Boost_LIBRARIES: 
 CMake Warning at googletest/CMakeLists.txt:54 (project):
@@ -7,16 +6,6 @@ CMake Warning at googletest/CMakeLists.txt:54 (project):
   expanded to nothing.
 
 
--- Found PythonInterp: /usr/bin/python (found version "3.6.9") 
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
--- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug
