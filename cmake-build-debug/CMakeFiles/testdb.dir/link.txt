@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/testdb.dir/test/db_test.cpp.o CMakeFiles/testdb.dir/src/DB.cpp.o  -o ../bin/testdb   -L/home/data/data_structure_homework/lib  -L/home/data/data_structure_homework/googletest  -Wl,-rpath,/home/data/data_structure_homework/lib:/home/data/data_structure_homework/googletest -ljsoncpp 

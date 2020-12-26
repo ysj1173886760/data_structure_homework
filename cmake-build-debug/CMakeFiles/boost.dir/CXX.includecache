@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/data/data_structure_homework/test/boost_test.cpp
+boost/timer/timer.hpp
+-
+boost/timer/progress_display.hpp
+-
+iostream
+-
+vector
+-
+string
+-
+
