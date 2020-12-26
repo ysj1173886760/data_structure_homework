@@ -13,7 +13,7 @@ class LoginSystem {
 public:
     LoginSystem();
     void Login();
-    void ChangePassword();1
+    void ChangePassword();
     void RecoverPassword();
 
 private:
