@@ -48,13 +48,14 @@ target_link_libraries(data_structure_homework jsoncpp)
 # after adding your test file, change the configurations on the top right corner
 # then go for it, here`s an example
 
-set(testdb test/db_test.cpp src/DB.cpp)
+#set(testdb test/db_test.cpp src/DB.cpp)
+set(register test/register_test.cpp src/Register.cpp src/DB.cpp)
 
-add_executable(testdb ${testdb})
-
-add_executable(boost test/boost_test.cpp)
+#add_executable(testdb ${testdb})
+#add_executable(boost test/boost_test.cpp)
+add_executable(register ${register})
 
 # linking google test lib to your test file
-target_link_libraries(testdb jsoncpp)
-
-target_link_libraries(boost ${Boost_LIBRARIES})
+#target_link_libraries(testdb jsoncpp)
+#target_link_libraries(boost ${Boost_LIBRARIES})
+target_link_libraries(register jsoncpp)

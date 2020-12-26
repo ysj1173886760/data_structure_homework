@@ -141,7 +141,9 @@ public:
     std::vector<std::string> discount;
 };
 
+// add public
 class RegisterRequestData: public Base {
+public:
     std::string account;
     std::string password;
     std::string shop_name;

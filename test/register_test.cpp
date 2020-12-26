@@ -5,7 +5,7 @@
 #include "Register.h"
 
 int main() {
-    Register_User r;
+    Register_Seller r;
     r.Register_Account();
     r.print();
 }

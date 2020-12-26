@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/shrimp/data/CLionProjects/data_structure_homework/cmake
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/login_test.dir/all
+all: CMakeFiles/register.dir/all
 all: CMakeFiles/data_structure_homework.dir/all
 all: googletest/all
 
@@ -85,7 +85,7 @@ preinstall: googletest/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/login_test.dir/clean
+clean: CMakeFiles/register.dir/clean
 clean: CMakeFiles/data_structure_homework.dir/clean
 clean: googletest/clean
 
@@ -112,31 +112,31 @@ googletest/clean: googletest/CMakeFiles/gtest.dir/clean
 .PHONY : googletest/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/login_test.dir
+# Target rules for target CMakeFiles/register.dir
 
 # All Build rule for target.
-CMakeFiles/login_test.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=10,11,12,13 "Built target login_test"
-.PHONY : CMakeFiles/login_test.dir/all
+CMakeFiles/register.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=10,11,12,13 "Built target register"
+.PHONY : CMakeFiles/register.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/login_test.dir/rule: cmake_check_build_system
+CMakeFiles/register.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/login_test.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/register.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/login_test.dir/rule
+.PHONY : CMakeFiles/register.dir/rule
 
 # Convenience name for target.
-login_test: CMakeFiles/login_test.dir/rule
+register: CMakeFiles/register.dir/rule
 
-.PHONY : login_test
+.PHONY : register
 
 # clean rule for target.
-CMakeFiles/login_test.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/login_test.dir/build.make CMakeFiles/login_test.dir/clean
-.PHONY : CMakeFiles/login_test.dir/clean
+CMakeFiles/register.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/clean
+.PHONY : CMakeFiles/register.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/data_structure_homework.dir
