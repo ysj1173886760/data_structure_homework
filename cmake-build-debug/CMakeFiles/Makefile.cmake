@@ -90,7 +90,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindBoost.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPackageHandleStandardArgs.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPackageMessage.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPythonInterp.cmake"
@@ -113,11 +112,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.17.3/CMakeSystem.cmake"
   "../googletest/CMakeLists.txt"
   "../googletest/cmake/internal_utils.cmake"
-  "/usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake"
-  "/usr/local/lib/cmake/Boost-1.75.0/BoostConfigVersion.cmake"
-  "/usr/local/lib/cmake/boost_headers-1.73.0/boost_headers-config-version.cmake"
-  "/usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config-version.cmake"
-  "/usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config.cmake"
   )
 
 # The corresponding makefile is:
@@ -139,8 +133,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/testdb.dir/DependInfo.cmake"
-  "CMakeFiles/boost.dir/DependInfo.cmake"
+  "CMakeFiles/login_test.dir/DependInfo.cmake"
   "CMakeFiles/data_structure_homework.dir/DependInfo.cmake"
   "googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   "googletest/CMakeFiles/gtest.dir/DependInfo.cmake"

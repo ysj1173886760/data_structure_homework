@@ -6,5 +6,5 @@ CXX_FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/Ma
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/local/include -I/Users/dbdxzwh/Desktop/data_structure_homework/include -I/Users/dbdxzwh/Desktop/data_structure_homework/googletest/include -I/Users/dbdxzwh/Desktop/data_structure_homework/json 
+CXX_INCLUDES = -I/Users/dbdxzwh/Desktop/data_structure_homework/include -I/Users/dbdxzwh/Desktop/data_structure_homework/googletest/include -I/Users/dbdxzwh/Desktop/data_structure_homework/json 
 
