@@ -113,14 +113,16 @@ public:
 };
 
 class ChangeItemRequestData: public Base {
+public:
     std::string item_id;
     std::string des;
     std::string time;
 };
 
 class BuyItemRequestData: public Base {
+public:
     std::string item_id;
-    std::string remake;
+    std::string remark;
     std::string user_id;
     std::string time;
 };
@@ -139,6 +141,8 @@ public:
     std::vector<ChangeItemRequestData> change_item_request_list;
     std::vector<BuyItemRequestData> buy_item_request_list;
     std::vector<std::string> discount;
+
+    std::vector<QuestionData> question_list;
 };
 
 // add public
@@ -151,6 +155,11 @@ public:
     std::string shop_owner_name;
     std::string shop_owner_phone_number;
     std::string shop_owner_id_number;
+};
+
+enum class Type {
+    user=1, seller, manager, item, orderlist,
+    ChangeItemRequest, BuyItemRequest, RegisterRequest
 };
 
 // TODO: money system
