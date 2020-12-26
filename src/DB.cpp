@@ -239,6 +239,7 @@ void DB::save_item_data(const std::string &filename) {
     for (const auto &[id, value]: this->item_data) {
         new_item_data.clear();
 
+        new_item_data["id"] = value.id;
         new_item_data["owner"] = value.owner;
         new_item_data["name"] = value.name;
         new_item_data["price"] = value.price;
@@ -270,7 +271,6 @@ std::vector<ItemData> DB::select_all_item_data() {
 }
 
 std::string DB::insert_item_data(const ItemData &inserted_user_data) {
-    // TODO: id generator
     ItemData new_item_data = inserted_user_data;
     this->item_data[new_item_data.id] = new_item_data;
     return new_item_data.id;
@@ -291,3 +291,72 @@ ItemData DB::select_item_data(const std::string &id) {
 }
 
 // item data end
+
+// manager data stuff
+
+void DB::load_manager_data(const std::string &filename) {
+    Json::Value root;
+
+    if (!parse_json_from_file(filename, root)) {
+        return;
+    }
+
+    for (auto it = root.begin(); it != root.end(); it++) {
+        Json::Value temp = *it;
+        std::string id = temp["id"].asString();
+        ManagerData new_manager;
+        new_manager.account = temp["account"].asString();
+        new_manager.password = temp["password"].asString();
+
+        this->manager_data[id] = new_manager;
+    }
+}
+
+void DB::save_manager_data(const std::string &filename) {
+    Json::Value root;
+
+    Json::Value new_manager_data;
+    for (const auto &[id, value]: this->manager_data) {
+        new_manager_data.clear();
+
+        new_manager_data["account"] = value.account;
+        new_manager_data["password"] = value.password;
+        new_manager_data["id"] = value.id;
+
+        root.append(new_manager_data);
+    }
+
+    if (!save_json_to_file(filename, root)) {
+        return;
+    }
+}
+
+std::vector<ManagerData> DB::select_all_manager_data() {
+    std::vector<ManagerData> return_value;
+    for (const auto &[id, value]: this->manager_data) {
+        return_value.push_back(value);
+    }
+    return return_value;
+}
+
+std::string DB::insert_manager_data(const ManagerData &inserted_manager_data) {
+    ManagerData new_manager_data;
+    this->manager_data[new_manager_data.id] = new_manager_data;
+    return new_manager_data.id;
+}
+
+void DB::delete_manager_data(const std::string &id) {
+    if (this->manager_data.count(id)) {
+        this->manager_data.erase(id);
+    }
+}
+
+ManagerData DB::select_manager_data(const std::string &id) {
+    ManagerData return_value;
+    if (this->manager_data.count(id)) {
+        return_value = manager_data[id];
+    }
+    return return_value;
+}
+
+// manager data done
