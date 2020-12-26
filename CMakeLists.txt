@@ -35,11 +35,6 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 
-include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include ${CMAKE_CURRENT_SOURCE_DIR}/json)
-
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/linux)
 elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")

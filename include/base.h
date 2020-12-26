@@ -141,6 +141,8 @@ public:
     std::vector<ChangeItemRequestData> change_item_request_list;
     std::vector<BuyItemRequestData> buy_item_request_list;
     std::vector<std::string> discount;
+
+    std::vector<QuestionData> question_list;
 };
 
 class RegisterRequestData: public Base {
