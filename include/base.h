@@ -151,5 +151,10 @@ class RegisterRequestData: public Base {
     std::string shop_owner_id_number;
 };
 
+enum class Type {
+    user=1, seller, manager, item, orderlist,
+    ChangeItemRequest, BuyItemRequest, RegisterRequest
+};
+
 // TODO: money system
 #endif //DATA_STRUCTURE_HOMEWORK_BASE_H
