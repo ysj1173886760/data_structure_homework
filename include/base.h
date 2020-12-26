@@ -137,6 +137,7 @@ public:
     std::string shop_owner_phone_number;
     std::string shop_owner_id_number;
 
+    std::vector<OrderList> history_order;
     std::vector<std::string> message;
     std::vector<ChangeItemRequestData> change_item_request_list;
     std::vector<BuyItemRequestData> buy_item_request_list;
