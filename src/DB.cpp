@@ -217,6 +217,7 @@ void DB::load_item_data(const std::string &filename) {
         Json::Value temp = *it;
         std::string id = temp["id"].asString();
         ItemData new_item;
+        new_item.id = id;
         new_item.owner = temp["owner"].asString();
         new_item.name = temp["name"].asString();
         new_item.price = temp["price"].asDouble();
@@ -305,6 +306,7 @@ void DB::load_manager_data(const std::string &filename) {
         Json::Value temp = *it;
         std::string id = temp["id"].asString();
         ManagerData new_manager;
+        new_manager.id = id;
         new_manager.account = temp["account"].asString();
         new_manager.password = temp["password"].asString();
 
@@ -340,7 +342,7 @@ std::vector<ManagerData> DB::select_all_manager_data() {
 }
 
 std::string DB::insert_manager_data(const ManagerData &inserted_manager_data) {
-    ManagerData new_manager_data;
+    ManagerData new_manager_data = inserted_manager_data;
     this->manager_data[new_manager_data.id] = new_manager_data;
     return new_manager_data.id;
 }
@@ -360,3 +362,151 @@ ManagerData DB::select_manager_data(const std::string &id) {
 }
 
 // manager data done
+
+// change item request data stuff
+
+void DB::load_change_item_request_data(const std::string &filename) {
+    Json::Value root;
+
+    if (!parse_json_from_file(filename, root)) {
+        return;
+    }
+
+    for (auto it = root.begin(); it != root.end(); it++) {
+        Json::Value temp = *it;
+        std::string id = temp["id"].asString();
+
+        ChangeItemRequestData new_change_item_request_data;
+        new_change_item_request_data.id = id;
+        new_change_item_request_data.des = temp["des"].asString();
+        new_change_item_request_data.item_id = temp["item_id"].asString();
+        new_change_item_request_data.time = temp["time"].asString();
+
+        this->change_item_request_data[id] = new_change_item_request_data;
+    }
+}
+
+void DB::save_change_item_request_data(const std::string &filename) {
+    Json::Value root;
+
+    Json::Value new_change_item_request_data;
+    for (const auto &[id, value]: this->change_item_request_data) {
+        new_change_item_request_data.clear();
+
+        new_change_item_request_data["item_id"] = value.item_id;
+        new_change_item_request_data["des"] = value.des;
+        new_change_item_request_data["time"] = value.time;
+        new_change_item_request_data["id"] = value.id;
+
+        root.append(new_change_item_request_data);
+    }
+
+    if (!save_json_to_file(filename, root)) {
+        return;
+    }
+}
+
+std::vector<ChangeItemRequestData> DB::select_all_change_item_request_data() {
+    std::vector<ChangeItemRequestData> return_value;
+    for (const auto &[id, value]: this->change_item_request_data) {
+        return_value.push_back(value);
+    }
+    return return_value;
+}
+
+std::string DB::insert_change_item_request_data(const ChangeItemRequestData &inserted_change_item_request_data) {
+    ChangeItemRequestData new_change_item_request_data = inserted_change_item_request_data;
+    this->change_item_request_data[new_change_item_request_data.id] = inserted_change_item_request_data;
+    return new_change_item_request_data.id;
+}
+
+void DB::delete_change_item_request_data(const std::string &id) {
+    if (this->change_item_request_data.count(id)) {
+        this->change_item_request_data.erase(id);
+    }
+}
+
+ChangeItemRequestData DB::select_change_item_request_data(const std::string &id) {
+    ChangeItemRequestData return_value;
+    if (this->change_item_request_data.count(id)) {
+        return_value = change_item_request_data[id];
+    }
+    return return_value;
+}
+
+// change item request data done
+
+// buy item request data stuff
+
+void DB::load_buy_item_request_data(const std::string &filename){
+    Json::Value root;
+
+    if (!parse_json_from_file(filename, root)) {
+        return;
+    }
+
+    for (auto it = root.begin(); it != root.end(); it++) {
+        Json::Value temp = *it;
+        std::string id = temp["id"].asString();
+
+        BuyItemRequestData new_buy_item_request_data;
+        new_buy_item_request_data.id = id;
+        new_buy_item_request_data.item_id = temp["item_id"].asString();
+        new_buy_item_request_data.remark= temp["remark"].asString();
+        new_buy_item_request_data.user_id = temp["user_id"].asString();
+        new_buy_item_request_data.time = temp["time"].asString();
+
+        this->buy_item_request_data[id] = new_buy_item_request_data;
+    }
+}
+
+void DB::save_buy_item_request_data(const std::string &filename) {
+    Json::Value root;
+
+    Json::Value new_buy_item_request_data;
+    for (const auto &[id, value]: this->buy_item_request_data) {
+        new_buy_item_request_data.clear();
+
+        new_buy_item_request_data["item_id"] = value.item_id;
+        new_buy_item_request_data["remark"] = value.remark;
+        new_buy_item_request_data["time"] = value.time;
+        new_buy_item_request_data["id"] = value.id;
+        new_buy_item_request_data["user_id"] = value.user_id;
+
+        root.append(new_buy_item_request_data);
+    }
+
+    if (!save_json_to_file(filename, root)) {
+        return;
+    }
+}
+
+std::vector<BuyItemRequestData> DB::select_all_buy_item_request_data() {
+    std::vector<BuyItemRequestData> return_value;
+    for (const auto &[id, value]: this->buy_item_request_data) {
+        return_value.push_back(value);
+    }
+    return return_value;
+}
+
+std::string DB::insert_buy_item_request_data(const BuyItemRequestData &inserted_buy_item_request_data) {
+    BuyItemRequestData new_buy_item_request_data = inserted_buy_item_request_data;
+    this->buy_item_request_data[new_buy_item_request_data.id] = inserted_buy_item_request_data;
+    return new_buy_item_request_data.id;
+}
+
+void DB::delete_buy_item_request_data(const std::string &id) {
+    if (this->buy_item_request_data.count(id)) {
+        this->buy_item_request_data.erase(id);
+    }
+}
+
+BuyItemRequestData DB::select_buy_item_request_data(const std::string &id) {
+    BuyItemRequestData return_value;
+    if (this->buy_item_request_data.count(id)) {
+        return_value = buy_item_request_data[id];
+    }
+    return return_value;
+}
+
+// buy item data done
