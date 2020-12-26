@@ -12,7 +12,7 @@
 class QuestionSystem {
 public:
     //传递所问商家的编号以及问题
-    bool CheckKeyWord(const std::string&, const std::vector<string>&);
+    bool CheckKeyWord(const std::vector<std::string>&, const std::vector<std::string>&);
     std::string GetAnswer(const std::string&, const std::string&);
 };
 
