@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/test_base.dir/test/test_base.cpp.o  -o ../bin/test_base   -L/home/data/data_structure_homework/lib  -L/home/data/data_structure_homework/googletest  -Wl,-rpath,/home/data/data_structure_homework/lib:/home/data/data_structure_homework/googletest lib/libgtestd.a -lpthread 

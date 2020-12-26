@@ -5,144 +5,139 @@
 		<Option title="gtest"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\usr\;CMake Files\..\..\..\usr\local\;CMake Files\..\..\..\usr\local\lib\;CMake Files\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\usr\local\lib\cmake\Boost-1.75.0\;CMake Files\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\;CMake Files\googletest\;CMake Files\googletest\cmake\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\Boost-1.75.0\;CMake Files\..\..\..\..\usr\local\lib\cmake\boost_headers-1.73.0\;CMake Files\..\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\;CMake Files\googletest\;CMake Files\googletest\cmake\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/data/data_structure_homework/cmake-build-debug/googletest"/>
+				<Option working_dir="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="gtest_main">
-				<Option output="/home/data/data_structure_homework/cmake-build-debug/lib/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/data/data_structure_homework/cmake-build-debug/googletest"/>
+				<Option output="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/lib/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/data/data_structure_homework/googletest/include"/>
-					<Add directory="/home/data/data_structure_homework/googletest"/>
-					<Add directory="/usr/include/c++/8"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
-					<Add directory="/usr/include/c++/8/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest_main"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest_main"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="gtest_main/fast">
-				<Option output="/home/data/data_structure_homework/cmake-build-debug/lib/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/data/data_structure_homework/cmake-build-debug/googletest"/>
+				<Option output="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/lib/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/data/data_structure_homework/googletest/include"/>
-					<Add directory="/home/data/data_structure_homework/googletest"/>
-					<Add directory="/usr/include/c++/8"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
-					<Add directory="/usr/include/c++/8/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="gtest">
-				<Option output="/home/data/data_structure_homework/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/data/data_structure_homework/cmake-build-debug/googletest"/>
+				<Option output="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/data/data_structure_homework/googletest/include"/>
-					<Add directory="/home/data/data_structure_homework/googletest"/>
-					<Add directory="/usr/include/c++/8"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
-					<Add directory="/usr/include/c++/8/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="gtest/fast">
-				<Option output="/home/data/data_structure_homework/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/data/data_structure_homework/cmake-build-debug/googletest"/>
+				<Option output="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/data/data_structure_homework/googletest/include"/>
-					<Add directory="/home/data/data_structure_homework/googletest"/>
-					<Add directory="/usr/include/c++/8"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
-					<Add directory="/usr/include/c++/8/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/include"/>
+					<Add directory="/Users/dbdxzwh/Desktop/data_structure_homework/googletest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/data/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/googletest/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/data/data_structure_homework/googletest/src/gtest-all.cc">
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/src/gtest-all.cc">
 			<Option target="gtest"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/googletest/src/gtest_main.cc">
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/src/gtest_main.cc">
 			<Option target="gtest_main"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/CMakeLists.txt">
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\Boost-1.75.0\"/>
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/../../../../usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Boost-1.75.0\"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/Boost-1.75.0/BoostConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\Boost-1.75.0\"/>
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/../../../../usr/local/lib/cmake/Boost-1.75.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Boost-1.75.0\"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\"/>
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/../../../../usr/local/lib/cmake/boost_headers-1.73.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\boost_headers-1.73.0\"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/../../../usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\"/>
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/../../../../usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/googletest/CMakeLists.txt">
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/../../../../usr/local/lib/cmake/boost_headers-1.75.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\boost_headers-1.75.0\"/>
+		</Unit>
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\googletest\"/>
 		</Unit>
-		<Unit filename="/home/data/data_structure_homework/googletest/cmake/internal_utils.cmake">
+		<Unit filename="/Users/dbdxzwh/Desktop/data_structure_homework/googletest/cmake/internal_utils.cmake">
 			<Option virtualFolder="CMake Files\googletest\cmake\"/>
 		</Unit>
 	</Project>

@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/137/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/137/bin/cmake/linux/bin/cmake -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/data/data_structure_homework
+CMAKE_SOURCE_DIR = /Users/dbdxzwh/Desktop/data_structure_homework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/data_structure_homework.dir/depend.make
@@ -79,29 +79,29 @@ include CMakeFiles/data_structure_homework.dir/flags.make
 
 CMakeFiles/data_structure_homework.dir/src/DB.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
 CMakeFiles/data_structure_homework.dir/src/DB.cpp.o: ../src/DB.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/DB.cpp.o -c /home/data/data_structure_homework/src/DB.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/DB.cpp.o -c /Users/dbdxzwh/Desktop/data_structure_homework/src/DB.cpp
 
 CMakeFiles/data_structure_homework.dir/src/DB.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/DB.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/data/data_structure_homework/src/DB.cpp > CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dbdxzwh/Desktop/data_structure_homework/src/DB.cpp > CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
 
 CMakeFiles/data_structure_homework.dir/src/DB.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/DB.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/data/data_structure_homework/src/DB.cpp -o CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dbdxzwh/Desktop/data_structure_homework/src/DB.cpp -o CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
 
 CMakeFiles/data_structure_homework.dir/src/main.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
 CMakeFiles/data_structure_homework.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/main.cpp.o -c /home/data/data_structure_homework/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/main.cpp.o -c /Users/dbdxzwh/Desktop/data_structure_homework/src/main.cpp
 
 CMakeFiles/data_structure_homework.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/data/data_structure_homework/src/main.cpp > CMakeFiles/data_structure_homework.dir/src/main.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dbdxzwh/Desktop/data_structure_homework/src/main.cpp > CMakeFiles/data_structure_homework.dir/src/main.cpp.i
 
 CMakeFiles/data_structure_homework.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/data/data_structure_homework/src/main.cpp -o CMakeFiles/data_structure_homework.dir/src/main.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dbdxzwh/Desktop/data_structure_homework/src/main.cpp -o CMakeFiles/data_structure_homework.dir/src/main.cpp.s
 
 # Object files for target data_structure_homework
 data_structure_homework_OBJECTS = \
@@ -115,7 +115,7 @@ data_structure_homework_EXTERNAL_OBJECTS =
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/main.cpp.o
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/build.make
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/data_structure_homework"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/data_structure_homework"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/data_structure_homework.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -128,6 +128,6 @@ CMakeFiles/data_structure_homework.dir/clean:
 .PHONY : CMakeFiles/data_structure_homework.dir/clean
 
 CMakeFiles/data_structure_homework.dir/depend:
-	cd /home/data/data_structure_homework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/data/data_structure_homework /home/data/data_structure_homework /home/data/data_structure_homework/cmake-build-debug /home/data/data_structure_homework/cmake-build-debug /home/data/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/dbdxzwh/Desktop/data_structure_homework /Users/dbdxzwh/Desktop/data_structure_homework /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/data_structure_homework.dir/depend
 

@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/testjson.dir/test/json_test.cpp.o  -o ../bin/testjson   -L/home/data/data_structure_homework/lib  -L/home/data/data_structure_homework/googletest  -Wl,-rpath,/home/data/data_structure_homework/lib:/home/data/data_structure_homework/googletest -ljsoncpp 

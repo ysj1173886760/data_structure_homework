@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/137/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/137/bin/cmake/linux/bin/cmake -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/data/data_structure_homework
+CMAKE_SOURCE_DIR = /Users/dbdxzwh/Desktop/data_structure_homework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/137/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -90,7 +90,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/137/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles /home/data/data_structure_homework/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/data/data_structure_homework/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -131,19 +131,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named data_structure_homework
-
-# Build rule for target.
-data_structure_homework: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_structure_homework
-.PHONY : data_structure_homework
-
-# fast build rule for target.
-data_structure_homework/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/build
-.PHONY : data_structure_homework/fast
-
-#=============================================================================
 # Target rules for targets named testdb
 
 # Build rule for target.
@@ -168,6 +155,19 @@ boost: cmake_check_build_system
 boost/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/boost.dir/build.make CMakeFiles/boost.dir/build
 .PHONY : boost/fast
+
+#=============================================================================
+# Target rules for targets named data_structure_homework
+
+# Build rule for target.
+data_structure_homework: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_structure_homework
+.PHONY : data_structure_homework
+
+# fast build rule for target.
+data_structure_homework/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/build
+.PHONY : data_structure_homework/fast
 
 #=============================================================================
 # Target rules for targets named gtest_main
@@ -201,8 +201,8 @@ src/DB.o: src/DB.cpp.o
 
 # target to build an object file
 src/DB.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
 .PHONY : src/DB.cpp.o
 
 src/DB.i: src/DB.cpp.i
@@ -211,8 +211,8 @@ src/DB.i: src/DB.cpp.i
 
 # target to preprocess a source file
 src/DB.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.i
 .PHONY : src/DB.cpp.i
 
 src/DB.s: src/DB.cpp.s
@@ -221,8 +221,8 @@ src/DB.s: src/DB.cpp.s
 
 # target to generate assembly for a file
 src/DB.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testdb.dir/build.make CMakeFiles/testdb.dir/src/DB.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_structure_homework.dir/build.make CMakeFiles/data_structure_homework.dir/src/DB.cpp.s
 .PHONY : src/DB.cpp.s
 
 src/main.o: src/main.cpp.o

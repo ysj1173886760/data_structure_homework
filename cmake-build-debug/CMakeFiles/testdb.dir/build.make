@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/137/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/137/bin/cmake/linux/bin/cmake -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/data/data_structure_homework
+CMAKE_SOURCE_DIR = /Users/dbdxzwh/Desktop/data_structure_homework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/data/data_structure_homework/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/testdb.dir/depend.make
@@ -79,29 +79,29 @@ include CMakeFiles/testdb.dir/flags.make
 
 CMakeFiles/testdb.dir/test/db_test.cpp.o: CMakeFiles/testdb.dir/flags.make
 CMakeFiles/testdb.dir/test/db_test.cpp.o: ../test/db_test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testdb.dir/test/db_test.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testdb.dir/test/db_test.cpp.o -c /home/data/data_structure_homework/test/db_test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testdb.dir/test/db_test.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testdb.dir/test/db_test.cpp.o -c /Users/dbdxzwh/Desktop/data_structure_homework/test/db_test.cpp
 
 CMakeFiles/testdb.dir/test/db_test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testdb.dir/test/db_test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/data/data_structure_homework/test/db_test.cpp > CMakeFiles/testdb.dir/test/db_test.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dbdxzwh/Desktop/data_structure_homework/test/db_test.cpp > CMakeFiles/testdb.dir/test/db_test.cpp.i
 
 CMakeFiles/testdb.dir/test/db_test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testdb.dir/test/db_test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/data/data_structure_homework/test/db_test.cpp -o CMakeFiles/testdb.dir/test/db_test.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dbdxzwh/Desktop/data_structure_homework/test/db_test.cpp -o CMakeFiles/testdb.dir/test/db_test.cpp.s
 
 CMakeFiles/testdb.dir/src/DB.cpp.o: CMakeFiles/testdb.dir/flags.make
 CMakeFiles/testdb.dir/src/DB.cpp.o: ../src/DB.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/testdb.dir/src/DB.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testdb.dir/src/DB.cpp.o -c /home/data/data_structure_homework/src/DB.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/testdb.dir/src/DB.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testdb.dir/src/DB.cpp.o -c /Users/dbdxzwh/Desktop/data_structure_homework/src/DB.cpp
 
 CMakeFiles/testdb.dir/src/DB.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testdb.dir/src/DB.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/data/data_structure_homework/src/DB.cpp > CMakeFiles/testdb.dir/src/DB.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dbdxzwh/Desktop/data_structure_homework/src/DB.cpp > CMakeFiles/testdb.dir/src/DB.cpp.i
 
 CMakeFiles/testdb.dir/src/DB.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testdb.dir/src/DB.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/data/data_structure_homework/src/DB.cpp -o CMakeFiles/testdb.dir/src/DB.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dbdxzwh/Desktop/data_structure_homework/src/DB.cpp -o CMakeFiles/testdb.dir/src/DB.cpp.s
 
 # Object files for target testdb
 testdb_OBJECTS = \
@@ -115,7 +115,7 @@ testdb_EXTERNAL_OBJECTS =
 ../bin/testdb: CMakeFiles/testdb.dir/src/DB.cpp.o
 ../bin/testdb: CMakeFiles/testdb.dir/build.make
 ../bin/testdb: CMakeFiles/testdb.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/data/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/testdb"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/testdb"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testdb.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -128,6 +128,6 @@ CMakeFiles/testdb.dir/clean:
 .PHONY : CMakeFiles/testdb.dir/clean
 
 CMakeFiles/testdb.dir/depend:
-	cd /home/data/data_structure_homework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/data/data_structure_homework /home/data/data_structure_homework /home/data/data_structure_homework/cmake-build-debug /home/data/data_structure_homework/cmake-build-debug /home/data/data_structure_homework/cmake-build-debug/CMakeFiles/testdb.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/dbdxzwh/Desktop/data_structure_homework /Users/dbdxzwh/Desktop/data_structure_homework /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug /Users/dbdxzwh/Desktop/data_structure_homework/cmake-build-debug/CMakeFiles/testdb.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/testdb.dir/depend
 
