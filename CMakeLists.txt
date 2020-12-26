@@ -52,7 +52,7 @@ set(testdb test/db_test.cpp src/DB.cpp)
 
 add_executable(testdb ${testdb})
 
-add_executable(boost test/boost_test.cpp)
+add_executable(boost test/boost_test.cpp src/IDgenerator.cpp src/BasicOperation.cpp)
 
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp)
