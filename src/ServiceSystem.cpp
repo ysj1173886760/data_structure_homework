@@ -81,9 +81,11 @@ void ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
     ItemData item;
     if(op.GetItem(shop_name, item_name, item)) {
         int tar = item_in_shop_list(user_id, item.id);
+        if(item.store_num < num)
+            std::cout << "ERROR : under stock!!!";
 
         //如果所购买的物品已经处在购物车中，则增加数量即可
-        if(tar!=-1)
+        else if(tar!=-1)
             user.shop_list[tar].buy_num += num;
 
         else {
@@ -136,31 +138,88 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
         add.id = generator.generateID(Type::BuyItemRequest);
     }
 
-    user.wallet.money -= op.GetCost(user_id);
+    user.shop_list.swap(user.current_order);
+
+    double cost = op.GetCost(user_id);
+    if(user.wallet.money > cost) {
+        std::cout << "ERROR : your money is not enough!!!";
+        return;
+    }
+
+    user.wallet.money -= cost;
+    seller.wallet.money += cost;
+    std::string user_info = "you have cost " + to_string(cost) + " in " + seller.shop_name;
+    user.message.push_back(user_info);
+    //感觉给商家留言没啥必要 先留着吧
+    //std::string seller_info = "you have got " + to_string(cost);
+    //seller.message.push_back(seller_info);
 }
 
+void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    SellerData seller = db.select_seller_data(seller_id);
 
+    if(seller.buy_item_request_list.size() == 0) {
+        std::cout << "NO BuyItemRequest";
+        return;
+    }
 
+    UserData user = db.select_user_data(seller.buy_item_request_list[0].user_id);
 
+    for(int i=0; i<seller.buy_item_request_list.size(); i++) {
+        ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
 
+        int del=0;
+        //库存不足 需要退货
+        if(item.store_num < seller.buy_item_request_list[i].buy_num) {
+            user.current_order.erase(user.current_order.begin()+i-del);
+            std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
+                    " is rejected and we have repay you";
+            user.message.push_back(info);
+            user.wallet.money += item.price;
+            seller.wallet.money -= item.price;
+            del++;
+        }
 
+        else
+            item.store_num--;
+    }
+}
 
+int item_in_current_list(const std::string& user_id, const std::string& item_id) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
 
+    for(int i=0; i<user.current_order.size(); i++) {
+        if(user.current_order[i].item_id == item_id)
+            return i;
+    }
+    return -1;
+}
 
+void ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
+    std::string item_id = order.item_id;
 
+    int tar = item_in_current_list(user_id, item_id);
 
+    if(tar!=-1) {
+        std::cout << "pls write why you wanner return it : ";
+        std::string info;
+        std::cin >> info;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        ItemData item = db.select_item_data(item_id);
+        SellerData seller;
+        if(op.GetSeller(item.owner, seller)) {
+            seller.message.push_back(info);
+            //现版本：无理由退款
+            //TODO:聊天室协商退款
+            seller.wallet.money -= item.price;
+            user.wallet.money += item.price;
+        }
+    }
+}
