@@ -1,23 +1,66 @@
 [
 	{
-		"account" : "shrimp",
+		"account" : "sheep",
+		"age" : "20",
+		"current_order" : null,
+		"email" : "117@qq.com",
+		"gender" : "male",
+		"history_item" : 
+		[
+			"item123",
+			"item321"
+		],
+		"history_order" : 
+		[
+			{
+				"buy_num" : 10,
+				"id" : "",
+				"item_id" : "item666",
+				"price" : "10",
+				"time" : "2000-10-11"
+			},
+			{
+				"buy_num" : 20,
+				"id" : "",
+				"item_id" : "ite777",
+				"price" : "11",
+				"time" : "2000-1-11"
+			}
+		],
+		"id" : "01321312231131",
+		"id_number" : "666",
+		"message" : 
+		[
+			"haha",
+			"hohohoi"
+		],
+		"password" : "321",
+		"phone_number" : "",
+		"real_name" : "sheep_name",
+		"shop_list" : null,
+		"user_name" : "phone_number"
+	},
+	{
+		"account" : "sheep3",
 		"age" : "",
-		"email" : "1953663575@qq.com",
+		"current_order" : null,
+		"email" : "321",
 		"gender" : "",
 		"history_item" : null,
 		"history_order" : null,
-		"id" : "",
-		"id_number" : "450127000000000000",
+		"id" : "12312313",
+		"id_number" : "",
 		"message" : null,
-		"password" : "xjz1953663575",
+		"password" : "000",
 		"phone_number" : "",
-		"real_name" : "Xiejz",
+		"real_name" : "real_name",
 		"shop_list" : null,
-		"user_name" : "xjz"
+		"user_name" : "sheep"
 	},
 	{
 		"account" : "123",
 		"age" : "16",
+		"current_order" : null,
 		"email" : "123@qq.com",
 		"gender" : "male",
 		"history_item" : 
@@ -56,59 +99,20 @@
 		"user_name" : "phone_number"
 	},
 	{
-		"account" : "sheep3",
+		"account" : "shrimp",
 		"age" : "",
-		"email" : "321",
+		"current_order" : null,
+		"email" : "1953663575@qq.com",
 		"gender" : "",
 		"history_item" : null,
 		"history_order" : null,
-		"id" : "12312313",
-		"id_number" : "",
+		"id" : "",
+		"id_number" : "450127000000000000",
 		"message" : null,
-		"password" : "000",
+		"password" : "xjz1953663575",
 		"phone_number" : "",
-		"real_name" : "real_name",
+		"real_name" : "Xiejz",
 		"shop_list" : null,
-		"user_name" : "sheep"
-	},
-	{
-		"account" : "sheep",
-		"age" : "20",
-		"email" : "117@qq.com",
-		"gender" : "male",
-		"history_item" : 
-		[
-			"item123",
-			"item321"
-		],
-		"history_order" : 
-		[
-			{
-				"buy_num" : 10,
-				"id" : "",
-				"item_id" : "item666",
-				"price" : "10",
-				"time" : "2000-10-11"
-			},
-			{
-				"buy_num" : 20,
-				"id" : "",
-				"item_id" : "ite777",
-				"price" : "11",
-				"time" : "2000-1-11"
-			}
-		],
-		"id" : "01321312231131",
-		"id_number" : "666",
-		"message" : 
-		[
-			"haha",
-			"hohohoi"
-		],
-		"password" : "321",
-		"phone_number" : "",
-		"real_name" : "sheep_name",
-		"shop_list" : null,
-		"user_name" : "phone_number"
+		"user_name" : "xjz"
 	}
 ]
