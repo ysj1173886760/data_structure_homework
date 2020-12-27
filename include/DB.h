@@ -43,7 +43,15 @@ private:
     void save_seller_data(const std::string&);
     void save_register_request_data(const std::string&);
 
-    DB() {}
+    DB() {
+        user_data.clear();
+        item_data.clear();
+        manager_data.clear();
+        change_item_request_data.clear();
+        buy_item_request_data.clear();
+        seller_data.clear();
+        register_request_data.clear();
+    }
 
 public:
     DB (const DB&) = delete;
@@ -100,7 +108,7 @@ public:
     RegisterRequestData select_register_request_data(const std::string&);
 
     // pass the id of the data you want to modify
-    // remember you have to parse all data but not the data you want to modify
+    // remember you have to pass all data but not the data you want to modify
     // because the origin data are going to be overwritten by new one
     // so pls be careful
     void modify_user_data(const std::string&, const UserData&);

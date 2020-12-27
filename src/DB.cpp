@@ -88,14 +88,15 @@ void DB::load_user_data(const std::string &filename) {
         new_user.password = temp["password"].asString();
         new_user.real_name = temp["real_name"].asString();
         new_user.user_name = temp["user_name"].asString();
+        new_user.phone_number = temp["phone_number"].asString();
         new_user.email = temp["email"].asString();
         new_user.id_number = temp["id_number"].asString();
         new_user.age = temp["age"].asString();
         new_user.gender = temp["gender"].asString();
 
-        std::vector<OrderList> history_order;
+        std::vector<Order> history_order;
         for (int i = 0; i < temp["history_order"].size(); i++) {
-            OrderList new_order;
+            Order new_order;
             new_order.id = temp["history_order"][i]["id"].asString();
             new_order.item_id = temp["history_order"][i]["item_id"].asString();
             new_order.price = temp["history_order"][i]["price"].asString();
@@ -110,7 +111,6 @@ void DB::load_user_data(const std::string &filename) {
         }
 
         for (int i = 0; i < temp["shop_list"].size(); i++) {
-            new_user.shop_list.emplace_back(temp["shop_list"][i].asString());
         }
 
         for (int i = 0; i < temp["history_item"].size(); i++) {
@@ -136,6 +136,7 @@ void DB::save_user_data(const std::string &filename) {
         new_user_data["id_number"] = value.id_number;
         new_user_data["age"] = value.age;
         new_user_data["gender"] = value.gender;
+        new_user_data["phone_number"] = value.phone_number;
 
         Json::Value history_order;
         history_order.clear();
@@ -160,9 +161,6 @@ void DB::save_user_data(const std::string &filename) {
 
         Json::Value shop_list;
         shop_list.clear();
-        for (int i = 0; i < value.shop_list.size(); i++) {
-            shop_list[i] = value.shop_list[i];
-        }
         new_user_data["shop_list"] = shop_list;
 
         Json::Value history_item;
@@ -207,6 +205,10 @@ UserData DB::select_user_data(const std::string &id) {
         return_value = user_data[id];
     }
     return return_value;
+}
+
+void DB::modify_user_data(const std::string &id, const UserData &modified_user_data) {
+    this->user_data[id] = modified_user_data;
 }
 
 // user data end
@@ -298,6 +300,10 @@ ItemData DB::select_item_data(const std::string &id) {
     return return_value;
 }
 
+void DB::modify_item_data(const std::string &id, const ItemData &modified_item_data) {
+    this->item_data[id] = modified_item_data;
+}
+
 // item data end
 
 // manager data stuff
@@ -366,6 +372,10 @@ ManagerData DB::select_manager_data(const std::string &id) {
         return_value = manager_data[id];
     }
     return return_value;
+}
+
+void DB::modify_manager_data(const std::string &id, const ManagerData &modified_manager_data) {
+    this->manager_data[id] = modified_manager_data;
 }
 
 // manager data done
@@ -439,6 +449,10 @@ ChangeItemRequestData DB::select_change_item_request_data(const std::string &id)
         return_value = change_item_request_data[id];
     }
     return return_value;
+}
+
+void DB::modify_change_item_request_data(const std::string &id, const ChangeItemRequestData &modified_change_item_request_data) {
+    this->change_item_request_data[id] = modified_change_item_request_data;
 }
 
 // change item request data done
@@ -516,6 +530,10 @@ BuyItemRequestData DB::select_buy_item_request_data(const std::string &id) {
     return return_value;
 }
 
+void DB::modify_buy_item_request_data(const std::string &id, const BuyItemRequestData &modified_buy_item_request_data) {
+    this->buy_item_request_data[id] = modified_buy_item_request_data;
+}
+
 // buy item data done
 
 // seller data stuff
@@ -537,9 +555,9 @@ void DB::load_seller_data(const std::string &filename) {
         new_seller.shop_name= temp["shop_name"].asString();
         new_seller.shop_address= temp["shop_address"].asString();
 
-        std::vector<OrderList> history_order;
+        std::vector<Order> history_order;
         for (int i = 0; i < temp["history_order"].size(); i++) {
-            OrderList new_order;
+            Order new_order;
             new_order.id = temp["history_order"][i]["id"].asString();
             new_order.item_id = temp["history_order"][i]["item_id"].asString();
             new_order.price = temp["history_order"][i]["price"].asString();
