@@ -110,8 +110,34 @@ void DB::load_user_data(const std::string &filename) {
             new_user.message.emplace_back(temp["message"][i].asString());
         }
 
+        std::vector<Order> shop_list;
         for (int i = 0; i < temp["shop_list"].size(); i++) {
+            Order new_order;
+            new_order.id = temp["shop_list"][i]["id"].asString();
+            new_order.item_id = temp["shop_list"][i]["item_id"].asString();
+            new_order.price = temp["shop_list"][i]["price"].asString();
+            new_order.time = temp["shop_list"][i]["time"].asString();
+            new_order.buy_num = temp["shop_list"][i]["buy_num"].asInt();
+            shop_list.emplace_back(new_order);
         }
+        new_user.shop_list = shop_list;
+
+        std::vector<Order> current_order;
+        for (int i = 0; i < temp["current_order"].size(); i++) {
+            Order new_order;
+            new_order.id = temp["current_order"][i]["id"].asString();
+            new_order.item_id = temp["current_order"][i]["item_id"].asString();
+            new_order.price = temp["current_order"][i]["price"].asString();
+            new_order.time = temp["current_order"][i]["time"].asString();
+            new_order.buy_num = temp["current_order"][i]["buy_num"].asInt();
+            current_order.emplace_back(new_order);
+        }
+        new_user.current_order = current_order;
+
+        Wallet wallet;
+        wallet.password = temp["wallet"]["password"].asString();
+        wallet.money = temp["wallet"]["money"].asDouble();
+        new_user.wallet = wallet;
 
         for (int i = 0; i < temp["history_item"].size(); i++) {
             new_user.history_item.emplace_back(temp["history_item"][i].asString());
@@ -161,7 +187,31 @@ void DB::save_user_data(const std::string &filename) {
 
         Json::Value shop_list;
         shop_list.clear();
+        for (const auto &x: value.shop_list) {
+            Json::Value order;
+            order.clear();
+            order["id"] = x.id;
+            order["item_id"] = x.item_id;
+            order["price"] = x.price;
+            order["time"] = x.time;
+            order["buy_num"] = x.buy_num;
+            shop_list.append(order);
+        }
         new_user_data["shop_list"] = shop_list;
+
+        Json::Value current_order;
+        current_order.clear();
+        for (const auto &x: value.current_order) {
+            Json::Value order;
+            order.clear();
+            order["id"] = x.id;
+            order["item_id"] = x.item_id;
+            order["price"] = x.price;
+            order["time"] = x.time;
+            order["buy_num"] = x.buy_num;
+            current_order.append(order);
+        }
+        new_user_data["current_order"] = current_order;
 
         Json::Value history_item;
         history_item.clear();
@@ -169,6 +219,11 @@ void DB::save_user_data(const std::string &filename) {
             history_item[i] = value.history_item[i];
         }
         new_user_data["history_item"] = history_item;
+
+        Json::Value wallet;
+        wallet.clear();
+        wallet["password"] = value.wallet.password;
+        wallet["money"] = value.wallet.money;
 
         root.append(new_user_data);
     }
@@ -381,159 +436,159 @@ void DB::modify_manager_data(const std::string &id, const ManagerData &modified_
 // manager data done
 
 // change item request data stuff
-
-void DB::load_change_item_request_data(const std::string &filename) {
-    Json::Value root;
-
-    if (!parse_json_from_file(filename, root)) {
-        return;
-    }
-
-    for (auto it = root.begin(); it != root.end(); it++) {
-        Json::Value temp = *it;
-        std::string id = temp["id"].asString();
-
-        ChangeItemRequestData new_change_item_request_data;
-        new_change_item_request_data.id = id;
-        new_change_item_request_data.des = temp["des"].asString();
-        new_change_item_request_data.item_id = temp["item_id"].asString();
-        new_change_item_request_data.time = temp["time"].asString();
-
-        this->change_item_request_data[id] = new_change_item_request_data;
-    }
-}
-
-void DB::save_change_item_request_data(const std::string &filename) {
-    Json::Value root;
-
-    Json::Value new_change_item_request_data;
-    for (const auto &[id, value]: this->change_item_request_data) {
-        new_change_item_request_data.clear();
-
-        new_change_item_request_data["item_id"] = value.item_id;
-        new_change_item_request_data["des"] = value.des;
-        new_change_item_request_data["time"] = value.time;
-        new_change_item_request_data["id"] = value.id;
-
-        root.append(new_change_item_request_data);
-    }
-
-    if (!save_json_to_file(filename, root)) {
-        return;
-    }
-}
-
-std::vector<ChangeItemRequestData> DB::select_all_change_item_request_data() {
-    std::vector<ChangeItemRequestData> return_value;
-    for (const auto &[id, value]: this->change_item_request_data) {
-        return_value.push_back(value);
-    }
-    return return_value;
-}
-
-std::string DB::insert_change_item_request_data(const ChangeItemRequestData &inserted_change_item_request_data) {
-    ChangeItemRequestData new_change_item_request_data = inserted_change_item_request_data;
-    this->change_item_request_data[new_change_item_request_data.id] = inserted_change_item_request_data;
-    return new_change_item_request_data.id;
-}
-
-void DB::delete_change_item_request_data(const std::string &id) {
-    if (this->change_item_request_data.count(id)) {
-        this->change_item_request_data.erase(id);
-    }
-}
-
-ChangeItemRequestData DB::select_change_item_request_data(const std::string &id) {
-    ChangeItemRequestData return_value;
-    if (this->change_item_request_data.count(id)) {
-        return_value = change_item_request_data[id];
-    }
-    return return_value;
-}
-
-void DB::modify_change_item_request_data(const std::string &id, const ChangeItemRequestData &modified_change_item_request_data) {
-    this->change_item_request_data[id] = modified_change_item_request_data;
-}
-
+//
+//void DB::load_change_item_request_data(const std::string &filename) {
+//    Json::Value root;
+//
+//    if (!parse_json_from_file(filename, root)) {
+//        return;
+//    }
+//
+//    for (auto it = root.begin(); it != root.end(); it++) {
+//        Json::Value temp = *it;
+//        std::string id = temp["id"].asString();
+//
+//        ChangeItemRequestData new_change_item_request_data;
+//        new_change_item_request_data.id = id;
+//        new_change_item_request_data.des = temp["des"].asString();
+//        new_change_item_request_data.item_id = temp["item_id"].asString();
+//        new_change_item_request_data.time = temp["time"].asString();
+//
+//        this->change_item_request_data[id] = new_change_item_request_data;
+//    }
+//}
+//
+//void DB::save_change_item_request_data(const std::string &filename) {
+//    Json::Value root;
+//
+//    Json::Value new_change_item_request_data;
+//    for (const auto &[id, value]: this->change_item_request_data) {
+//        new_change_item_request_data.clear();
+//
+//        new_change_item_request_data["item_id"] = value.item_id;
+//        new_change_item_request_data["des"] = value.des;
+//        new_change_item_request_data["time"] = value.time;
+//        new_change_item_request_data["id"] = value.id;
+//
+//        root.append(new_change_item_request_data);
+//    }
+//
+//    if (!save_json_to_file(filename, root)) {
+//        return;
+//    }
+//}
+//
+//std::vector<ChangeItemRequestData> DB::select_all_change_item_request_data() {
+//    std::vector<ChangeItemRequestData> return_value;
+//    for (const auto &[id, value]: this->change_item_request_data) {
+//        return_value.push_back(value);
+//    }
+//    return return_value;
+//}
+//
+//std::string DB::insert_change_item_request_data(const ChangeItemRequestData &inserted_change_item_request_data) {
+//    ChangeItemRequestData new_change_item_request_data = inserted_change_item_request_data;
+//    this->change_item_request_data[new_change_item_request_data.id] = inserted_change_item_request_data;
+//    return new_change_item_request_data.id;
+//}
+//
+//void DB::delete_change_item_request_data(const std::string &id) {
+//    if (this->change_item_request_data.count(id)) {
+//        this->change_item_request_data.erase(id);
+//    }
+//}
+//
+//ChangeItemRequestData DB::select_change_item_request_data(const std::string &id) {
+//    ChangeItemRequestData return_value;
+//    if (this->change_item_request_data.count(id)) {
+//        return_value = change_item_request_data[id];
+//    }
+//    return return_value;
+//}
+//
+//void DB::modify_change_item_request_data(const std::string &id, const ChangeItemRequestData &modified_change_item_request_data) {
+//    this->change_item_request_data[id] = modified_change_item_request_data;
+//}
+//
 // change item request data done
 
 // buy item request data stuff
-
-void DB::load_buy_item_request_data(const std::string &filename){
-    Json::Value root;
-
-    if (!parse_json_from_file(filename, root)) {
-        return;
-    }
-
-    for (auto it = root.begin(); it != root.end(); it++) {
-        Json::Value temp = *it;
-        std::string id = temp["id"].asString();
-
-        BuyItemRequestData new_buy_item_request_data;
-        new_buy_item_request_data.id = id;
-        new_buy_item_request_data.item_id = temp["item_id"].asString();
-        new_buy_item_request_data.remark= temp["remark"].asString();
-        new_buy_item_request_data.user_id = temp["user_id"].asString();
-        new_buy_item_request_data.time = temp["time"].asString();
-
-        this->buy_item_request_data[id] = new_buy_item_request_data;
-    }
-}
-
-void DB::save_buy_item_request_data(const std::string &filename) {
-    Json::Value root;
-
-    Json::Value new_buy_item_request_data;
-    for (const auto &[id, value]: this->buy_item_request_data) {
-        new_buy_item_request_data.clear();
-
-        new_buy_item_request_data["item_id"] = value.item_id;
-        new_buy_item_request_data["remark"] = value.remark;
-        new_buy_item_request_data["time"] = value.time;
-        new_buy_item_request_data["id"] = value.id;
-        new_buy_item_request_data["user_id"] = value.user_id;
-
-        root.append(new_buy_item_request_data);
-    }
-
-    if (!save_json_to_file(filename, root)) {
-        return;
-    }
-}
-
-std::vector<BuyItemRequestData> DB::select_all_buy_item_request_data() {
-    std::vector<BuyItemRequestData> return_value;
-    for (const auto &[id, value]: this->buy_item_request_data) {
-        return_value.push_back(value);
-    }
-    return return_value;
-}
-
-std::string DB::insert_buy_item_request_data(const BuyItemRequestData &inserted_buy_item_request_data) {
-    BuyItemRequestData new_buy_item_request_data = inserted_buy_item_request_data;
-    this->buy_item_request_data[new_buy_item_request_data.id] = inserted_buy_item_request_data;
-    return new_buy_item_request_data.id;
-}
-
-void DB::delete_buy_item_request_data(const std::string &id) {
-    if (this->buy_item_request_data.count(id)) {
-        this->buy_item_request_data.erase(id);
-    }
-}
-
-BuyItemRequestData DB::select_buy_item_request_data(const std::string &id) {
-    BuyItemRequestData return_value;
-    if (this->buy_item_request_data.count(id)) {
-        return_value = buy_item_request_data[id];
-    }
-    return return_value;
-}
-
-void DB::modify_buy_item_request_data(const std::string &id, const BuyItemRequestData &modified_buy_item_request_data) {
-    this->buy_item_request_data[id] = modified_buy_item_request_data;
-}
-
+//
+//void DB::load_buy_item_request_data(const std::string &filename){
+//    Json::Value root;
+//
+//    if (!parse_json_from_file(filename, root)) {
+//        return;
+//    }
+//
+//    for (auto it = root.begin(); it != root.end(); it++) {
+//        Json::Value temp = *it;
+//        std::string id = temp["id"].asString();
+//
+//        BuyItemRequestData new_buy_item_request_data;
+//        new_buy_item_request_data.id = id;
+//        new_buy_item_request_data.item_id = temp["item_id"].asString();
+//        new_buy_item_request_data.remark= temp["remark"].asString();
+//        new_buy_item_request_data.user_id = temp["user_id"].asString();
+//        new_buy_item_request_data.time = temp["time"].asString();
+//
+//        this->buy_item_request_data[id] = new_buy_item_request_data;
+//    }
+//}
+//
+//void DB::save_buy_item_request_data(const std::string &filename) {
+//    Json::Value root;
+//
+//    Json::Value new_buy_item_request_data;
+//    for (const auto &[id, value]: this->buy_item_request_data) {
+//        new_buy_item_request_data.clear();
+//
+//        new_buy_item_request_data["item_id"] = value.item_id;
+//        new_buy_item_request_data["remark"] = value.remark;
+//        new_buy_item_request_data["time"] = value.time;
+//        new_buy_item_request_data["id"] = value.id;
+//        new_buy_item_request_data["user_id"] = value.user_id;
+//
+//        root.append(new_buy_item_request_data);
+//    }
+//
+//    if (!save_json_to_file(filename, root)) {
+//        return;
+//    }
+//}
+//
+//std::vector<BuyItemRequestData> DB::select_all_buy_item_request_data() {
+//    std::vector<BuyItemRequestData> return_value;
+//    for (const auto &[id, value]: this->buy_item_request_data) {
+//        return_value.push_back(value);
+//    }
+//    return return_value;
+//}
+//
+//std::string DB::insert_buy_item_request_data(const BuyItemRequestData &inserted_buy_item_request_data) {
+//    BuyItemRequestData new_buy_item_request_data = inserted_buy_item_request_data;
+//    this->buy_item_request_data[new_buy_item_request_data.id] = inserted_buy_item_request_data;
+//    return new_buy_item_request_data.id;
+//}
+//
+//void DB::delete_buy_item_request_data(const std::string &id) {
+//    if (this->buy_item_request_data.count(id)) {
+//        this->buy_item_request_data.erase(id);
+//    }
+//}
+//
+//BuyItemRequestData DB::select_buy_item_request_data(const std::string &id) {
+//    BuyItemRequestData return_value;
+//    if (this->buy_item_request_data.count(id)) {
+//        return_value = buy_item_request_data[id];
+//    }
+//    return return_value;
+//}
+//
+//void DB::modify_buy_item_request_data(const std::string &id, const BuyItemRequestData &modified_buy_item_request_data) {
+//    this->buy_item_request_data[id] = modified_buy_item_request_data;
+//}
+//
 // buy item data done
 
 // seller data stuff
@@ -554,6 +609,10 @@ void DB::load_seller_data(const std::string &filename) {
         new_seller.password = temp["password"].asString();
         new_seller.shop_name= temp["shop_name"].asString();
         new_seller.shop_address= temp["shop_address"].asString();
+        new_seller.shop_owner_id_number = temp["shop_owner_id_number"].asString();
+        new_seller.shop_owner_phone_number = temp["shop_owner_phone_number"].asString();
+        new_seller.shop_owner_name = temp["shop_owner_name"].asString();
+        new_seller.shop_owner_id_number = temp["shop_owner_id_number"].asString();
 
         std::vector<Order> history_order;
         for (int i = 0; i < temp["history_order"].size(); i++) {
@@ -578,6 +637,9 @@ void DB::load_seller_data(const std::string &filename) {
             new_change_item_request.des = temp["change_item_request_list"][i]["des"].asString();
             new_change_item_request.time = temp["change_item_request_list"][i]["time"].asString();
             new_change_item_request.id = temp["change_item_request_list"][i]["id"].asString();
+            new_change_item_request.buy_num = temp["change_item_request_list"][i]["buy_num"].asInt();
+            new_change_item_request.price = temp["change_item_request_list"][i]["price"].asDouble();
+            new_change_item_request.user_id = temp["change_item_request_list"][i]["user_id"].asString();
             change_item_request_list.emplace_back(new_change_item_request);
         }
         new_seller.change_item_request_list = change_item_request_list;
@@ -590,6 +652,8 @@ void DB::load_seller_data(const std::string &filename) {
             new_buy_item_request_data.id = temp["buy_item_request_list"][i]["id"].asString();
             new_buy_item_request_data.user_id = temp["buy_item_request_list"][i]["user_id"].asString();
             new_buy_item_request_data.remark = temp["buy_item_request_list"][i]["remark"].asString();
+            new_buy_item_request_data.buy_num = temp["buy_item_request_list"][i]["buy_num"].asInt();
+            new_buy_item_request_data.price = temp["buy_item_request_list"][i]["price"].asDouble();
             buy_item_request_list.emplace_back(new_buy_item_request_data);
         }
         new_seller.buy_item_request_list = buy_item_request_list;
@@ -606,6 +670,11 @@ void DB::load_seller_data(const std::string &filename) {
             question_list.emplace_back(new_question);
         }
         new_seller.question_list = question_list;
+
+        Wallet wallet;
+        wallet.money = temp["wallet"]["money"].asDouble();
+        wallet.password = temp["wallet"]["password"].asString();
+        new_seller.wallet = wallet;
 
         this->seller_data[id] = new_seller;
     }
@@ -649,6 +718,9 @@ void DB::save_seller_data(const std::string &filename) {
             change_item_request["des"] = x.des;
             change_item_request["time"] = x.time;
             change_item_request["id"] = x.id;
+            change_item_request["buy_num"] = x.buy_num;
+            change_item_request["price"] = x.price;
+            change_item_request["user_id"] = x.user_id;
 
             change_item_request_list.append(change_item_request);
         }
@@ -663,6 +735,8 @@ void DB::save_seller_data(const std::string &filename) {
             buy_item_request["remark"] = x.remark;
             buy_item_request["user_id"] = x.user_id;
             buy_item_request["id"] = x.id;
+            buy_item_request["buy_num"] = x.buy_num;
+            buy_item_request["price"] = x.price;
 
             buy_item_request_list.append(buy_item_request);
         }
@@ -694,6 +768,10 @@ void DB::save_seller_data(const std::string &filename) {
         }
         new_seller_data["discount"] = discount;
 
+        Json::Value wallet;
+        wallet.clear();
+        wallet["password"] = value.wallet.password;
+        wallet["money"] = value.wallet.money;
 
         root.append(new_seller_data);
     }
@@ -705,7 +783,7 @@ void DB::save_seller_data(const std::string &filename) {
 
 std::string DB::insert_seller_data(const SellerData &inserted_seller_data) {
     SellerData new_seller_data = inserted_seller_data;
-    this->seller_data[new_seller_data.id] = inserted_seller_data;
+    this->seller_data[new_seller_data.id] = new_seller_data;
     return new_seller_data.id;
 }
 
@@ -731,6 +809,10 @@ SellerData DB::select_seller_data(const std::string &id) {
     return return_value;
 }
 
+void DB::modify_seller_data(const std::string &id, const SellerData &modified_seller_data) {
+    this->seller_data[id] = modified_seller_data;
+}
+
 // seller data done
 
 // register request data stuff
@@ -753,6 +835,7 @@ void DB::load_register_request_data(const std::string &filename) {
         new_register_request_data.shop_address = temp["shop_address"].asString();
         new_register_request_data.password = temp["password"].asString();
         new_register_request_data.account = temp["account"].asString();
+        new_register_request_data.shop_name = temp["shop_name"].asString();
 
         this->register_request_data[id] = new_register_request_data;
     }
@@ -808,6 +891,10 @@ RegisterRequestData DB::select_register_request_data(const std::string &id) {
         return_value = this->register_request_data[id];
     }
     return return_value;
+}
+
+void DB::modify_register_request_data(const std::string &id, const RegisterRequestData &modified_register_request_data) {
+    this->register_request_data[id] = modified_register_request_data;
 }
 
 // register request data done

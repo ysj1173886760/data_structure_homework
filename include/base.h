@@ -64,6 +64,11 @@ class Wallet {
 public:
     std::string password;
     double money;
+
+    void print() const {
+        std::cout << "password: " << password << std::endl;
+        std::cout << "money: " << money << std::endl;
+    }
 };
 
 class UserData: public Base {
@@ -108,11 +113,22 @@ public:
             std::cout << x << std::endl;
         }
 
+        std::cout << "shop_list_num: " << shop_list.size() << std::endl;
+        for (const auto &x : shop_list) {
+            x.print();
+        }
+
+        std::cout << "current_order: " << current_order.size() << std::endl;
+        for (const auto &x : current_order) {
+            x.print();
+        }
 
         std::cout << "history_item_num: " << history_item.size() << std::endl;
         for (const auto &x: history_item) {
             std::cout << x << std::endl;
         }
+
+        wallet.print();
     }
 };
 
@@ -151,6 +167,9 @@ public:
         std::cout << "item_id: " << item_id << std::endl;
         std::cout << "des: " << des << std::endl;
         std::cout << "time: " << time << std::endl;
+        std::cout << "user_id: " << user_id << std::endl;
+        std::cout << "buy_num: " << buy_num << std::endl;
+        std::cout << "price: " << price << std::endl;
     }
 };
 
@@ -168,6 +187,8 @@ public:
         std::cout << "remark: " << remark << std::endl;
         std::cout << "user_id: " << user_id << std::endl;
         std::cout << "time: " << time << std::endl;
+        std::cout << "buy_num: " << buy_num << std::endl;
+        std::cout << "price: " << price << std::endl;
     }
 };
 
@@ -228,6 +249,8 @@ public:
         for (const auto &x : question_list) {
             x.print();
         }
+
+        wallet.print();
     }
 };
 
