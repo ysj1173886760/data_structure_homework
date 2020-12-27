@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterManager.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterSeller.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterUser.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/ServiceSystem.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/ServiceSystem.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/main.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

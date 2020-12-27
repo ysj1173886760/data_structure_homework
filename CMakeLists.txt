@@ -59,6 +59,10 @@ target_link_libraries(data_structure_homework jsoncpp)
 
 set(testdb test/db_test.cpp src/DB.cpp)
 
+set(register_test test/register_test.cpp src/DB.cpp src/RegisterUser.cpp src/RegisterSeller.cpp src/RegisterManager.cpp)
+
+set(login_test test/login_test.cpp src/LoginUser.cpp src/LoginSeller.cpp src/LoginManager.cpp src/DB.cpp)
+
 add_executable(testdb ${testdb})
 
 add_executable(boost test/boost_test.cpp src/DB.cpp src/IDgenerator.cpp src/BasicOperation.cpp)
@@ -66,6 +70,10 @@ add_executable(boost test/boost_test.cpp src/DB.cpp src/IDgenerator.cpp src/Basi
 add_executable(question test/question_test.cpp src/DB.cpp src/QuestionSystem.cpp src/BasicOperation.cpp)
 
 add_executable(service test/service_test.cpp src/BasicOperation.cpp src/ServiceSystem.cpp src/DB.cpp)
+
+add_executable(register_test ${register_test})
+
+add_executable(login_test ${login_test})
 
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp)
@@ -75,3 +83,7 @@ target_link_libraries(boost jsoncpp ${Boost_LIBRARIES})
 target_link_libraries(question jsoncpp)
 
 target_link_libraries(service jsoncpp)
+
+target_link_libraries(register_test jsoncpp)
+
+target_link_libraries(login_test jsoncpp)

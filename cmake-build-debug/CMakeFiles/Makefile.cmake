@@ -63,8 +63,10 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/register_user.dir/DependInfo.cmake"
+  "CMakeFiles/login_test.dir/DependInfo.cmake"
+  "CMakeFiles/service.dir/DependInfo.cmake"
   "CMakeFiles/data_structure_homework.dir/DependInfo.cmake"
+  "CMakeFiles/register_test.dir/DependInfo.cmake"
   "CMakeFiles/testdb.dir/DependInfo.cmake"
   "CMakeFiles/boost.dir/DependInfo.cmake"
   "CMakeFiles/question.dir/DependInfo.cmake"

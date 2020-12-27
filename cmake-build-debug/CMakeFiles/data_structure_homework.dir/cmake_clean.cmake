@@ -11,6 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o"
+  "CMakeFiles/data_structure_homework.dir/src/ServiceSystem.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
 )
 
