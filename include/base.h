@@ -48,7 +48,7 @@ public:
 class Order: public Base {
 public:
     std::string item_id;    //item id of the order
-    std::string price;      //price of the order
+    double price;      //price of the order
     std::string time;       //time when you buy
     int buy_num;
 

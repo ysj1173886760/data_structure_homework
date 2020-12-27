@@ -123,7 +123,7 @@ void DB::load_user_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["history_order"][i]["id"].asString();
             new_order.item_id = temp["history_order"][i]["item_id"].asString();
-            new_order.price = temp["history_order"][i]["price"].asString();
+            new_order.price = temp["history_order"][i]["price"].asDouble();
             new_order.time = temp["history_order"][i]["time"].asString();
             new_order.buy_num = temp["history_order"][i]["buy_num"].asInt();
             history_order.emplace_back(new_order);
@@ -139,7 +139,7 @@ void DB::load_user_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["shop_list"][i]["id"].asString();
             new_order.item_id = temp["shop_list"][i]["item_id"].asString();
-            new_order.price = temp["shop_list"][i]["price"].asString();
+            new_order.price = temp["shop_list"][i]["price"].asDouble();
             new_order.time = temp["shop_list"][i]["time"].asString();
             new_order.buy_num = temp["shop_list"][i]["buy_num"].asInt();
             shop_list.emplace_back(new_order);
@@ -151,7 +151,7 @@ void DB::load_user_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["current_order"][i]["id"].asString();
             new_order.item_id = temp["current_order"][i]["item_id"].asString();
-            new_order.price = temp["current_order"][i]["price"].asString();
+            new_order.price = temp["current_order"][i]["price"].asDouble();
             new_order.time = temp["current_order"][i]["time"].asString();
             new_order.buy_num = temp["current_order"][i]["buy_num"].asInt();
             current_order.emplace_back(new_order);
@@ -648,7 +648,7 @@ void DB::load_seller_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["history_order"][i]["id"].asString();
             new_order.item_id = temp["history_order"][i]["item_id"].asString();
-            new_order.price = temp["history_order"][i]["price"].asString();
+            new_order.price = temp["history_order"][i]["price"].asDouble();
             new_order.time = temp["history_order"][i]["time"].asString();
             new_order.buy_num = temp["history_order"][i]["buy_num"].asInt();
             history_order.emplace_back(new_order);
