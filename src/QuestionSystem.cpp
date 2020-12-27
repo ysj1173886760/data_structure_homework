@@ -17,12 +17,12 @@ bool QuestionSystem::CheckKeyWord(const std::vector<std::string>& s, const std::
 }
 
 std::string QuestionSystem::GetAnswer(const std::string& id, const std::string& question) {
+    DB& db = DB::getInstance();
     BasicOperation op;
     //问题的匹配我们设计为关键词的匹配
     //商家的信息包括商家电话号、商家地址、商品信息
     std::vector<string> word = op.sentence2word(question);
-    //TODO: SellerData seller = db.select_seller_data(id);
-    SellerData seller;
+    SellerData seller = db.select_seller_data(id);
 
     //商家电话号、商家地址都是直接从商家编号可知
     if(CheckKeyWord({"phone","tel","telephone"}, word))
