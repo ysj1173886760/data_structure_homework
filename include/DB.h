@@ -13,6 +13,7 @@
 #include <iostream>
 #include "base.h"
 #include "json.h"
+#include "IDgenerator.h"
 
 class DB {
 private:

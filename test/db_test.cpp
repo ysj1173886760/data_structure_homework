@@ -28,6 +28,14 @@ int main() {
 //    new_user_data.email = "321";
 //    db.insert_user_data(new_user_data);
     // save data test
+    ItemData new_item_data;
+    new_item_data.price = 1.1;
+    new_item_data.store_num = 10;
+    new_item_data.owner = "asd";
+    new_item_data.des = "dsa";
+    new_item_data.sell_num = 1;
+    string id = db.insert_item_data(new_item_data);
+    cout << id << endl;
     db.close();
     return 0;
 }
