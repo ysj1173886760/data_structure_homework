@@ -35,7 +35,7 @@ vector<std::string> BasicOperation::sentence2word(const string& str) {
 //获取单词的相似度
 double BasicOperation::GetWordsSim(const std::string& s1, const std::string& s2) {
     int m = s1.size(), n = s2.size();
-    int dp[m+1][n+1];
+    vector<vector<int>> dp(m+1, vector<int>(n+1));
     for (int i = 1; i <= m; i++)
         dp[i][0] = i;
     for (int j = 1; j <= n; j++)
@@ -49,7 +49,7 @@ double BasicOperation::GetWordsSim(const std::string& s1, const std::string& s2)
                                min(dp[i][j-1] + 1, dp[i-1][j-1] + 1));
         }
     }
-    return double(dp[m][n])/max(m,n);
+    return 1-double(dp[m][n])/max(m,n);
 }
 
 vector<ItemData> BasicOperation::GetShopItems(const std::string& id) {

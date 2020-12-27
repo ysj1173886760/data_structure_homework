@@ -65,9 +65,13 @@ add_executable(boost test/boost_test.cpp src/DB.cpp src/IDgenerator.cpp src/Basi
 
 add_executable(question test/question_test.cpp src/DB.cpp src/QuestionSystem.cpp src/BasicOperation.cpp)
 
+add_executable(service test/service_test.cpp src/BasicOperation.cpp src/ServiceSystem.cpp src/DB.cpp)
+
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp)
 
 target_link_libraries(boost jsoncpp ${Boost_LIBRARIES})
 
 target_link_libraries(question jsoncpp)
+
+target_link_libraries(service jsoncpp)
