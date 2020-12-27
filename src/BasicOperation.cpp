@@ -83,7 +83,16 @@ bool BasicOperation::GetItem(const std::string& shop_name, const std::string& it
     return false;
 }
 
+double BasicOperation::GetCost(const std::string& user_id) {
+    DB &db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
 
+    double cost = 0;
+    for(int i=0; i<user.shop_list.size(); i++)
+        cost += (user.shop_list[i].price * user.shop_list[i].buy_num);
+
+    return cost;
+}
 
 
 
