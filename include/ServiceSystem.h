@@ -8,6 +8,7 @@
 #include "DB.h"
 #include "base.h"
 #include "BasicOperation.h"
+#include "IDgenerator.h"
 
 class ServiceSystem {
 public:
@@ -18,10 +19,10 @@ public:
     void display_shop(const std::string&);
     //根据商品名称查看卖这种商品的所有商家的名称以及价格
     void display_item(const std::string&);
-    //根据顾客id将商品名称与件数添加入购物车
-    void insert_shop_list(const std::string&, const std::string&, int num=1);
+    //user_id shop_id item_name num
+    void insert_shop_list(const std::string&, const std::string&, const std::string&, int num=1);
     //从购物车中删除多件商品
-    void remove_shop_list(const std::string&, const std::string&, int num=1);
+    void remove_shop_list(const std::string&, const std::string&, const std::string&, int num=1);
     //根据商家id与顾客id提交订单(id用来更新各自的history_order)
     void submit_shop_list(const std::string&, const std::string&, const std::vector<std::string>&);
 };

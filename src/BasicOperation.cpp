@@ -64,6 +64,36 @@ vector<ItemData> BasicOperation::GetShopItems(const std::string& id) {
     return sel_items;
 }
 
+bool BasicOperation::GetItem(const std::string& shop_name, const std::string& item_name, ItemData& item) {
+    DB &db = DB::getInstance();
+    vector<SellerData> sellers = db.select_all_seller_data();
+
+    int tar;
+    for(tar=0; tar<sellers.size(); tar++) {
+        if(sellers[tar].shop_name == shop_name)
+            break;
+    }
+
+    int i;
+    vector<ItemData> items = GetShopItems(sellers[tar].id);
+    for(i=0; i<items.size(); i++) {
+        if (items[i].name == item_name)
+            return true;
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

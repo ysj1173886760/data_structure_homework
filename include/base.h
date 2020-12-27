@@ -270,7 +270,7 @@ enum class Type {
     Seller,
     Manager,
     Item,
-    OrderList,
+    Order,
     ChangeItemRequest,
     BuyItemRequest,
     RegisterRequest
