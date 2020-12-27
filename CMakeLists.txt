@@ -24,13 +24,22 @@ message(STATUS "Boost_LIBRARIES: ${BOOST_LIBRARY_DIRS}")
 include_directories(${Boost_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 #
+message(STATUS "operating system is ${CMAKE_SYSTEM}")
+message(STATUS "operating system name is ${CMAKE_SYSTEM_NAME}")
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 
 include_directories(include ${CMAKE_CURRENT_SOURCE_DIR}/googletest/include ${CMAKE_CURRENT_SOURCE_DIR}/json)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib ${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/linux)
+elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/mac)
+endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
@@ -48,14 +57,17 @@ target_link_libraries(data_structure_homework jsoncpp)
 # after adding your test file, change the configurations on the top right corner
 # then go for it, here`s an example
 
-#set(testdb test/db_test.cpp src/DB.cpp)
-set(register_user_test test/register_user_test.cpp src/DB.cpp src/UserRegister.cpp)
+set(testdb test/db_test.cpp src/DB.cpp)
 
-#add_executable(testdb ${testdb})
-#add_executable(boost test/boost_test.cpp)
-add_executable(register_user_test ${register_user_test})
+add_executable(testdb ${testdb})
+
+add_executable(boost test/boost_test.cpp src/DB.cpp src/IDgenerator.cpp src/BasicOperation.cpp)
+
+add_executable(question test/question_test.cpp src/DB.cpp src/QuestionSystem.cpp src/BasicOperation.cpp)
 
 # linking google test lib to your test file
-#target_link_libraries(testdb jsoncpp)
-#target_link_libraries(boost ${Boost_LIBRARIES})
-target_link_libraries(register_user_test jsoncpp)
+target_link_libraries(testdb jsoncpp)
+
+target_link_libraries(boost jsoncpp ${Boost_LIBRARIES})
+
+target_link_libraries(question jsoncpp)
