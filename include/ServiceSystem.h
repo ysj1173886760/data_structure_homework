@@ -23,8 +23,12 @@ public:
     void insert_shop_list(const std::string&, const std::string&, const std::string&, int num=1);
     //从购物车中删除多件商品
     void remove_shop_list(const std::string&, const std::string&, const std::string&, int num=1);
-    //根据商家id与顾客id提交订单(id用来更新各自的history_order)
-    void submit_shop_list(const std::string&, const std::string&, const std::vector<std::string>&);
+    //根据商家id与顾客id提交订单，完成款项的转移，并留言
+    void submit_shop_list(const std::string&, const std::string&);
+    //商家处理购买订单
+    void deal_BuyItemRequest(const std::string&);
+    //顾客检查商品
+    void returnItem(const std::string&, const Order&);
 };
 
 

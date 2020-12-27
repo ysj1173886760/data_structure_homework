@@ -9,6 +9,7 @@
 #define DATA_STRUCTURE_HOMEWORK_BASE_H
 
 #include <string>
+#include <utility>
 #include <vector>
 #include <iostream>
 
@@ -48,7 +49,7 @@ public:
 class Order: public Base {
 public:
     std::string item_id;    //item id of the order
-    std::string price;      //price of the order
+    double price;      //price of the order
     std::string time;       //time when you buy
     int buy_num;
 
@@ -264,6 +265,32 @@ public:
     std::string shop_owner_name;
     std::string shop_owner_phone_number;
     std::string shop_owner_id_number;
+
+    explicit RegisterRequestData(std::string _account = "",
+                                 std::string _password = "",
+                                 std::string _shop_name = "",
+                                 std::string _shop_address = "",
+                                 std::string _shop_owner_name = "",
+                                 std::string _shop_owner_phone_number = "",
+                                 std::string _shop_owner_id_number = "",
+                                 std::string _id = "") :
+                                 account(std::move(_account)),
+                                 password(std::move(_password)),
+                                 shop_name(std::move(_shop_name)),
+                                 shop_address(std::move(_shop_address)),
+                                 shop_owner_id_number(std::move(_shop_owner_id_number)),
+                                 shop_owner_name(std::move(_shop_owner_name)),
+                                 shop_owner_phone_number(std::move(_shop_owner_phone_number),
+                                 id(_id) {}
+    void print() const {
+        std::cout << "account: " << account << std::endl;
+        std::cout << "password: " << password << std::endl;
+        std::cout << "shop_name" << shop_name << std::endl;
+        std::cout << "shop_address: " << shop_address << std::endl;
+        std::cout << "shop_owner_name: " << shop_owner_name << std::endl;
+        std::cout << "shop_owner_phone_number: " << shop_owner_phone_number << std::endl;
+        std::cout << "shop_owner_id_number: " << shop_owner_id_number << std::endl;
+    }
 };
 
 enum class Type {

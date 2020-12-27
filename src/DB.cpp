@@ -5,15 +5,39 @@
 #include "DB.h"
 
 void DB::open() {
-    std::cout << "loading userdata..." << std::endl;
-    load_user_data("../data/data.json");
+    std::cout << "loading userData..." << std::endl;
+    load_user_data("../data/user_data.json");
+
+    std::cout << "loading itemData..." << std::endl;
+    load_item_data("../data/item_data.json");
+
+    std::cout << "loading managerData..." << std::endl;
+    load_manager_data("../data/manager_data.json");
+
+    std::cout << "loading sellerData..." << std::endl;
+    load_seller_data("../data/seller_data.json");
+
+    std::cout << "loading registerRequestData..." << std::endl;
+    load_register_request_data("../data/register_request_data.json");
 
     std::cout << "data load complete" << std::endl;
 }
 
 void DB::close() {
-    std::cout << "saving userdata..." << std::endl;
-    save_user_data("../data/data.json");
+    std::cout << "saving userData..." << std::endl;
+    save_user_data("../data/user_data.json");
+
+    std::cout << "saving itemData..." << std::endl;
+    save_item_data("../data/item_data.json");
+
+    std::cout << "saving managerData..." << std::endl;
+    save_manager_data("../data/manager_data.json");
+
+    std::cout << "saving sellerData..." << std::endl;
+    save_seller_data("../data/seller_data.json");
+
+    std::cout << "saving registerRequestData..." << std::endl;
+    save_register_request_data("../data/register_request_data.json");
 
     std::cout << "data save complete" << std::endl;
 }
@@ -99,7 +123,7 @@ void DB::load_user_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["history_order"][i]["id"].asString();
             new_order.item_id = temp["history_order"][i]["item_id"].asString();
-            new_order.price = temp["history_order"][i]["price"].asString();
+            new_order.price = temp["history_order"][i]["price"].asDouble();
             new_order.time = temp["history_order"][i]["time"].asString();
             new_order.buy_num = temp["history_order"][i]["buy_num"].asInt();
             history_order.emplace_back(new_order);
@@ -115,7 +139,7 @@ void DB::load_user_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["shop_list"][i]["id"].asString();
             new_order.item_id = temp["shop_list"][i]["item_id"].asString();
-            new_order.price = temp["shop_list"][i]["price"].asString();
+            new_order.price = temp["shop_list"][i]["price"].asDouble();
             new_order.time = temp["shop_list"][i]["time"].asString();
             new_order.buy_num = temp["shop_list"][i]["buy_num"].asInt();
             shop_list.emplace_back(new_order);
@@ -127,7 +151,7 @@ void DB::load_user_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["current_order"][i]["id"].asString();
             new_order.item_id = temp["current_order"][i]["item_id"].asString();
-            new_order.price = temp["current_order"][i]["price"].asString();
+            new_order.price = temp["current_order"][i]["price"].asDouble();
             new_order.time = temp["current_order"][i]["time"].asString();
             new_order.buy_num = temp["current_order"][i]["buy_num"].asInt();
             current_order.emplace_back(new_order);
@@ -242,8 +266,9 @@ std::vector<UserData> DB::select_all_user_data() {
 }
 
 std::string DB::insert_user_data(const UserData& inserted_user_data) {
-    // TODO: id generator
     UserData new_user_data = inserted_user_data;
+    IDgenerator &gen = IDgenerator::get_instance();
+    new_user_data.id = gen.generateID(Type::User);
     this->user_data[new_user_data.id] = new_user_data;
     return new_user_data.id;
 }
@@ -337,6 +362,8 @@ std::vector<ItemData> DB::select_all_item_data() {
 
 std::string DB::insert_item_data(const ItemData &inserted_user_data) {
     ItemData new_item_data = inserted_user_data;
+    IDgenerator &gen = IDgenerator::get_instance();
+    new_item_data.id = gen.generateID(Type::Item);
     this->item_data[new_item_data.id] = new_item_data;
     return new_item_data.id;
 }
@@ -411,6 +438,8 @@ std::vector<ManagerData> DB::select_all_manager_data() {
 
 std::string DB::insert_manager_data(const ManagerData &inserted_manager_data) {
     ManagerData new_manager_data = inserted_manager_data;
+    IDgenerator &gen = IDgenerator::get_instance();
+    new_manager_data.id = gen.generateID(Type::Manager);
     this->manager_data[new_manager_data.id] = new_manager_data;
     return new_manager_data.id;
 }
@@ -619,7 +648,7 @@ void DB::load_seller_data(const std::string &filename) {
             Order new_order;
             new_order.id = temp["history_order"][i]["id"].asString();
             new_order.item_id = temp["history_order"][i]["item_id"].asString();
-            new_order.price = temp["history_order"][i]["price"].asString();
+            new_order.price = temp["history_order"][i]["price"].asDouble();
             new_order.time = temp["history_order"][i]["time"].asString();
             new_order.buy_num = temp["history_order"][i]["buy_num"].asInt();
             history_order.emplace_back(new_order);
@@ -783,6 +812,8 @@ void DB::save_seller_data(const std::string &filename) {
 
 std::string DB::insert_seller_data(const SellerData &inserted_seller_data) {
     SellerData new_seller_data = inserted_seller_data;
+    IDgenerator &gen = IDgenerator::get_instance();
+    new_seller_data.id = gen.generateID(Type::Seller);
     this->seller_data[new_seller_data.id] = new_seller_data;
     return new_seller_data.id;
 }
@@ -875,6 +906,8 @@ std::vector<RegisterRequestData> DB::select_all_register_request_data() {
 
 std::string DB::insert_register_request_data(const RegisterRequestData &inserted_register_request_data) {
     RegisterRequestData new_register_data = inserted_register_request_data;
+    IDgenerator &gen = IDgenerator::get_instance();
+    new_register_data.id = gen.generateID(Type::RegisterRequest);
     this->register_request_data[new_register_data.id] = new_register_data;
     return new_register_data.id;
 }
