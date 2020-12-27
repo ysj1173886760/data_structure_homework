@@ -26,3 +26,121 @@ std::string ServiceSystem::GetHighestSim(const std::vector<std::string>& v, cons
         return v[sim[0].second];
     }
 }
+
+void ServiceSystem::display_shop(const std::string& shop_name) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    vector<SellerData> sellers = db.select_all_seller_data();
+
+    int tar;
+    for(tar=0; tar<sellers.size(); tar++) {
+        if(sellers[tar].shop_name == shop_name)
+            break;
+    }
+
+    vector<ItemData> items = op.GetShopItems(sellers[tar].id);
+    for(int i=0; i<items.size(); i++) {
+        std::cout << "name : " << items[i].name << std::endl;
+        std::cout << "price : " << items[i].price << std::endl;
+        std::cout << "left : " << items[i].store_num << std::endl;
+        std::cout << "description : " << items[i].des << std::endl;
+    }
+}
+
+void ServiceSystem::display_item(const std::string& item_name) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    vector<ItemData> items = db.select_all_item_data();
+    for(int i=0; i<items.size(); i++) {
+        if(op.GetWordsSim(items[i].name, item_name) > 0.8) {
+            std::cout << "Shop : " << items[i].owner << std::endl;
+            std::cout << "Name : " << items[i].name << std::endl;
+            std::cout << "Price : " << items[i].price << std::endl;
+        }
+    }
+}
+
+int item_in_shop_list(const std::string& user_id, const std::string& item_id) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
+
+    for(int i=0; i<user.shop_list.size(); i++) {
+        if(user.shop_list[i].item_id == item_id)
+            return i;
+    }
+    return -1;
+}
+
+void ServiceSystem::insert_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    IDgenerator& generator = IDgenerator::get_instance();
+    UserData user = db.select_user_data(user_id);
+
+    ItemData item;
+    if(op.GetItem(shop_name, item_name, item)) {
+        int tar = item_in_shop_list(user_id, item.id);
+
+        //如果所购买的物品已经处在购物车中，则增加数量即可
+        if(tar!=-1)
+            user.shop_list[tar].buy_num += num;
+
+        else {
+            Order order;
+            order.id = generator.generateID(Type::Order);
+            order.item_id = item.id;
+            order.price = item.price;
+            order.buy_num = num;
+            order.time = op.time2str();
+            for(int i=0; i<num; i++)
+                user.shop_list.push_back(order);
+        }
+    }
+}
+
+void ServiceSystem::remove_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    IDgenerator& generator = IDgenerator::get_instance();
+    UserData user = db.select_user_data(user_id);
+
+    ItemData item;
+    if(op.GetItem(shop_name, item_name, item)) {
+        int tar = item_in_shop_list(user_id, item.id);
+
+        if(tar!=-1)
+            user.shop_list[tar].buy_num = max(user.shop_list[tar].buy_num-num, 0);
+
+        else
+            std::cout << "ERROR : you are removing sth doesn't in the shop_list!!!" << std::endl;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

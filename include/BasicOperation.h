@@ -19,6 +19,7 @@ public:
     //比较两个单词的相似度并返回
     double GetWordsSim(const std::string&, const std::string&);
     vector<ItemData> GetShopItems(const std::string&);
+    bool GetItem(const std::string&, const std::string&, ItemData&);
 };
 
 

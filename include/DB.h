@@ -19,8 +19,8 @@ private:
     std::unordered_map<std::string, UserData> user_data;
     std::unordered_map<std::string, ItemData> item_data;
     std::unordered_map<std::string, ManagerData> manager_data;
-    std::unordered_map<std::string, ChangeItemRequestData> change_item_request_data;
-    std::unordered_map<std::string, BuyItemRequestData> buy_item_request_data;
+//    std::unordered_map<std::string, ChangeItemRequestData> change_item_request_data;
+//    std::unordered_map<std::string, BuyItemRequestData> buy_item_request_data;
     std::unordered_map<std::string, SellerData> seller_data;
     std::unordered_map<std::string, RegisterRequestData> register_request_data;
 
@@ -30,16 +30,16 @@ private:
     void load_user_data(const std::string&);
     void load_item_data(const std::string&);
     void load_manager_data(const std::string&);
-    void load_change_item_request_data(const std::string&);
-    void load_buy_item_request_data(const std::string&);
+//    void load_change_item_request_data(const std::string&);
+//    void load_buy_item_request_data(const std::string&);
     void load_seller_data(const std::string&);
     void load_register_request_data(const std::string&);
 
     void save_user_data(const std::string&);
     void save_item_data(const std::string&);
     void save_manager_data(const std::string&);
-    void save_change_item_request_data(const std::string&);
-    void save_buy_item_request_data(const std::string&);
+//    void save_change_item_request_data(const std::string&);
+//    void save_buy_item_request_data(const std::string&);
     void save_seller_data(const std::string&);
     void save_register_request_data(const std::string&);
 
@@ -47,8 +47,8 @@ private:
         user_data.clear();
         item_data.clear();
         manager_data.clear();
-        change_item_request_data.clear();
-        buy_item_request_data.clear();
+//        change_item_request_data.clear();
+//        buy_item_request_data.clear();
         seller_data.clear();
         register_request_data.clear();
     }
@@ -71,8 +71,8 @@ public:
     std::string insert_user_data(const UserData&);
     std::string insert_item_data(const ItemData&);
     std::string insert_manager_data(const ManagerData&);
-    std::string insert_change_item_request_data(const ChangeItemRequestData&);
-    std::string insert_buy_item_request_data(const BuyItemRequestData&);
+//    std::string insert_change_item_request_data(const ChangeItemRequestData&);
+//    std::string insert_buy_item_request_data(const BuyItemRequestData&);
     std::string insert_seller_data(const SellerData&);
     std::string insert_register_request_data(const RegisterRequestData&);
 
@@ -82,8 +82,8 @@ public:
     void delete_user_data(const std::string&);
     void delete_item_data(const std::string&);
     void delete_manager_data(const std::string&);
-    void delete_change_item_request_data(const std::string&);
-    void delete_buy_item_request_data(const std::string&);
+//    void delete_change_item_request_data(const std::string&);
+//    void delete_buy_item_request_data(const std::string&);
     void delete_seller_data(const std::string&);
     void delete_register_request_data(const std::string&);
 
@@ -92,8 +92,8 @@ public:
     std::vector<UserData> select_all_user_data();
     std::vector<ItemData> select_all_item_data();
     std::vector<ManagerData> select_all_manager_data();
-    std::vector<ChangeItemRequestData> select_all_change_item_request_data();
-    std::vector<BuyItemRequestData> select_all_buy_item_request_data();
+//    std::vector<ChangeItemRequestData> select_all_change_item_request_data();
+//    std::vector<BuyItemRequestData> select_all_buy_item_request_data();
     std::vector<SellerData> select_all_seller_data();
     std::vector<RegisterRequestData> select_all_register_request_data();
 
@@ -102,8 +102,8 @@ public:
     UserData select_user_data(const std::string&);
     ItemData select_item_data(const std::string&);
     ManagerData select_manager_data(const std::string&);
-    ChangeItemRequestData select_change_item_request_data(const std::string&);
-    BuyItemRequestData select_buy_item_request_data(const std::string&);
+//    ChangeItemRequestData select_change_item_request_data(const std::string&);
+//    BuyItemRequestData select_buy_item_request_data(const std::string&);
     SellerData select_seller_data(const std::string&);
     RegisterRequestData select_register_request_data(const std::string&);
 
@@ -114,9 +114,9 @@ public:
     void modify_user_data(const std::string&, const UserData&);
     void modify_item_data(const std::string&, const ItemData&);
     void modify_manager_data(const std::string&, const ManagerData&);
-    void modify_change_item_request_data(const std::string&, const ChangeItemRequestData&);
-    void modify_buy_item_request_data(const std::string&, const BuyItemRequestData&);
-    void modify_seller_request_data(const std::string&, const SellerData&);
+//    void modify_change_item_request_data(const std::string&, const ChangeItemRequestData&);
+//    void modify_buy_item_request_data(const std::string&, const BuyItemRequestData&);
+    void modify_seller_data(const std::string&, const SellerData&);
     void modify_register_request_data(const std::string&, const RegisterRequestData&);
 
 };
