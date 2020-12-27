@@ -14,69 +14,47 @@ RegisterManager::RegisterManager() {
     db.close();
 }
 
-void RegisterManager::Register() {
-    register_account();
-    register_password();
+
+// 传入参数
+// 账号，密码，密码确认
+bool RegisterManager::Register(const std::string& account,
+                               const std::string& password,
+                               const std::string& confirm_password) {
+    //
+    if (!(register_account(account) && register_password(password, confirm_password))) {
+        return false;
+    }
 
     DB& db = DB::getInstance();
     db.open();
-
     db.insert_manager_data(manager);
-
     db.close();
+
+    return true;
 }
 
-void RegisterManager::register_account() {
-    std::string account;
+//
+bool RegisterManager::register_account(const std::string& account) {
 
-    while (true) {
-        std::cout << "input your account: " << std::endl;
-
-        std::cin >> account;
-
-        bool check = false;
-        for (auto it : all_manager_data) {
-//            std::cout << "in for" << std::endl;
-            if (it.account == account) {
-                std::cout << "the account already exists!" << std::endl;
-                check = true;
-                break;
-            }
+    // the account already exists
+    for (const auto& it : all_manager_data) {
+        if (it.account == account) {
+            return false;
         }
-        if (check)
-            continue;
-
-        break;
     }
 
     manager.account = account;
+    return true;
 }
 
-void RegisterManager::register_password() {
-    std::string password;
-    std::string confirm_password;
-    while (true) {
-        std::cout << "input your password: ";
+//
+bool RegisterManager::register_password(const std::string& password, const std::string& confirm_password) {
 
-        std::cin >> password;
-
-        // password rule
-        if (password.size() <= 6) {
-            std::cout << "password is too simple" << std::endl;
-            continue;
-        }
-
-        std::cout << "confirm your password: ";
-
-        std::cin >> confirm_password;
-
-        if (password != confirm_password) {
-            std::cout << "password != confirm_password" << std::endl;
-            continue;
-        }
-
-        break;
+    // password rule
+    if (password != confirm_password) {
+        return false;
     }
 
     manager.password = password;
+    return true;
 }

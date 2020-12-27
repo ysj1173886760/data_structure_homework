@@ -16,19 +16,29 @@ public:
     RegisterSeller();
     ~RegisterSeller();
 
-    void Register();
+    bool Register(const std::string& account,
+                  const std::string& password,
+                  const std::string& confirm_password,
+                  const std::string& shop_name,
+                  const std::string& shop_address,
+                  const std::string& shop_owner_name,
+                  const std::string& shop_owner_phone_number,
+                  const std::string& shop_owner_id_number,
+                  const std::string& pay_password,
+                  const std::string& confirm_pay_password);
     void print() {
         seller.print();
     }
 private:
-    void register_account();
-    void register_password();
-    void register_shop_name();
-    void register_shop_address();
-    void register_shop_owner_name();
-    void register_shop_owner_phone_number();
-    void register_shop_owner_id_number();
-    void register_pay_password();
+    bool register_account(const std::string&);
+    bool register_password(const std::string&, const std::string&);
+    bool register_shop_name(const std::string&);
+    bool register_shop_address(const std::string&);
+    bool register_shop_owner_name(const std::string&);
+    bool register_shop_owner_phone_number(const std::string&);
+    bool register_shop_owner_id_number(const std::string&);
+    bool register_pay_password(const std::string&, const std::string&);
+
     void copy_to_register_requests_data();
 
     SellerData seller;

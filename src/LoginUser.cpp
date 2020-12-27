@@ -14,55 +14,122 @@ LoginUser::LoginUser() {
 }
 
 // if you login successfully, this function will return true;
-bool LoginUser::Login() {
-    std::string account;
-    std::string password;
+bool LoginUser::Login(const std::string& account, const std::string& password) {
 
-    std::cout << "account" << std::endl;
-    std::cin >> account;
-    std::cout << "password" << std::endl;
-    std::cin >> password;
-
-    for (auto it : all_user_data) {
+    //
+    for (const auto& it : all_user_data) {
         if (it.account == account && it.password == password) {
+            std::cout << "login successfully!" << std::endl;
             return true;
         }
     }
+
+    std::cout << "login error!" << std::endl;
     return false;
 }
 
-//
-void LoginUser::ChangePassword() {
-    std::string password;
+int LoginUser::ChangePassword(const std::string &account,
+                              const std::string &password,
+                              const std::string &email,
+                              const std::string &new_password,
+                              const std::string &new_confirm_password) {
 
-    if (Login()) {
-        password = OkPassword();
-    }
-
-}
-
-void LoginUser::ForgotPassword() {
-
-}
-
-// return a true password.
-std::string LoginUser::OkPassword() {
-    std::string password;
-    std::string confirm_password;
-
-    while (true) {
-        std::cout << "password" << std::endl;
-        std::cin >> password;
-
-        // password rule should be added.
-
-        std::cout << "confirm_password" << std::endl;
-        std::cin >> confirm_password;
-
-        if (password == confirm_password) {
-            break;
+    for (auto it : all_user_data) {
+        if (it.account == account && it.password == password) {
+            if (it.email == email) {
+                if (OkPassword(new_password, new_confirm_password)) {
+                    it.password = password;
+                    return 0;
+                }
+                else {
+                    return -3;
+                } // password is illegal
+            }
+            else {
+                return -2;
+            } // email is wrong
         }
+        else {
+            return -1;
+        } // account or password wrong
+    }
+}
+
+//
+int LoginUser::ChangePayPassword(const std::string &account,
+                                 const std::string &password,
+                                 const std::string &email,
+                                 const std::string &real_name,
+                                 const std::string &id_number,
+                                 const std::string &new_pay_password,
+                                 const std::string &new_confirm_pay_password) {
+    //
+    for (auto it : all_user_data) {
+        if (it.account == account && it.password == password) {
+            if (it.email == email && it.real_name == real_name && it.id_number == id_number) {
+                if (OkPayPassword(new_pay_password, new_confirm_pay_password)) {
+                    it.wallet.password = new_pay_password;
+                    return 0;
+                }
+                else {
+                    return -3;
+                } // pay password is illegal
+            }
+            else {
+                return -2;
+            } // authentication is wrong
+        }
+        else {
+            return -1;
+        } // account or password is wrong
+    }
+}
+
+
+int LoginUser::ForgotPassword(const std::string &account,
+                               const std::string &email,
+                               const std::string &new_password,
+                               const std::string &new_confirm_password) {
+
+    //
+    for (auto it : all_user_data) {
+        if (it.account == account) {
+            if (it.email == email) {
+                if (OkPassword(new_password, new_confirm_password)) {
+                    it.password = new_password;
+                    return 0;
+                }
+                else {
+                    return -3;
+                }
+            }
+            else {
+                return -2;
+            } // it.email != email
+        } // it.account == account
     }
 
-    return password;
+    return -1;
+}
+
+//
+bool LoginUser::OkPassword(const std::string& password, const std::string& confirm_password) {
+
+    // password rule
+    if (password != confirm_password) {
+        return false;
+    }
+
+    return true;
+}
+
+//
+bool LoginUser::OkPayPassword(const std::string &pay_password, const std::string &confirm_pay_password) {
+
+    // pay password rule
+    if (pay_password != confirm_pay_password) {
+        return false;
+    }
+
+    return true;
 }

@@ -18,180 +18,125 @@ RegisterSeller::~RegisterSeller() {
 
 }
 
-void RegisterSeller::Register() {
-    register_account();
-    register_password();
-    register_pay_password();
+// 这个到底是返回 true 还是 false，因为需要向管理员发出申请，所以怎么定义注册成功
+// 传入参数
+// 账号，密码，密码确认，店铺名字，店铺地址
+// 拥有者姓名，拥有者手机号，拥有者身份证，支付密码，支付密码确认
+bool RegisterSeller::Register(const std::string& account,
+                              const std::string& password,
+                              const std::string& confirm_password,
+                              const std::string& shop_name,
+                              const std::string& shop_address,
+                              const std::string& shop_owner_name,
+                              const std::string& shop_owner_phone_number,
+                              const std::string& shop_owner_id_number,
+                              const std::string& pay_password,
+                              const std::string& confirm_pay_password) {
+    //
+    if (!(register_account(account) && register_password(password, confirm_password) &&
+    register_pay_password(pay_password, confirm_pay_password) && register_shop_name(shop_name) &&
+    register_shop_address(shop_address) && register_shop_owner_name(shop_owner_name) &&
+    register_shop_owner_phone_number(shop_owner_phone_number) && register_shop_owner_id_number(shop_owner_id_number))) {
+        std::cout << "Register Seller fail" << std::endl;
+        return false;
+    }
 
-    register_shop_owner_name();
-    register_shop_owner_phone_number();
-    register_shop_owner_id_number();
-
-    register_shop_name();
-    register_shop_address();
+    copy_to_register_requests_data();
 
     DB& db = DB::getInstance();
     db.open();
-
-    copy_to_register_requests_data();
     db.insert_register_request_data(rrd);
-    db.insert_seller_data(seller);
-
     db.close();
+
+    return true;
 }
 
-void RegisterSeller::register_account() {
-    std::string account;
+bool RegisterSeller::register_account(const std::string& account) {
 
-    while (true) {
-        std::cout << "input your account: " << std::endl;
-
-        std::cin >> account;
-
-        bool check = false;
-        for (auto it : all_seller_data) {
-//            std::cout << "in for" << std::endl;
-            if (it.account == account) {
-                std::cout << "the account already exists!" << std::endl;
-                check = true;
-                break;
-            }
+    // if the account already exists
+    for (const auto& it : all_seller_data) {
+        if (it.account == account) {
+            return false;
         }
-        if (check)
-            continue;
-
-        break;
     }
 
     seller.account = account;
+    return true;
 }
 
-void RegisterSeller::register_password() {
-    std::string password;
-    std::string confirm_password;
-    while (true) {
-        std::cout << "input your password: ";
+bool RegisterSeller::register_password(const std::string& password, const std::string& confirm_password) {
 
-        std::cin >> password;
-
-        // password rule
-        if (password.size() <= 6) {
-            std::cout << "password is too simple" << std::endl;
-            continue;
-        }
-
-        std::cout << "confirm your password: ";
-
-        std::cin >> confirm_password;
-
-        if (password != confirm_password) {
-            std::cout << "password != confirm_password" << std::endl;
-            continue;
-        }
-
-        break;
+    // password rule
+    if (password != confirm_password) {
+        return false;
     }
 
     seller.password = password;
+    return true;
 }
 
-void RegisterSeller::register_shop_name() {
-    std::string shop_name;
+bool RegisterSeller::register_shop_name(const std::string& shop_name) {
 
-    while (true) {
-        std::cout << "shop_name" << std::endl;
-
-        std::cin >> shop_name;
-
-        bool check = false;
-        for (auto it : all_seller_data) {
-            if (it.shop_name == shop_name) {
-                check = true;
-                break;
-            }
+    // if the shop_name already exists
+    for (const auto& it : all_seller_data) {
+        if (it.shop_name == shop_name) {
+            return false;
         }
-
-        if (check) continue;
-        break;
     }
 
     seller.shop_name = shop_name;
+    return true;
 }
 
-void RegisterSeller::register_shop_address() {
-    std::string shop_address;
-
-    std::cout << "shop_address" << std::endl;
-
-    std::cin >> shop_address;
+bool RegisterSeller::register_shop_address(const std::string& shop_address) {
 
     seller.shop_address = shop_address;
+    return true;
 }
 
-void RegisterSeller::register_shop_owner_name() {
-    std::string shop_owner_name;
-
-    std::cout << "shop_owner_name" << std::endl;
-    std::cin >> shop_owner_name;
+bool RegisterSeller::register_shop_owner_name(const std::string& shop_owner_name) {
 
     seller.shop_owner_name = shop_owner_name;
+    return true;
 }
 
-void RegisterSeller::register_shop_owner_phone_number() {
-    std::string phone_number;
-//    std::regex phone_regex("^1(3\\d|47|5([0-3]|[5-9])|8(0|2|[5-9]))\\d{8}$");
+bool RegisterSeller::register_shop_owner_phone_number(const std::string& shop_owner_phone_number) {
+
+    // std::regex phone_regex("^1(3\\d|47|5([0-3]|[5-9])|8(0|2|[5-9]))\\d{8}$");
     std::regex phone_regex("(.*)");
-    while (true) {
-        std::cout << "input your phone number: ";
 
-        std::cin >> phone_number;
-
-        if (!std::regex_match(phone_number, phone_regex)) {
-            std::cout << "phone number is illegal!" << std::endl;
-            continue;
-        }
-
-        break;
+    //
+    if (!std::regex_match(shop_owner_phone_number, phone_regex)) {
+        return false;
     }
 
-    seller.shop_owner_phone_number = phone_number;
+    seller.shop_owner_phone_number = shop_owner_phone_number;
+    return true;
 }
 
-void RegisterSeller::register_shop_owner_id_number() {
+bool RegisterSeller::register_shop_owner_id_number(const std::string& shop_owner_id_number) {
+
 //    std::regex id_number_regex("^([1-9]\\d{5}[12]\\d{3}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])\\d{3}[0-9xX])$");
     std::regex id_number_regex("(.*)");
-    std::string id_number;
 
-    while (true) {
-        std::cout << "input your idCard number: ";
-
-        std::cin >> id_number;
-
-        if (!std::regex_match(id_number, id_number_regex)) {
-            std::cout << "idCard is illegal!" << std::endl;
-            continue;
-        }
-
-        break;
+    //
+    if (!std::regex_match(shop_owner_id_number, id_number_regex)) {
+        return false;
     }
 
-    seller.shop_owner_id_number = id_number;
+    seller.shop_owner_id_number = shop_owner_id_number;
+    return true;
 }
 
-void RegisterSeller::register_pay_password() {
-    std::string password;
-    std::string confirm_password;
+bool RegisterSeller::register_pay_password(const std::string& pay_password, const std::string& confirm_pay_password) {
 
-    while (true) {
-        std::cout << "pay password: ";
-        std::cin >> password;
-        std::cout << "confirm pay password: ";
-        std::cin >> confirm_password;
-
-        // pay_password rule
-        if (password == confirm_password)
-            break;
+    // pay password rule
+    if (pay_password != confirm_pay_password) {
+        return false;
     }
+
+    seller.wallet.password = pay_password;
+    return true;
 }
 
 // copy the seller's information to RegisterRequestsData list.

@@ -12,14 +12,14 @@
 class RegisterManager {
 public:
     RegisterManager();
-    void Register();
+    bool Register(const std::string&, const std::string&, const std::string&);
 
     void print() {
         manager.print();
     }
 private:
-    void register_account();
-    void register_password();
+    bool register_account(const std::string&);
+    bool register_password(const std::string&, const std::string&);
 
     ManagerData manager;
     std::vector<ManagerData> all_manager_data;
