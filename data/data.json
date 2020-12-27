@@ -1,67 +1,8 @@
 [
 	{
-		"account" : "123",
-		"age" : "16",
-		"email" : "123@qq.com",
-		"gender" : "male",
-		"history_item" : 
-		[
-			"item123",
-			"item321"
-		],
-		"history_order" : 
-		[
-			{
-				"buy_num" : 10,
-				"id" : "",
-				"item_id" : "item123",
-				"price" : "10",
-				"time" : "2000-10-11"
-			},
-			{
-				"buy_num" : 20,
-				"id" : "",
-				"item_id" : "item321",
-				"price" : "11",
-				"time" : "2000-1-11"
-			}
-		],
-		"id" : "0112312312321",
-		"id_number" : "666",
-		"message" : 
-		[
-			"haha",
-			"heihei"
-		],
-		"password" : "123",
-		"phone_number" : "123321",
-		"real_name" : "real_name",
-		"shop_list" : 
-		[
-			"item123",
-			"item321"
-		],
-		"user_name" : "hahaha"
-	},
-	{
-		"account" : "sheep3",
-		"age" : "",
-		"email" : "321",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "12312313",
-		"id_number" : "",
-		"message" : null,
-		"password" : "000",
-		"phone_number" : "",
-		"real_name" : "real_name",
-		"shop_list" : null,
-		"user_name" : "sheep"
-	},
-	{
 		"account" : "sheep",
 		"age" : "20",
+		"current_order" : null,
 		"email" : "117@qq.com",
 		"gender" : "male",
 		"history_item" : 
@@ -98,9 +39,88 @@
 		"real_name" : "sheep_name",
 		"shop_list" : 
 		[
-			"item666",
-			"item321"
+			{
+				"buy_num" : 0,
+				"id" : "",
+				"item_id" : "",
+				"price" : "",
+				"time" : ""
+			}
 		],
 		"user_name" : "phone_number"
+	},
+	{
+		"account" : "123",
+		"age" : "16",
+		"current_order" : null,
+		"email" : "123@qq.com",
+		"gender" : "male",
+		"history_item" : 
+		[
+			"item123",
+			"item321"
+		],
+		"history_order" : 
+		[
+			{
+				"buy_num" : 10,
+				"id" : "",
+				"item_id" : "item123",
+				"price" : "10",
+				"time" : "2000-10-11"
+			},
+			{
+				"buy_num" : 20,
+				"id" : "",
+				"item_id" : "item321",
+				"price" : "11",
+				"time" : "2000-1-11"
+			}
+		],
+		"id" : "0112312312321",
+		"id_number" : "666",
+		"message" : 
+		[
+			"haha",
+			"heihei"
+		],
+		"password" : "123",
+		"phone_number" : "123321",
+		"real_name" : "real_name",
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 10,
+				"id" : "",
+				"item_id" : "item123",
+				"price" : "10",
+				"time" : "2000-10-11"
+			},
+			{
+				"buy_num" : 20,
+				"id" : "",
+				"item_id" : "item321",
+				"price" : "11",
+				"time" : "2000-1-11"
+			}
+		],
+		"user_name" : "hahaha"
+	},
+	{
+		"account" : "sheep3",
+		"age" : "",
+		"current_order" : null,
+		"email" : "321",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "12312313",
+		"id_number" : "",
+		"message" : null,
+		"password" : "000",
+		"phone_number" : "",
+		"real_name" : "real_name",
+		"shop_list" : null,
+		"user_name" : "sheep"
 	}
 ]
