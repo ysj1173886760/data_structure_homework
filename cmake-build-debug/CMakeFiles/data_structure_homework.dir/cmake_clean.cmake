@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/Register.cpp.o"
+  "CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o"
   "CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
 )
 
