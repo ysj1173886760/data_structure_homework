@@ -87,3 +87,5 @@ target_link_libraries(service jsoncpp)
 target_link_libraries(register_test jsoncpp)
 
 target_link_libraries(login_test jsoncpp)
+
+add_executable(rbtree_test test/rbtree_test.cpp)
