@@ -176,13 +176,20 @@ void RegisterUser::register_id_number() {
 
 void RegisterUser::register_pay_password() {
     std::string pay_password;
+    std::string confirm_pay_password;
+
 
     while (true) {
-        std::cout << "pay_password: ";
+        std::cout << "pay password: ";
         std::cin >> pay_password;
+        std::cout << "confirm pay password: ";
+        std::cin >> confirm_pay_password;
+
 
         // add some pay_password rule
-        if (pay_password.size() == 6) break;
+        if (pay_password == confirm_pay_password) {
+            break;
+        }
     }
 
     user.wallet.password = pay_password;

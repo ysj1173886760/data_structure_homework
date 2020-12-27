@@ -28,7 +28,7 @@ private:
     void register_shop_owner_name();
     void register_shop_owner_phone_number();
     void register_shop_owner_id_number();
-
+    void register_pay_password();
     void copy_to_register_requests_data();
 
     SellerData seller;

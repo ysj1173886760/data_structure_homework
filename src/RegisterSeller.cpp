@@ -21,6 +21,7 @@ RegisterSeller::~RegisterSeller() {
 void RegisterSeller::Register() {
     register_account();
     register_password();
+    register_pay_password();
 
     register_shop_owner_name();
     register_shop_owner_phone_number();
@@ -175,6 +176,22 @@ void RegisterSeller::register_shop_owner_id_number() {
     }
 
     seller.shop_owner_id_number = id_number;
+}
+
+void RegisterSeller::register_pay_password() {
+    std::string password;
+    std::string confirm_password;
+
+    while (true) {
+        std::cout << "pay password: ";
+        std::cin >> password;
+        std::cout << "confirm pay password: ";
+        std::cin >> confirm_password;
+
+        // pay_password rule
+        if (password == confirm_password)
+            break;
+    }
 }
 
 // copy the seller's information to RegisterRequestsData list.
