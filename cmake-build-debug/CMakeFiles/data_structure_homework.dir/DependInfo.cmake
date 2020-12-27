@@ -7,10 +7,13 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/BasicOperation.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/BasicOperation.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/DB.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/DB.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/IDgenerator.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.o"
-  "/home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSystem.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/LoginManager.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSeller.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/LoginUser.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/QuestionSystem.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o"
-  "/home/shrimp/data/CLionProjects/data_structure_homework/src/Register.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/Register.cpp.o"
-  "/home/shrimp/data/CLionProjects/data_structure_homework/src/UserRegister.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterManager.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterSeller.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o"
+  "/home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterUser.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o"
   "/home/shrimp/data/CLionProjects/data_structure_homework/src/main.cpp" "/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

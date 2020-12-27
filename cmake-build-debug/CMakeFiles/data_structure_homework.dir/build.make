@@ -116,22 +116,48 @@ CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/IDgenerator.cpp -o CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.s
 
-CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
-CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o: ../src/LoginSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSystem.cpp
+CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
+CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o: ../src/LoginManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginManager.cpp
 
-CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSystem.cpp > CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.i
+CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginManager.cpp > CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.i
 
-CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSystem.cpp -o CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.s
+CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginManager.cpp -o CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.s
+
+CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
+CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o: ../src/LoginSeller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSeller.cpp
+
+CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSeller.cpp > CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.i
+
+CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginSeller.cpp -o CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.s
+
+CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
+CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o: ../src/LoginUser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginUser.cpp
+
+CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginUser.cpp > CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.i
+
+CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/LoginUser.cpp -o CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.s
 
 CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
 CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o: ../src/QuestionSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/QuestionSystem.cpp
 
 CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.i: cmake_force
@@ -142,35 +168,48 @@ CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/QuestionSystem.cpp -o CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.s
 
-CMakeFiles/data_structure_homework.dir/src/Register.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
-CMakeFiles/data_structure_homework.dir/src/Register.cpp.o: ../src/Register.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/data_structure_homework.dir/src/Register.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/Register.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/Register.cpp
+CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
+CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o: ../src/RegisterManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterManager.cpp
 
-CMakeFiles/data_structure_homework.dir/src/Register.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/Register.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/Register.cpp > CMakeFiles/data_structure_homework.dir/src/Register.cpp.i
+CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterManager.cpp > CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.i
 
-CMakeFiles/data_structure_homework.dir/src/Register.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/Register.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/Register.cpp -o CMakeFiles/data_structure_homework.dir/src/Register.cpp.s
+CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterManager.cpp -o CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.s
 
-CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
-CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o: ../src/UserRegister.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/UserRegister.cpp
+CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
+CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o: ../src/RegisterSeller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterSeller.cpp
 
-CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/UserRegister.cpp > CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.i
+CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterSeller.cpp > CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.i
 
-CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/UserRegister.cpp -o CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.s
+CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterSeller.cpp -o CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.s
+
+CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
+CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o: ../src/RegisterUser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterUser.cpp
+
+CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterUser.cpp > CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.i
+
+CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shrimp/data/CLionProjects/data_structure_homework/src/RegisterUser.cpp -o CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.s
 
 CMakeFiles/data_structure_homework.dir/src/main.cpp.o: CMakeFiles/data_structure_homework.dir/flags.make
 CMakeFiles/data_structure_homework.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/data_structure_homework.dir/src/main.cpp.o -c /home/shrimp/data/CLionProjects/data_structure_homework/src/main.cpp
 
 CMakeFiles/data_structure_homework.dir/src/main.cpp.i: cmake_force
@@ -186,10 +225,13 @@ data_structure_homework_OBJECTS = \
 "CMakeFiles/data_structure_homework.dir/src/BasicOperation.cpp.o" \
 "CMakeFiles/data_structure_homework.dir/src/DB.cpp.o" \
 "CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.o" \
-"CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o" \
+"CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o" \
+"CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o" \
+"CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o" \
 "CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o" \
-"CMakeFiles/data_structure_homework.dir/src/Register.cpp.o" \
-"CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o" \
+"CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o" \
+"CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o" \
+"CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o" \
 "CMakeFiles/data_structure_homework.dir/src/main.cpp.o"
 
 # External object files for target data_structure_homework
@@ -198,14 +240,17 @@ data_structure_homework_EXTERNAL_OBJECTS =
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/BasicOperation.cpp.o
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/DB.cpp.o
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/IDgenerator.cpp.o
-../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/LoginSystem.cpp.o
+../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/LoginManager.cpp.o
+../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/LoginSeller.cpp.o
+../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/LoginUser.cpp.o
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/QuestionSystem.cpp.o
-../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/Register.cpp.o
-../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/UserRegister.cpp.o
+../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/RegisterManager.cpp.o
+../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/RegisterSeller.cpp.o
+../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/RegisterUser.cpp.o
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/src/main.cpp.o
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/build.make
 ../bin/data_structure_homework: CMakeFiles/data_structure_homework.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable ../bin/data_structure_homework"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shrimp/data/CLionProjects/data_structure_homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable ../bin/data_structure_homework"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/data_structure_homework.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
