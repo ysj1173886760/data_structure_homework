@@ -112,7 +112,7 @@ int LoginUser::ForgotPassword(const std::string &account,
     return -1;
 }
 
-//
+// password rule
 bool LoginUser::OkPassword(const std::string& password, const std::string& confirm_password) {
 
     // password rule
