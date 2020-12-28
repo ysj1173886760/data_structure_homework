@@ -1,22 +1,5 @@
 [
 	{
-		"account" : "sheep3",
-		"age" : "",
-		"current_order" : null,
-		"email" : "321",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "12312313",
-		"id_number" : "",
-		"message" : null,
-		"password" : "000",
-		"phone_number" : "",
-		"real_name" : "real_name",
-		"shop_list" : null,
-		"user_name" : "sheep"
-	},
-	{
 		"account" : "sheep",
 		"age" : "20",
 		"current_order" : null,
@@ -56,6 +39,23 @@
 		"real_name" : "sheep_name",
 		"shop_list" : null,
 		"user_name" : "phone_number"
+	},
+	{
+		"account" : "sheep3",
+		"age" : "",
+		"current_order" : null,
+		"email" : "321",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "12312313",
+		"id_number" : "",
+		"message" : null,
+		"password" : "000",
+		"phone_number" : "",
+		"real_name" : "real_name",
+		"shop_list" : null,
+		"user_name" : "sheep"
 	},
 	{
 		"account" : "123",
@@ -116,23 +116,6 @@
 		"user_name" : "xjz"
 	},
 	{
-		"account" : "account",
-		"age" : "",
-		"current_order" : null,
-		"email" : "email@qq.com",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "120201228204045",
-		"id_number" : "id_number",
-		"message" : null,
-		"password" : "password",
-		"phone_number" : "phone_number",
-		"real_name" : "real_name",
-		"shop_list" : null,
-		"user_name" : "user_name"
-	},
-	{
 		"account" : "myaccount",
 		"age" : "",
 		"current_order" : null,
@@ -148,5 +131,22 @@
 		"real_name" : "myrealname",
 		"shop_list" : null,
 		"user_name" : "myusername"
+	},
+	{
+		"account" : "account",
+		"age" : "",
+		"current_order" : null,
+		"email" : "email@qq.com",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "120201228204045",
+		"id_number" : "id_number",
+		"message" : null,
+		"password" : "password",
+		"phone_number" : "phone_number",
+		"real_name" : "real_name",
+		"shop_list" : null,
+		"user_name" : "user_name"
 	}
 ]
