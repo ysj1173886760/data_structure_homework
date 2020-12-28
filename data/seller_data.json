@@ -1,1 +1,18 @@
-null
+[
+	{
+		"account" : "account",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201228215730",
+		"message" : null,
+		"password" : "password",
+		"question_list" : null,
+		"shop_address" : "shop_address",
+		"shop_name" : "shop_name",
+		"shop_owner_id_number" : "shop_owner_id_number",
+		"shop_owner_name" : "shop_owner_name",
+		"shop_owner_phone_number" : "shop_owner_phone_number"
+	}
+]

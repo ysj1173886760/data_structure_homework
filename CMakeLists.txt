@@ -65,7 +65,8 @@ set(login_test test/login_test.cpp src/LoginUser.cpp src/LoginSeller.cpp src/Log
 
 set(register_with_login test/register_with_login.cpp src/DB.cpp src/RegisterUser.cpp
         src/RegisterSeller.cpp src/RegisterManager.cpp src/LoginUser.cpp
-        src/LoginSeller.cpp src/LoginManager.cpp src/IDgenerator.cpp src/BasicOperation.cpp)
+        src/LoginSeller.cpp src/LoginManager.cpp src/IDgenerator.cpp src/BasicOperation.cpp
+        src/ManagerOperation.cpp)
 
 add_executable(testdb ${testdb})
 

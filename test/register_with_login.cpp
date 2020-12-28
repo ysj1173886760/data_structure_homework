@@ -9,6 +9,7 @@
 #include "LoginUser.h"
 #include "LoginSeller.h"
 #include "LoginManager.h"
+#include "ManagerOperation.h"
 #include "DB.h"
 #include <vector>
 
@@ -33,8 +34,8 @@ int main() {
     std::string shop_owner_id_number;
 
 
-//    std::cout << "account: ";
-//    std::cin >> account;
+    std::cout << "account: ";
+    std::cin >> account;
 //    std::cout << "password: ";
 //    std::cin >> password;
 //    std::cout << "confirm_password: ";
@@ -54,8 +55,8 @@ int main() {
 //    std::cout << "pay_confirm_password: ";
 //    std::cin >> pay_confirm_password;
 //
-//    std::cout << "shop_name:";
-//    std::cin >> shop_name;
+    std::cout << "shop_name:";
+    std::cin >> shop_name;
 //    std::cout << "shop_address: ";
 //    std:cin >> shop_address;
 //    std::cout << "shop_owner_name: ";
@@ -129,5 +130,14 @@ int main() {
 //    else {
 //        std::cout << "no ok" << std::endl;
 //    }
+
+    ManagerOperation p;
+    if (p.accept_shop_application(account, shop_name)) {
+        std::cout << "ok" << std::endl;
+    }
+    else {
+        std::cout << "no" << std::endl;
+    }
+
     db.close();
 }
