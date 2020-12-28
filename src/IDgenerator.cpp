@@ -3,10 +3,14 @@
 //
 
 #include "IDgenerator.h"
-std::string IDgenerator::generateID(enum Type type) {
+std::string IDgenerator::GenerateID(Type type) {
     BasicOperation op;
     std::string id = "";
     id += (int)type+'0';
     id += op.time2str();
     return id;
+}
+
+Type IDgenerator::GetType(const string& id) {
+    return Type(id[0]-'0');
 }

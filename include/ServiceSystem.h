@@ -9,6 +9,8 @@
 #include "base.h"
 #include "BasicOperation.h"
 #include "IDgenerator.h"
+#include "MoneySystem.h"
+#include "MessageSystem.h"
 
 class ServiceSystem {
 public:
@@ -16,9 +18,9 @@ public:
     std::string GetHighestSim(const std::vector<std::string>&, const std::string&);
 public:
     //根据商家名称显示某个商家商品名称以及价格
-    void display_shop(const std::string&);
+    std::vector<ItemData> display_shop(const std::string&);
     //根据商品名称查看卖这种商品的所有商家的名称以及价格
-    void display_item(const std::string&);
+    std::vector<ItemData> display_item(const std::string&);
     //user_id shop_id item_name num
     void insert_shop_list(const std::string&, const std::string&, const std::string&, int num=1);
     //从购物车中删除多件商品

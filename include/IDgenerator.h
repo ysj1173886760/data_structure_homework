@@ -20,7 +20,8 @@ public:
         return instance;
     }
 
-    std::string generateID(enum Type type);
+    std::string GenerateID(Type type);
+    Type GetType(const string&);
 };
 
 
