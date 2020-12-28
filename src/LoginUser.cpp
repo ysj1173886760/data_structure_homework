@@ -8,9 +8,7 @@
 LoginUser::LoginUser() {
     DB& db = DB::getInstance();
 
-    db.open();
     all_user_data = db.select_all_user_data();
-    db.close();
 }
 
 // if you login successfully, this function will return true;

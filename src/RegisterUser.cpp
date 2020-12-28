@@ -10,9 +10,7 @@
 RegisterUser::RegisterUser() {
     DB& db = DB::getInstance();
 
-    db.open();
     all_user_data = db.select_all_user_data();
-    db.close();
 }
 
 RegisterUser::~RegisterUser() {
@@ -41,6 +39,10 @@ bool RegisterUser::Register(const std::string& in_account,
         register_pay_password(in_pay_password, in_pay_confirm_password) && register_user_name(in_user_name) &&
         register_real_name(in_real_name) && register_phone_number(in_phone_number) &&
         register_email(in_email) && register_id_number(in_id_number))) return false;
+
+    DB& db = DB::getInstance();
+
+    db.insert_user_data(user);
 
     return true;
 }

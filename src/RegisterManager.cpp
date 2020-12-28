@@ -9,9 +9,7 @@
 RegisterManager::RegisterManager() {
     DB& db = DB::getInstance();
 
-    db.open();
     all_manager_data = db.select_all_manager_data();
-    db.close();
 }
 
 

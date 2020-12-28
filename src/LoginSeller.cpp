@@ -7,11 +7,17 @@
 
 LoginSeller::LoginSeller() {
     DB& db = DB::getInstance();
-    db.open();
+
     all_seller_data = db.select_all_seller_data();
-    db.close();
 }
 
 bool LoginSeller::Login(const std::string &account, const std::string &password) {
 
+    for (const auto& it : all_seller_data) {
+        if (it.account == account && it.password == password) {
+            return true;
+        }
+    }
+
+    return false;
 }

@@ -15,6 +15,10 @@ public:
     RegisterUser();
     ~RegisterUser();
 
+    // if you register successfully, will return true.
+    // 传入参数
+    // 账号，密码，密码确认，用户名，注册人姓名，手机号码
+    // 电子邮箱（qq邮箱）,注册人身份证，支付密码，支付密码确认
     bool Register(const std::string& in_account,
                   const std::string& in_password,
                   const std::string& in_confirm_password,
