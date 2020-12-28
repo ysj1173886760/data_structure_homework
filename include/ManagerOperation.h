@@ -16,26 +16,48 @@ class ManagerOperation {
 public:
     ManagerOperation();
 
-    // 获得一个申请列表对象的 vector
+    // return vector about register_request_data
     std::vector<RegisterRequestData> view_application_list();
 
-    // 接受商家的申请
-    // 传入：商家的账号和店名
+    // accept seller application
+    // input: seller_account, seller_shop_name
     bool accept_shop_application(const std::string& account,
                                  const std::string& shop_name);
 
-    // 拒绝商家申请
-    // 传入：商家的账号与店名
+    // reject seller application
+    // input: seller_account, seller_shop_name
     bool reject_shop_application(const std::string& account,
                                  const std::string& shop_name);
 
-    // 创建新的管理员账号（注意，只有主管理员才能创建新的账号）
-    // 传入：账号，密码
+    // register a new manager (only support register new account by root manager)
+    // input: root manager's account, root manager's password,
+    //        new_guy_account, new_guy_password, new_guy_confirm_password.
     bool register_manager(const std::string& account,
-                          const std::string& password);
+                          const std::string& password,
+                          const std::string& new_guy_account,
+                          const std::string& new_guy_password,
+                          const std::string& new_guy_confirm_password);
+
+    // remove user data, because the user break the rule.
+    // input: user_account, user_email.
+    bool remove_user(const std::string& user_account,
+                     const std::string& user_email);
+
+    // remove seller data, because the seller break the rule.
+    // input: seller_account, seller_shop_name, seller_phone_number
+    bool remove_seller(const std::string& seller_account,
+                       const std::string& seller_shop_name,
+                       const std::string& seller_phone_number);
+
+    // remove manager data, because the manager break the rule.
+    // input: root_account, root_password, manager_account
+    // only support root delete manager, of course root can't delete himself.
+    bool remove_manager(const std::string& root_account,
+                        const std::string& root_password,
+                        const std::string& manager_account);
 private:
 
-    // 返回一个 商家信息 的对象
+    // return a object about seller data
     SellerData copy_request_to_seller(const RegisterRequestData& rqd);
 };
 
