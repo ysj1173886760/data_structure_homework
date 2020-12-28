@@ -49,6 +49,11 @@ aux_source_directory(${PROJECT_SOURCE_DIR}/src dir_srcs)
 
 set(WORK ${dir_srcs})
 
+# curses library
+#find_package(Curses REQUIRED)
+#set(CURSES_USE_NCURSES TRUE)
+include_directories(${CURSES_INCLUDE_DIRS})
+
 add_executable(data_structure_homework ${WORK})
 
 target_link_libraries(data_structure_homework jsoncpp)
@@ -89,3 +94,6 @@ target_link_libraries(register_test jsoncpp)
 target_link_libraries(login_test jsoncpp)
 
 add_executable(rbtree_test test/rbtree_test.cpp)
+
+add_executable(ui_test test/ui_test.cpp)
+target_link_libraries(ui_test ncurses)
