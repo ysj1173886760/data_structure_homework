@@ -20,8 +20,8 @@ public:
         return instance;
     }
 
-    std::string GenerateID(Type type);
-    Type GetType(const string&);
+    std::string generateID(Type type);
+    Type GetType(const std::string&);
 };
 
 

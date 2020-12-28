@@ -11,7 +11,7 @@ using namespace boost;
 int main()
 {
     IDgenerator& instance = IDgenerator::get_instance();
-    std::cout << instance.GenerateID(Type::User);
+    std::cout << instance.generateID(Type::User);
     return 0;
 }
 

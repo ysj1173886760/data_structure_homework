@@ -3,7 +3,7 @@
 //
 
 #include "IDgenerator.h"
-std::string IDgenerator::GenerateID(Type type) {
+std::string IDgenerator::generateID(Type type) {
     BasicOperation op;
     std::string id = "";
     id += (int)type+'0';
@@ -11,6 +11,6 @@ std::string IDgenerator::GenerateID(Type type) {
     return id;
 }
 
-Type IDgenerator::GetType(const string& id) {
+Type IDgenerator::GetType(const std::string& id) {
     return Type(id[0]-'0');
 }

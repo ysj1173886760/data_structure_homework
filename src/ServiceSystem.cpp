@@ -83,7 +83,7 @@ void ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
 
         else {
             Order order;
-            order.id = generator.GenerateID(Type::Order);
+            order.id = generator.generateID(Type::Order);
             order.item_id = item.id;
             order.price = item.price;
             order.buy_num = num;
@@ -128,7 +128,7 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
         add.price = user.shop_list[i].price;
         std::cout << "please input remark : ";
         std::cin >> add.remark;
-        add.id = generator.GenerateID(Type::BuyItemRequest);
+        add.id = generator.generateID(Type::BuyItemRequest);
     }
 
     user.shop_list.swap(user.current_order);
