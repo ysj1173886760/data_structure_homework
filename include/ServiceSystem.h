@@ -29,7 +29,7 @@ public:
     void submit_shop_list(const std::string&, const std::string&);
     //商家处理购买订单
     void deal_BuyItemRequest(const std::string&);
-    //顾客检查商品
+    //顾客退还商品
     void returnItem(const std::string&, const Order&);
 };
 
