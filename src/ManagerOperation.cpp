@@ -60,10 +60,77 @@ bool ManagerOperation::reject_shop_application(const std::string &account, const
 }
 
 // only support root manager to register other managers
-bool ManagerOperation::register_manager(const std::string &account, const std::string &password) {
+bool ManagerOperation::register_manager(const std::string& account,
+                                        const std::string& password,
+                                        const std::string& new_guy_account,
+                                        const std::string& new_guy_password,
+                                        const std::string& new_guy_confirm_password) {
+    // root manager's account and password
     if (account == "account" && password == "password") {
-
+        RegisterManager rm;
+        if (rm.Register(new_guy_account, new_guy_password, new_guy_confirm_password)) {
+            return true;
+        }
     }
+    //
+    return false;
+}
+
+bool ManagerOperation::remove_user(const std::string &user_account,
+                                   const std::string &user_email) {
+    std::vector<UserData> all_user_data;
+
+    DB& db = DB::getInstance();
+    all_user_data = db.select_all_user_data();
+
+    for (const auto& it : all_user_data) {
+        if (it.account == user_account && it.email == user_email) {
+            // maybe can add a remind email
+            db.delete_user_data(it.id);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool ManagerOperation::remove_seller(const std::string &seller_account,
+                                     const std::string &seller_shop_name,
+                                     const std::string &seller_phone_number) {
+    std::vector<SellerData> all_seller_data;
+
+    DB& db = DB::getInstance();
+    all_seller_data = db.select_all_seller_data();
+
+    for (const auto& it : all_seller_data) {
+        if (it.account == seller_account && it.shop_name == seller_shop_name && it.shop_owner_phone_number == seller_phone_number) {
+            //
+            db.delete_seller_data(it.id);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool ManagerOperation::remove_manager(const std::string &root_account,
+                                      const std::string &root_password,
+                                      const std::string &manager_account) {
+    if (root_account == "account" && root_password == "password") {
+        std::vector<ManagerData> all_manager_data;
+
+        DB& db = DB::getInstance();
+        all_manager_data = db.select_all_manager_data();
+
+        for (const auto& it : all_manager_data) {
+            if (it.account == manager_account) {
+                db.delete_manager_data(it.id);
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 SellerData ManagerOperation::copy_request_to_seller(const RegisterRequestData& rqd) {
