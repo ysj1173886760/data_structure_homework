@@ -24,6 +24,8 @@ public:
     double GetCost(const std::string&);
     //根据商家名称获得商家结构
     bool GetSeller(const std::string&, SellerData&);
+
+    std::string get_user_id_by_account(const std::string &account);
 };
 
 

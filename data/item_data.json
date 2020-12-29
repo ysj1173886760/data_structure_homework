@@ -1,6 +1,16 @@
 [
 	{
 		"des" : "",
+		"id" : "420201229145537",
+		"label" : null,
+		"name" : "new_1",
+		"owner" : "test_shop_name",
+		"price" : 100.0,
+		"sell_num" : 0,
+		"store_num" : 0
+	},
+	{
+		"des" : "",
 		"id" : "420201229153041",
 		"label" : null,
 		"name" : "new_3",
@@ -18,15 +28,5 @@
 		"price" : 20.0,
 		"sell_num" : 0,
 		"store_num" : 5
-	},
-	{
-		"des" : "",
-		"id" : "420201229145537",
-		"label" : null,
-		"name" : "new_1",
-		"owner" : "test_shop_name",
-		"price" : 100.0,
-		"sell_num" : 0,
-		"store_num" : 0
 	}
 ]
