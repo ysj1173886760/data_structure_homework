@@ -2,7 +2,16 @@
 	{
 		"account" : "sheep3",
 		"age" : "",
-		"current_order" : null,
+		"current_order" : 
+		[
+			{
+				"buy_num" : 0,
+				"id" : "520201229111931",
+				"item_id" : "420201228232616",
+				"price" : 10.0,
+				"time" : "20201229111931"
+			}
+		],
 		"email" : "321",
 		"gender" : "",
 		"history_item" : null,
@@ -13,7 +22,16 @@
 		"password" : "000",
 		"phone_number" : "",
 		"real_name" : "real_name",
-		"shop_list" : null,
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 1,
+				"id" : "520201229114308",
+				"item_id" : "420201228232616",
+				"price" : 10.0,
+				"time" : "20201229114308"
+			}
+		],
 		"user_name" : "sheep"
 	},
 	{
@@ -135,7 +153,16 @@
 	{
 		"account" : "account",
 		"age" : "",
-		"current_order" : null,
+		"current_order" : 
+		[
+			{
+				"buy_num" : 2,
+				"id" : "520201229114655",
+				"item_id" : "420201228232616",
+				"price" : 10.0,
+				"time" : "20201229114655"
+			}
+		],
 		"email" : "email@qq.com",
 		"gender" : "",
 		"history_item" : null,
@@ -146,7 +173,16 @@
 		"password" : "password",
 		"phone_number" : "phone_number",
 		"real_name" : "real_name",
-		"shop_list" : null,
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 1,
+				"id" : "520201229114359",
+				"item_id" : "420201228232616",
+				"price" : 10.0,
+				"time" : "20201229114359"
+			}
+		],
 		"user_name" : "user_name"
 	}
 ]
