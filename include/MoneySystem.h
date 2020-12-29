@@ -12,11 +12,11 @@
 class MoneySystem {
 public:
     //顾客充值
-    void RechargeMoney(const std::string&, double);
+    bool RechargeMoney(const std::string&, double);
     //（顾客或商家）提现
-    void WithdrawMoney(const std::string&, double);
+    bool WithdrawMoney(const std::string&, double);
     //两人（顾客或商家）之间的转账
-    void TransferMoney(const std::string&, const std::string&, double);
+    bool TransferMoney(const std::string&, const std::string&, double);
 };
 
 

@@ -77,8 +77,10 @@ bool BasicOperation::GetItem(const std::string& shop_name, const std::string& it
     int i;
     vector<ItemData> items = GetShopItems(sellers[tar].id);
     for(i=0; i<items.size(); i++) {
-        if (items[i].name == item_name)
+        if (items[i].name == item_name) {
+            item = items[i];
             return true;
+        }
     }
     return false;
 }

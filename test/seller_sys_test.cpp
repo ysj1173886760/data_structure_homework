@@ -27,6 +27,8 @@ int main() {
     SellerSystem sel_sys;
     sel_sys.insert_item(seller.id, item);
     sel_sys.remove_item(seller.id, item);
+    sel_sys.modify_item(seller.id, item);
+
 
 
 }
