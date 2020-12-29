@@ -8,9 +8,7 @@
 LoginUser::LoginUser() {
     DB& db = DB::getInstance();
 
-    db.open();
     all_user_data = db.select_all_user_data();
-    db.close();
 }
 
 // if you login successfully, this function will return true;
@@ -112,7 +110,7 @@ int LoginUser::ForgotPassword(const std::string &account,
     return -1;
 }
 
-//
+// password rule
 bool LoginUser::OkPassword(const std::string& password, const std::string& confirm_password) {
 
     // password rule

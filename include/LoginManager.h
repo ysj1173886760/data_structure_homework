@@ -14,7 +14,8 @@ class LoginManager {
 public:
     LoginManager();
 
-    void Login();
+    // 成功登入返回 true.
+    bool Login(const std::string& account, const std::string& password);
     void ChangePassword();
     void ForgotPassword();
 

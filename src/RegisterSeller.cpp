@@ -9,9 +9,7 @@
 RegisterSeller::RegisterSeller() {
     DB& db = DB::getInstance();
 
-    db.open();
     all_seller_data = db.select_all_seller_data();
-    db.close();
 }
 
 RegisterSeller::~RegisterSeller() {
@@ -44,9 +42,9 @@ bool RegisterSeller::Register(const std::string& account,
     copy_to_register_requests_data();
 
     DB& db = DB::getInstance();
-    db.open();
+
+    // 将申请放入请求列表中
     db.insert_register_request_data(rrd);
-    db.close();
 
     return true;
 }
