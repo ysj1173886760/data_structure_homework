@@ -12,10 +12,12 @@ void MessageSystem::SendMessage(const std::string& receiver_id, const std::strin
     if(type == Type::User) {
         UserData user = db.select_user_data(receiver_id);
         user.message.push_back(message);
+        db.modify_user_data(user.id, user);
     }
     else if(type == Type::Seller) {
         SellerData seller = db.select_seller_data(receiver_id);
         seller.message.push_back(message);
+        db.modify_seller_data(seller.id, seller);
     }
     else
         std::cout << "ERROR : id didn't support transfer money operation!!!" << std::endl;

@@ -69,7 +69,6 @@ int item_in_shop_list(const std::string& user_id, const std::string& item_id) {
 void ServiceSystem::insert_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
     BasicOperation op;
     DB &db = DB::getInstance();
-    db.open();
     IDgenerator& generator = IDgenerator::get_instance();
     UserData user = db.select_user_data(user_id);
 
@@ -92,7 +91,6 @@ void ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
             order.time = op.time2str();
             user.shop_list.push_back(order);
             db.modify_user_data(user.id, user);
-            db.close();
         }
     }
 }
@@ -108,12 +106,10 @@ void ServiceSystem::remove_shop_list(const std::string& user_id, const std::stri
         int tar = item_in_shop_list(user_id, item.id);
 
         if(tar!=-1) {
-            db.open();
             user.shop_list[tar].buy_num = user.shop_list[tar].buy_num - num;
             if(user.shop_list[tar].buy_num <= 0)
                 user.shop_list.erase(user.shop_list.begin()+tar);
             db.modify_user_data(user_id, user);
-            db.close();
         }
 
         else
@@ -132,7 +128,6 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
     MoneySystem money_sys;
     if(money_sys.TransferMoney(user.id, seller.id, cost)) {
 
-        db.open();
         for(int i=0; i<user.shop_list.size(); i++) {
             BuyItemRequestData add;
             add.user_id = user_id;
@@ -148,16 +143,14 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
         }
 
         user.shop_list.swap(user.current_order);
+        db.modify_user_data(user.id, user);
 
         MessageSystem message_sys;
         std::string user_info = "you have cost " + to_string(cost) + " in " + seller.shop_name;
-        message_sys.SendMessage(user_id, user_info);
+        message_sys.SendMessage(user.id, user_info);
 
-        db.modify_user_data(user.id, user);
         db.modify_seller_data(seller.id, seller);
-
     }
-    db.close();
     //感觉给商家留言没啥必要 先留着吧
     //std::string seller_info = "you have got " + to_string(cost);
     //seller.message.push_back(seller_info);
@@ -165,6 +158,7 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
 
 void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
     BasicOperation op;
+    MessageSystem message_sys;
     DB &db = DB::getInstance();
     SellerData seller = db.select_seller_data(seller_id);
 
@@ -175,7 +169,6 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
 
     UserData user = db.select_user_data(seller.buy_item_request_list[0].user_id);
 
-    db.open();
     for(int i=0; i<seller.buy_item_request_list.size(); i++) {
         ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
 
@@ -187,7 +180,6 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
             MoneySystem money_sys;
             if(money_sys.TransferMoney(seller.id, user.id, item.price)) {
 
-                MessageSystem message_sys;
                 std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
                                    " is rejected and we have repay you";
                 message_sys.SendMessage(user.id, info);
@@ -196,15 +188,17 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
         }
 
         else {
-            item.store_num--;
+            item.store_num-=seller.buy_item_request_list[i].buy_num;
+            std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
+                    + item.name + " have arrived, pls check";
+            message_sys.SendMessage(user.id, info);
             db.modify_item_data(item.id, item);
         }
     }
 
     seller.buy_item_request_list.clear();
-    db.modify_user_data(user.id, user);
+    //db.modify_user_data(user.id, user);
     db.modify_seller_data(seller.id, seller);
-    db.close();
 }
 
 int item_in_current_list(const std::string& user_id, const std::string& item_id) {
@@ -230,7 +224,6 @@ void ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
     int tar = item_in_current_list(user_id, item_id);
 
     if(tar!=-1) {
-        db.open();
         std::cout << "pls write why you wanner return it : ";
         std::string info;
         std::cin >> info;
@@ -240,17 +233,14 @@ void ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
         if(op.GetSeller(item.owner, seller)) {
 
             MoneySystem money_sys;
-            if(money_sys.TransferMoney(seller.id, user.id, item.price)) {
+            if (money_sys.TransferMoney(seller.id, user.id, item.price)) {
                 item.store_num += order.buy_num;
                 MessageSystem message_sys;
                 message_sys.SendMessage(seller.id, info);
             }
 
-            db.modify_user_data(user.id, user);
+            item.store_num+=order.buy_num;
             db.modify_item_data(item.id, item);
-            db.modify_seller_data(seller.id, seller);
         }
-
-        db.close();
     }
 }
