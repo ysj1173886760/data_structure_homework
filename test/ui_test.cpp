@@ -2,7 +2,7 @@
 // Created by sheep on 2020/12/28.
 //
 
-#include <curses.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
@@ -12,7 +12,8 @@
 using namespace std;
 
 int main() {
-    char *buff = (char*)malloc(sizeof(char) * 100);
+    // make sure your terminal size is (24,80)
+    char *buff = (char*)malloc(sizeof(char) * 60);
     initscr();
     keypad(stdscr, TRUE);
     WINDOW *input = newwin(3, 80, 21, 0);
@@ -22,13 +23,14 @@ int main() {
     wrefresh(input);
     wrefresh(display);
     while (1) {
+        wclear(input);
         box(input, 0, 0);
-        memset(buff, 0, sizeof(char) * 100);
-        mvwgetnstr(input, 1, 3, buff, 100);
+        memset(buff, 0, sizeof(char) * 60);
+        mvwgetnstr(input, 1, 3, buff, 60);
         mvwaddstr(display, display_row, 3, buff);
         display_row++;
-        if (display_row > 20) {
-            display_row = 20;
+        if (display_row > 21) {
+            display_row = 21;
             wmove(display, 1, 0);
             wdeleteln(display);
         }
@@ -39,7 +41,6 @@ int main() {
         }
         wrefresh(display);
         wrefresh(input);
-        wclear(input);
     }
     delwin(input);
     delwin(display);
