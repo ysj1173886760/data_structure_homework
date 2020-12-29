@@ -110,5 +110,13 @@ bool BasicOperation::GetSeller(const std::string &shop_name, SellerData& seller)
     return false;
 }
 
-
-
+std::string BasicOperation::get_user_id_by_account(const std::string &account) {
+    DB &db = DB::getInstance();
+    vector<UserData> users = db.select_all_user_data();
+    for (const auto &x : users) {
+        if (x.account == account) {
+            return x.id;
+        }
+    }
+    return "";
+}

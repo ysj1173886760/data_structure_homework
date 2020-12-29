@@ -123,3 +123,6 @@ add_executable(rbtree_test test/rbtree_test.cpp)
 add_executable(ui_test test/ui_test.cpp src/DB.cpp
                         src/IDgenerator.cpp src/BasicOperation.cpp)
 target_link_libraries(ui_test ncurses jsoncpp ${Boost_LIBRARIES} pthread)
+
+add_executable(login_ui test/login_ui_test.cpp ${WORK})
+target_link_libraries(login_ui jsoncpp ${Boost_LIBRARIES} edit)

@@ -61,6 +61,27 @@ public:
         }
         return ans;
     }
+
+    std::string getIdentifyCode(int size = 6) {
+        std::string ans = "";
+        for (int i = 0; i < size; i++) {
+            int type = getRandomInt(0, 3);
+            switch (type) {
+                case 0:
+                    ans += getRandomInt(0, 10) + '0';
+                    break;
+                case 1:
+                    ans += getRandomInt(0, 26) + 'a';
+                    break;
+                case 2:
+                    ans += getRandomInt(0, 26) + 'A';
+                    break;
+                default:
+                    break;
+            }
+        }
+        return ans;
+    }
 };
 
 
