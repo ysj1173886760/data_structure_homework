@@ -43,6 +43,7 @@ std::string QuestionSystem::GetAnswer(const std::string& id, const std::string& 
                 return to_string(sel_items[i].sell_num);
         }
     }
+    return "no answer";
 }
 
 

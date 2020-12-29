@@ -73,6 +73,8 @@ set(register_with_login test/register_with_login.cpp src/DB.cpp src/RegisterUser
         src/LoginSeller.cpp src/LoginManager.cpp src/IDgenerator.cpp src/BasicOperation.cpp
         src/ManagerOperation.cpp)
 
+set(email_test test/email_test.cpp src/Email.cpp)
+
 add_executable(testdb ${testdb})
 
 add_executable(boost test/boost_test.cpp src/DB.cpp src/IDgenerator.cpp src/BasicOperation.cpp)
@@ -90,6 +92,11 @@ add_executable(register_with_login ${register_with_login})
 add_executable(seller_sys_test test/seller_sys_test.cpp src/DB.cpp src/BasicOperation.cpp src/IDgenerator.cpp
         src/SellerSystem.cpp)
 
+add_executable(email_test ${email_test})
+
+add_executable(ALL_SYSTEM_TEST test/ALL_SYSTEM_TEST.cpp src/DB.cpp src/BasicOperation.cpp src/QuestionSystem.cpp src/IDgenerator.cpp
+        src/ServiceSystem.cpp src/MoneySystem.cpp src/MessageSystem.cpp src/SellerSystem.cpp)
+
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp ${Boost_LIBRARIES})
 
@@ -106,6 +113,10 @@ target_link_libraries(login_test jsoncpp)
 target_link_libraries(register_with_login jsoncpp)
 
 target_link_libraries(seller_sys_test jsoncpp)
+
+target_link_libraries(whole_test jsoncpp)
+
+target_link_libraries(ALL_SYSTEM_TEST jsoncpp)
 
 add_executable(rbtree_test test/rbtree_test.cpp)
 
