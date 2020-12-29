@@ -75,6 +75,7 @@ int Email::send_email(const std::string &Target_email, const std::string &Title,
     return 0;
 }
 
+// create connect
 bool Email::_create_connect() {
     int socket_client_temp = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in sock_addr = {};

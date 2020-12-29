@@ -16,6 +16,7 @@ public:
     RegisterSeller();
     ~RegisterSeller();
 
+    //
     bool Register(const std::string& account,
                   const std::string& password,
                   const std::string& confirm_password,

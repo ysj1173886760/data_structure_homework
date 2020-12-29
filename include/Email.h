@@ -25,6 +25,7 @@ public:
     Email();
     ~Email();
 
+    // only support qq email.
     // return 0, if your send email successfully
     // return 1, the email's account is wrong
     // return 2, failed to send email
