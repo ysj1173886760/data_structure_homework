@@ -1,40 +1,5 @@
 [
 	{
-		"account" : "sheep3",
-		"age" : "",
-		"current_order" : 
-		[
-			{
-				"buy_num" : 0,
-				"id" : "520201229111931",
-				"item_id" : "420201228232616",
-				"price" : 10.0,
-				"time" : "20201229111931"
-			}
-		],
-		"email" : "321",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "12312313",
-		"id_number" : "",
-		"message" : null,
-		"password" : "000",
-		"phone_number" : "",
-		"real_name" : "real_name",
-		"shop_list" : 
-		[
-			{
-				"buy_num" : 1,
-				"id" : "520201229114308",
-				"item_id" : "420201228232616",
-				"price" : 10.0,
-				"time" : "20201229114308"
-			}
-		],
-		"user_name" : "sheep"
-	},
-	{
 		"account" : "123",
 		"age" : "16",
 		"current_order" : null,
@@ -74,6 +39,41 @@
 		"real_name" : "real_name",
 		"shop_list" : null,
 		"user_name" : "phone_number"
+	},
+	{
+		"account" : "sheep3",
+		"age" : "",
+		"current_order" : 
+		[
+			{
+				"buy_num" : 0,
+				"id" : "520201229111931",
+				"item_id" : "420201228232616",
+				"price" : 10.0,
+				"time" : "20201229111931"
+			}
+		],
+		"email" : "321",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "12312313",
+		"id_number" : "",
+		"message" : null,
+		"password" : "000",
+		"phone_number" : "",
+		"real_name" : "real_name",
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 1,
+				"id" : "520201229114308",
+				"item_id" : "420201228232616",
+				"price" : 10.0,
+				"time" : "20201229114308"
+			}
+		],
+		"user_name" : "sheep"
 	},
 	{
 		"account" : "shrimp",
@@ -134,23 +134,6 @@
 		"user_name" : "phone_number"
 	},
 	{
-		"account" : "myaccount",
-		"age" : "",
-		"current_order" : null,
-		"email" : "21799@qq.com",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "120201228201930",
-		"id_number" : "28913123912",
-		"message" : null,
-		"password" : "1953663575",
-		"phone_number" : "18078120536",
-		"real_name" : "myrealname",
-		"shop_list" : null,
-		"user_name" : "myusername"
-	},
-	{
 		"account" : "account",
 		"age" : "",
 		"current_order" : 
@@ -184,5 +167,22 @@
 			}
 		],
 		"user_name" : "user_name"
+	},
+	{
+		"account" : "myaccount",
+		"age" : "",
+		"current_order" : null,
+		"email" : "21799@qq.com",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "120201228201930",
+		"id_number" : "28913123912",
+		"message" : null,
+		"password" : "1953663575",
+		"phone_number" : "18078120536",
+		"real_name" : "myrealname",
+		"shop_list" : null,
+		"user_name" : "myusername"
 	}
 ]

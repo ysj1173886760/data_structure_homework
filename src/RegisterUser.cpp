@@ -21,10 +21,7 @@ RegisterUser::~RegisterUser() {
 //    db.close();
 }
 
-// if you register successfully, will return true.
-// 传入参数
-// 账号，密码，密码确认，用户名，注册人姓名，手机号码
-// 电子邮箱（qq邮箱）,注册人身份证，支付密码，支付密码确认
+
 bool RegisterUser::Register(const std::string& in_account,
                             const std::string& in_password,
                             const std::string& in_confirm_password,
@@ -62,7 +59,9 @@ bool RegisterUser::register_account(const std::string& account) {
 //
 bool RegisterUser::register_password(const std::string& password, const std::string& confirm_password) {
     // add some password rule
+    // password length must be greater than 8 bits and less than 16 bits.
     if (password != confirm_password) return false;
+    if (password.size() < 8 || password.size() > 16) return false;
 
     user.password = password;
     return true;
@@ -88,8 +87,8 @@ bool RegisterUser::register_real_name(const std::string& real_name) {
 
 bool RegisterUser::register_phone_number(const std::string& phone_number) {
     // 对于手机号的正则表达式
-    // std::regex phone_regex("^1(3\\d|47|5([0-3]|[5-9])|8(0|2|[5-9]))\\d{8}$");
-    std::regex phone_regex("(.*)");
+    std::regex phone_regex("^1(3\\d|47|5([0-3]|[5-9])|8(0|2|[5-9]))\\d{8}$");
+    // std::regex phone_regex("(.*)");
 
     // 未匹配成功
     if (!std::regex_match(phone_number, phone_regex)) return false;
@@ -99,8 +98,8 @@ bool RegisterUser::register_phone_number(const std::string& phone_number) {
 }
 
 bool RegisterUser::register_email(const std::string& email) {
-    // only support qq email and google email
-    std::regex email_regex("(.*)(@qq.com|@gmail.com)");
+    // only support qq email
+    std::regex email_regex("(.*)@qq.com");
 
     // 未匹配成功
     if (!std::regex_match(email, email_regex)) return false;
@@ -110,8 +109,7 @@ bool RegisterUser::register_email(const std::string& email) {
 }
 
 bool RegisterUser::register_id_number(const std::string& id_number) {
-//    std::regex id_number_regex("^([1-9]\\d{5}[12]\\d{3}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])\\d{3}[0-9xX])$");
-    std::regex id_number_regex("(.*)");
+    std::regex id_number_regex(R"(^([1-9]\d{5}[12]\d{3}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])\d{3}[0-9xX])$)");
 
     // 未匹配成功
     if (!std::regex_match(id_number, id_number_regex)) return false;
@@ -123,7 +121,12 @@ bool RegisterUser::register_id_number(const std::string& id_number) {
 bool RegisterUser::register_pay_password(const std::string& pay_password, const std::string& confirm_pay_password) {
 
     // add some pay password rule.
+    // only support number password, and password length must be 6.
+    std::regex regex_pay_password("\\d*");
+
+    if (pay_password.size() != 6) return false;
     if (pay_password != confirm_pay_password) return false;
+    if (!std::regex_match(pay_password, regex_pay_password)) return false;
 
     user.wallet.money = 0;
     user.wallet.password = pay_password;

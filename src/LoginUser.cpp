@@ -4,6 +4,7 @@
 
 #include "LoginUser.h"
 #include <string>
+#include <regex>
 
 LoginUser::LoginUser() {
     DB& db = DB::getInstance();
@@ -37,6 +38,10 @@ int LoginUser::ChangePassword(const std::string &account,
             if (it.email == email) {
                 if (OkPassword(new_password, new_confirm_password)) {
                     it.password = password;
+
+                    DB& db = DB::getInstance();
+                    db.modify_user_data(it.id, it);
+
                     return 0;
                 }
                 else {
@@ -67,6 +72,10 @@ int LoginUser::ChangePayPassword(const std::string &account,
             if (it.email == email && it.real_name == real_name && it.id_number == id_number) {
                 if (OkPayPassword(new_pay_password, new_confirm_pay_password)) {
                     it.wallet.password = new_pay_password;
+
+                    DB& db = DB::getInstance();
+                    db.modify_user_data(it.id, it);
+
                     return 0;
                 }
                 else {
@@ -95,11 +104,15 @@ int LoginUser::ForgotPassword(const std::string &account,
             if (it.email == email) {
                 if (OkPassword(new_password, new_confirm_password)) {
                     it.password = new_password;
+
+                    DB& db = DB::getInstance();
+                    db.modify_user_data(it.id, it);
+
                     return 0;
                 }
                 else {
                     return -3;
-                }
+                } // new password is no ok.
             }
             else {
                 return -2;
@@ -114,9 +127,8 @@ int LoginUser::ForgotPassword(const std::string &account,
 bool LoginUser::OkPassword(const std::string& password, const std::string& confirm_password) {
 
     // password rule
-    if (password != confirm_password) {
-        return false;
-    }
+    if (password != confirm_password) return false;
+    if (password.size() < 8 || password.size() > 16) return false;
 
     return true;
 }
@@ -124,10 +136,11 @@ bool LoginUser::OkPassword(const std::string& password, const std::string& confi
 //
 bool LoginUser::OkPayPassword(const std::string &pay_password, const std::string &confirm_pay_password) {
 
+    std::regex regex_pay_password("\\d*");
     // pay password rule
-    if (pay_password != confirm_pay_password) {
-        return false;
-    }
+    if (pay_password.size() != 6) return false;
+    if (pay_password != confirm_pay_password) return false;
+    if (!std::regex_match(pay_password, regex_pay_password)) return false;
 
     return true;
 }

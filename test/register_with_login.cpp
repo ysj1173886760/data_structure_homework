@@ -18,6 +18,7 @@ int main() {
     db.open();
 
     std::string account;
+    std::string _account;
     std::string password;
     std::string confirm_password;
     std::string user_name;
@@ -34,8 +35,8 @@ int main() {
     std::string shop_owner_id_number;
 
 
-    std::cout << "account: ";
-    std::cin >> account;
+//    std::cout << "account: ";
+//    std::cin >> account;
 //    std::cout << "password: ";
 //    std::cin >> password;
 //    std::cout << "confirm_password: ";
@@ -55,8 +56,8 @@ int main() {
 //    std::cout << "pay_confirm_password: ";
 //    std::cin >> pay_confirm_password;
 //
-    std::cout << "shop_name:";
-    std::cin >> shop_name;
+//    std::cout << "shop_name:";
+//    std::cin >> shop_name;
 //    std::cout << "shop_address: ";
 //    std:cin >> shop_address;
 //    std::cout << "shop_owner_name: ";
@@ -97,7 +98,7 @@ int main() {
 //    else {
 //        std::cout << "login no ok" << std::endl;
 //    }
-
+//
 //    RegisterSeller rs;
 //    if (rs.Register(account,
 //                password,
@@ -131,13 +132,24 @@ int main() {
 //        std::cout << "no ok" << std::endl;
 //    }
 
-    ManagerOperation p;
-    if (p.accept_shop_application(account, shop_name)) {
-        std::cout << "ok" << std::endl;
-    }
-    else {
-        std::cout << "no" << std::endl;
-    }
+//    ManagerOperation p;
+//    if (p.accept_shop_application(account, shop_name)) {
+//        std::cout << "ok" << std::endl;
+//    }
+//    else {
+//        std::cout << "no" << std::endl;
+//    }
 
+//    ManagerOperation p;
+//    if (p.register_manager("account", "password", "shrimp", "1953663575", "1953663575")) {
+//        std::cout << "ok" << std::endl;
+//    }
+//    else {
+//        std::cout << "no" << std::endl;
+//    }
+
+    LoginManager l;
+    int a = l.ForgotPassword("account", "password", "shrimp", "xjz1953663575", "xjz1953663575");
     db.close();
+    return a;
 }
