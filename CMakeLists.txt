@@ -114,7 +114,7 @@ target_link_libraries(register_with_login jsoncpp)
 
 target_link_libraries(seller_sys_test jsoncpp)
 
-target_link_libraries(whole_test jsoncpp)
+#target_link_libraries(whole_test jsoncpp)
 
 target_link_libraries(ALL_SYSTEM_TEST jsoncpp)
 
