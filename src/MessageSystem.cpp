@@ -18,5 +18,5 @@ void MessageSystem::SendMessage(const std::string& receiver_id, const std::strin
         seller.message.push_back(message);
     }
     else
-        std::cout << "ERROR : id didn't support transfer money operation!!!";
+        std::cout << "ERROR : id didn't support transfer money operation!!!" << std::endl;
 }

@@ -1,72 +1,32 @@
 [
 	{
-		"des" : "no des",
-		"id" : "420201228232616",
+		"des" : "",
+		"id" : "420201229150058",
 		"label" : null,
-		"name" : "add",
-		"owner" : "shop_name",
-		"price" : 10.0,
-		"sell_num" : 5,
-		"store_num" : 2
+		"name" : "new_2",
+		"owner" : "test_shop_name",
+		"price" : 20.0,
+		"sell_num" : 0,
+		"store_num" : 5
 	},
 	{
-		"des" : "dsa",
-		"id" : "420201227215331",
+		"des" : "",
+		"id" : "420201229145537",
 		"label" : null,
-		"name" : "",
-		"owner" : "asd",
-		"price" : 1.1000000000000001,
-		"sell_num" : 1,
-		"store_num" : 10
+		"name" : "new_1",
+		"owner" : "test_shop_name",
+		"price" : 100.0,
+		"sell_num" : 0,
+		"store_num" : 0
 	},
 	{
-		"des" : "no des",
-		"id" : "420201228232148",
+		"des" : "",
+		"id" : "420201229153041",
 		"label" : null,
-		"name" : "add",
-		"owner" : "",
-		"price" : 10.0,
-		"sell_num" : 5,
-		"store_num" : 10
-	},
-	{
-		"des" : "no des",
-		"id" : "420201228232216",
-		"label" : null,
-		"name" : "add",
-		"owner" : "",
-		"price" : 10.0,
-		"sell_num" : 5,
-		"store_num" : 10
-	},
-	{
-		"des" : "dsa",
-		"id" : "420201227221244",
-		"label" : null,
-		"name" : "",
-		"owner" : "asd",
-		"price" : 1.1000000000000001,
-		"sell_num" : 1,
-		"store_num" : 10
-	},
-	{
-		"des" : "dsa",
-		"id" : "420201227214841",
-		"label" : null,
-		"name" : "",
-		"owner" : "asd",
-		"price" : 1.1000000000000001,
-		"sell_num" : -1206095795,
-		"store_num" : 10
-	},
-	{
-		"des" : "dsa",
-		"id" : "420201227215038",
-		"label" : null,
-		"name" : "",
-		"owner" : "asd",
-		"price" : 1.1000000000000001,
-		"sell_num" : -1340964787,
-		"store_num" : 10
+		"name" : "new_3",
+		"owner" : "test_shop_name",
+		"price" : 25.0,
+		"sell_num" : 0,
+		"store_num" : 20
 	}
 ]

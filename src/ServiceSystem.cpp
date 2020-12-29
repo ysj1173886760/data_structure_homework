@@ -77,7 +77,7 @@ void ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
     if(op.GetItem(shop_name, item_name, item)) {
         int tar = item_in_shop_list(user_id, item.id);
         if(item.store_num < num)
-            std::cout << "ERROR : under stock!!!";
+            std::cout << "ERROR : under stock!!!" << std::endl;
 
         //如果所购买的物品已经处在购物车中，则增加数量即可
         else if(tar!=-1)

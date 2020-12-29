@@ -88,6 +88,9 @@ add_executable(seller_sys_test test/seller_sys_test.cpp src/DB.cpp src/BasicOper
 add_executable(whole_test test/whole_test.cpp src/DB.cpp src/BasicOperation.cpp src/QuestionSystem.cpp src/IDgenerator.cpp
         src/ServiceSystem.cpp src/MoneySystem.cpp src/MessageSystem.cpp)
 
+add_executable(ALL_SYSTEM_TEST test/ALL_SYSTEM_TEST.cpp src/DB.cpp src/BasicOperation.cpp src/QuestionSystem.cpp src/IDgenerator.cpp
+        src/ServiceSystem.cpp src/MoneySystem.cpp src/MessageSystem.cpp src/SellerSystem.cpp)
+
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp ${Boost_LIBRARIES})
 
@@ -106,5 +109,7 @@ target_link_libraries(register_with_login jsoncpp)
 target_link_libraries(seller_sys_test jsoncpp)
 
 target_link_libraries(whole_test jsoncpp)
+
+target_link_libraries(ALL_SYSTEM_TEST jsoncpp)
 
 add_executable(rbtree_test test/rbtree_test.cpp)
