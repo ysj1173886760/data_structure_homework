@@ -112,15 +112,3 @@ bool BasicOperation::GetSeller(const std::string &shop_name, SellerData& seller)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-

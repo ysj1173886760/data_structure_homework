@@ -11,8 +11,8 @@
 class SellerSystem {
 public:
     bool insert_item(const std::string&, ItemData&);
-    bool remove_item(const std::string&, ItemData&);
-    bool modify_item(const std::string&, ItemData&);
+    bool remove_item(const std::string&, const std::string&);
+    bool modify_item(const std::string&, ItemData&, const std::string&);
 };
 
 

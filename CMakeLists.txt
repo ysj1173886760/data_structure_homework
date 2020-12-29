@@ -49,6 +49,11 @@ aux_source_directory(${PROJECT_SOURCE_DIR}/src dir_srcs)
 
 set(WORK ${dir_srcs})
 
+# curses library
+#find_package(Curses REQUIRED)
+#set(CURSES_USE_NCURSES TRUE)
+include_directories(${CURSES_INCLUDE_DIRS})
+
 add_executable(data_structure_homework ${WORK})
 
 target_link_libraries(data_structure_homework jsoncpp)
@@ -89,6 +94,9 @@ add_executable(seller_sys_test test/seller_sys_test.cpp src/DB.cpp src/BasicOper
 
 add_executable(email_test ${email_test})
 
+add_executable(ALL_SYSTEM_TEST test/ALL_SYSTEM_TEST.cpp src/DB.cpp src/BasicOperation.cpp src/QuestionSystem.cpp src/IDgenerator.cpp
+        src/ServiceSystem.cpp src/MoneySystem.cpp src/MessageSystem.cpp src/SellerSystem.cpp)
+
 # linking google test lib to your test file
 target_link_libraries(testdb jsoncpp ${Boost_LIBRARIES})
 
@@ -106,4 +114,12 @@ target_link_libraries(register_with_login jsoncpp)
 
 target_link_libraries(seller_sys_test jsoncpp)
 
+#target_link_libraries(whole_test jsoncpp)
+
+target_link_libraries(ALL_SYSTEM_TEST jsoncpp)
+
 add_executable(rbtree_test test/rbtree_test.cpp)
+
+add_executable(ui_test test/ui_test.cpp src/DB.cpp
+                        src/IDgenerator.cpp src/BasicOperation.cpp)
+target_link_libraries(ui_test ncurses jsoncpp ${Boost_LIBRARIES} pthread)

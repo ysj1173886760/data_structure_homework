@@ -5,41 +5,41 @@
 #include "DB.h"
 
 void DB::open() {
-    std::cout << "loading userData..." << std::endl;
+//    std::cout << "loading userData..." << std::endl;
     load_user_data("../data/user_data.json");
 
-    std::cout << "loading itemData..." << std::endl;
+//    std::cout << "loading itemData..." << std::endl;
     load_item_data("../data/item_data.json");
 
-    std::cout << "loading managerData..." << std::endl;
+//    std::cout << "loading managerData..." << std::endl;
     load_manager_data("../data/manager_data.json");
 
-    std::cout << "loading sellerData..." << std::endl;
+//    std::cout << "loading sellerData..." << std::endl;
     load_seller_data("../data/seller_data.json");
 
-    std::cout << "loading registerRequestData..." << std::endl;
+//    std::cout << "loading registerRequestData..." << std::endl;
     load_register_request_data("../data/register_request_data.json");
 
-    std::cout << "data load complete" << std::endl;
+//    std::cout << "data load complete" << std::endl;
 }
 
 void DB::close() {
-    std::cout << "saving userData..." << std::endl;
+//    std::cout << "saving userData..." << std::endl;
     save_user_data("../data/user_data.json");
 
-    std::cout << "saving itemData..." << std::endl;
+//    std::cout << "saving itemData..." << std::endl;
     save_item_data("../data/item_data.json");
 
-    std::cout << "saving managerData..." << std::endl;
+//    std::cout << "saving managerData..." << std::endl;
     save_manager_data("../data/manager_data.json");
 
-    std::cout << "saving sellerData..." << std::endl;
+//    std::cout << "saving sellerData..." << std::endl;
     save_seller_data("../data/seller_data.json");
 
-    std::cout << "saving registerRequestData..." << std::endl;
+//    std::cout << "saving registerRequestData..." << std::endl;
     save_register_request_data("../data/register_request_data.json");
 
-    std::cout << "data save complete" << std::endl;
+//    std::cout << "data save complete" << std::endl;
 }
 
 bool DB::parse_json_from_file(const std::string &filename, Json::Value &root) {

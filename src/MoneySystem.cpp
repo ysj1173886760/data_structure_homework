@@ -14,7 +14,7 @@ bool MoneySystem::RechargeMoney(const std::string& user_id, double money) {
         return true;
     }
     else {
-        std::cout << "ERROR : this id didn't support recharge money operation!!!";
+        std::cout << "ERROR : this id didn't support recharge money operation!!!" << std::endl;
         return false;
     }//TODO : 发消息
 }
@@ -39,7 +39,7 @@ bool MoneySystem::WithdrawMoney(const std::string& id, double money) {
         seller.wallet.money -= money;
     }
     else {
-        std::cout << "ERROR : this id didn't support withdraw money operation!!!";
+        std::cout << "ERROR : this id didn't support withdraw money operation!!!" << std::endl;
         return false;
     }
     return true;
@@ -87,7 +87,7 @@ bool MoneySystem::TransferMoney(const std::string& id_1, const std::string& id_2
     }
 
     else {
-        std::cout << "ERROR : id didn't support transfer money operation!!!";
+        std::cout << "ERROR : id didn't support transfer money operation!!!" << std::endl;
         return false;
     }
     return true;
