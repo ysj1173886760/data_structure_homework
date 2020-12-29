@@ -165,7 +165,7 @@ bool Email::_send(const std::string &str) const {
 
     if (err < 0) return false;
 
-    std::cout << str.c_str() << std::endl;
+    //std::cout << str.c_str() << std::endl;
     return true;
 }
 
@@ -175,7 +175,7 @@ bool Email::_recv() {
 
     if (err < 0) return false;
 
-    std::cout << buff << std::endl;
+    //std::cout << buff << std::endl;
 
     return true;
 }

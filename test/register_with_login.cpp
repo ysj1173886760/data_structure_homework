@@ -35,27 +35,27 @@ int main() {
     std::string shop_owner_id_number;
 
 
-//    std::cout << "account: ";
-//    std::cin >> account;
-//    std::cout << "password: ";
-//    std::cin >> password;
-//    std::cout << "confirm_password: ";
-//    std::cin >> confirm_password;
-//    std::cout << "user_name: ";
-//    std::cin >> user_name;
-//    std::cout << "real_name: ";
-//    std::cin >> real_name;
-//    std::cout << "phone_number: ";
-//    std::cin >> phone_number;
-//    std::cout << "email: ";
-//    std::cin >> email;
-//    std::cout << "id_number: ";
-//    std::cin >> id_number;
-//    std::cout << "pay_password: ";
-//    std::cin >> pay_password;
-//    std::cout << "pay_confirm_password: ";
-//    std::cin >> pay_confirm_password;
-//
+    std::cout << "account: ";
+    std::cin >> account;
+    std::cout << "password: ";
+    std::cin >> password;
+    std::cout << "confirm_password: ";
+    std::cin >> confirm_password;
+    std::cout << "user_name: ";
+    std::cin >> user_name;
+    std::cout << "real_name: ";
+    std::cin >> real_name;
+    std::cout << "phone_number: ";
+    std::cin >> phone_number;
+    std::cout << "email: ";
+    std::cin >> email;
+    std::cout << "id_number: ";
+    std::cin >> id_number;
+    std::cout << "pay_password: ";
+    std::cin >> pay_password;
+    std::cout << "pay_confirm_password: ";
+    std::cin >> pay_confirm_password;
+
 //    std::cout << "shop_name:";
 //    std::cin >> shop_name;
 //    std::cout << "shop_address: ";
@@ -71,21 +71,21 @@ int main() {
 //    std::cout << "pay_confirm_password: ";
 //    std::cin >> pay_confirm_password;
 
-//    RegisterUser ru;
-//    if (ru.Register(account,
-//                    password,
-//                    confirm_password,
-//                    user_name,
-//                    real_name,
-//                    phone_number,
-//                    email,
-//                    id_number,
-//                    pay_password,
-//                    pay_confirm_password)) {
-//        std::cout << "ok" << std::endl;
-//    } else {
-//        std::cout << "no ok" << std::endl;
-//    }
+    RegisterUser ru;
+    if (ru.Register(account,
+                    password,
+                    confirm_password,
+                    user_name,
+                    real_name,
+                    phone_number,
+                    email,
+                    id_number,
+                    pay_password,
+                    pay_confirm_password)) {
+        std::cout << "ok" << std::endl;
+    } else {
+        std::cout << "no ok" << std::endl;
+    }
 
 //    LoginUser lu;
 //
@@ -148,8 +148,8 @@ int main() {
 //        std::cout << "no" << std::endl;
 //    }
 
-    LoginManager l;
-    int a = l.ForgotPassword("account", "password", "shrimp", "xjz1953663575", "xjz1953663575");
+//    LoginManager l;
+//    int a = l.ForgotPassword("account", "password", "shrimp", "xjz1953663575", "xjz1953663575");
     db.close();
-    return a;
+//    return a;
 }
