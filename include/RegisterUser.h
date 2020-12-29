@@ -20,7 +20,7 @@ public:
     // the password and confirm password are different, or password is illegal, return 2.
     // phone, email, id_number is illegal, return 3.
     // pay password and confirm pay password are different or pay password is illegal, return 4.
-    bool Register(const std::string& in_account,
+    int Register(const std::string& in_account,
                   const std::string& in_password,
                   const std::string& in_confirm_password,
                   const std::string& in_user_name,

@@ -42,11 +42,14 @@ public:
                           const std::string& new_confirm_pay_password);
 
     // maybe we can add a email verification code
-    // ok change 0
-    // the account is nullptr -1
-    // email is wrong -2  (this account no use this email)
-    // illegal password -3
+    // return 0, change successfully.
+    // return 1, account is wrong
+    // return 2, verification information is wrong
+    // return 3, email is wrong
+    // return 4, password is illegal
     int ForgotPassword(const std::string& account,
+                       const std::string& real_name,
+                       const std::string& id_number,
                        const std::string& email,
                        const std::string& new_password,
                        const std::string& new_confirm_password);

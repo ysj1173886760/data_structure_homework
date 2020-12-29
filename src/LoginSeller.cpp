@@ -66,32 +66,26 @@ int LoginSeller::ForgotPassword(const std::string &account,
                                 const std::string &new_confirm_password) {
 
     for (auto it : all_seller_data) {
+        if (it.account == account) {
+            if (it.shop_name == shop_name &&
+            it.shop_owner_name == shop_owner_name &&
+            it.shop_owner_phone_number == shop_owner_phone_number &&
+            it.shop_owner_id_number == shop_owner_id_number) {
+                if (ok_password(new_password, new_confirm_password)) {
+                    it.password = new_password;
 
-        if (it.account == account
-        && it.shop_name == shop_name
-        && it.shop_owner_name == shop_owner_name
-        && it.shop_owner_phone_number == shop_owner_phone_number
-        && it.shop_owner_id_number == shop_owner_id_number) {
+                    DB& db = DB::getInstance();
+                    db.modify_seller_data(it.id, it);
 
-            if (ok_password(new_password, new_confirm_password)) {
-                it.password = new_password;
-
-                DB& db = DB::getInstance();
-                db.modify_seller_data(it.id, it);
-
-                return 0;
+                    return 0;
+                }
+                else return 3; // password is illegal
             }
-            else {
-                return -2;
-            } // illegal password.
+            else return 2; // verification error
         }
-        else {
-            return -1;
-        } // verification information wrong
     }
 
-    // verification information wrong
-    return -1;
+    return 1; // account is wrong
 }
 
 bool LoginSeller::ok_password(const std::string &password, const std::string &confirm_password) {

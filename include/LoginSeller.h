@@ -27,9 +27,10 @@ public:
                        const std::string& new_password,
                        const std::string& new_confirm_password);
 
-    // ok change, return 0
-    // verification wrong, return -1
-    // illegal password, return -2
+    // return 0, if you change successfully
+    // return 1, the account is wrong
+    // return 2, verification error
+    // return 3, password is illegal
     int ForgotPassword(const std::string& account,
                        const std::string& shop_name,
                        const std::string& shop_owner_name,
@@ -41,7 +42,7 @@ public:
 private:
     std::vector<SellerData> all_seller_data;
 
-    bool ok_password(const std::string& password, const std::string& confirm_password);
+    static bool ok_password(const std::string& password, const std::string& confirm_password);
     bool ok_pay_password(const std::string& pay_password, const std::string& confirm_pay_password);
 };
 

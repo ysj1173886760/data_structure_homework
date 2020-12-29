@@ -37,7 +37,7 @@ int LoginUser::ChangePassword(const std::string &account,
         if (it.account == account && it.password == password) {
             if (it.email == email) {
                 if (OkPassword(new_password, new_confirm_password)) {
-                    it.password = password;
+                    it.password = new_password;
 
                     DB& db = DB::getInstance();
                     db.modify_user_data(it.id, it);
@@ -56,6 +56,9 @@ int LoginUser::ChangePassword(const std::string &account,
             return -1;
         } // account or password wrong
     }
+
+    // account or password wrong
+    return -1;
 }
 
 //
@@ -76,47 +79,42 @@ int LoginUser::ChangePayPassword(const std::string &account,
                     DB& db = DB::getInstance();
                     db.modify_user_data(it.id, it);
 
-                    return 0;
+                    return 0; // ok changer
                 }
-                else {
-                    return -3;
-                } // pay password is illegal
+                else return -3; // pay password is illegal
             }
-            else {
-                return -2;
-            } // authentication is wrong
+            else return -2; // authentication is wrong
         }
-        else {
-            return -1;
-        } // account or password is wrong
+        else return -1; // account or password is wrong
     }
 }
 
 
 int LoginUser::ForgotPassword(const std::string &account,
-                               const std::string &email,
-                               const std::string &new_password,
-                               const std::string &new_confirm_password) {
+                              const std::string &real_name,
+                              const std::string &id_number,
+                              const std::string &email,
+                              const std::string &new_password,
+                              const std::string &new_confirm_password) {
 
     //
     for (auto it : all_user_data) {
         if (it.account == account) {
-            if (it.email == email) {
-                if (OkPassword(new_password, new_confirm_password)) {
-                    it.password = new_password;
+            if (it.real_name == real_name && it.id_number == id_number) {
+                if (it.email == email) {
+                    if (OkPassword(new_password, new_confirm_password)) {
+                        it.password = new_password;
 
-                    DB& db = DB::getInstance();
-                    db.modify_user_data(it.id, it);
+                        DB& db = DB::getInstance();
+                        db.modify_user_data(it.id, it);
 
-                    return 0;
+                        return 0; // ok change
+                    }
+                    else return -4; // password is illegal
                 }
-                else {
-                    return -3;
-                } // new password is no ok.
+                else return -3; // email is wrong
             }
-            else {
-                return -2;
-            } // it.email != email
+            else return -2; // verification error
         } // it.account == account
     }
 

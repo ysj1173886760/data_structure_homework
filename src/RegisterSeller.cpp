@@ -16,11 +16,13 @@ RegisterSeller::~RegisterSeller() {
 
 }
 
-// 这个到底是返回 true 还是 false，因为需要向管理员发出申请，所以怎么定义注册成功
-// 传入参数
-// 账号，密码，密码确认，店铺名字，店铺地址
-// 拥有者姓名，拥有者手机号，拥有者身份证，支付密码，支付密码确认
-bool RegisterSeller::Register(const std::string& account,
+
+// return 0, if you successfully apply to manager
+// return 1, if account or shop_name already exists
+// return 2, if password is illegal
+// return 3, if address, owner name, phone or id number wrong
+// return 4, if pay_password is illegal
+int RegisterSeller::Register(const std::string& account,
                               const std::string& password,
                               const std::string& confirm_password,
                               const std::string& shop_name,
@@ -31,22 +33,21 @@ bool RegisterSeller::Register(const std::string& account,
                               const std::string& pay_password,
                               const std::string& confirm_pay_password) {
     //
-    if (!(register_account(account) && register_password(password, confirm_password) &&
-    register_pay_password(pay_password, confirm_pay_password) && register_shop_name(shop_name) &&
-    register_shop_address(shop_address) && register_shop_owner_name(shop_owner_name) &&
-    register_shop_owner_phone_number(shop_owner_phone_number) && register_shop_owner_id_number(shop_owner_id_number))) {
-        std::cout << "Register Seller fail" << std::endl;
-        return false;
-    }
+    if (!register_account(account) || !register_shop_name(shop_name)) return 1;
+    if (!register_password(password, confirm_password)) return 2;
+    if (!register_shop_address(shop_address) || !register_shop_owner_name(shop_owner_name)
+    || !register_shop_owner_phone_number(shop_owner_phone_number)
+    || !register_shop_owner_id_number(shop_owner_id_number))
+        return 3;
+    if (!register_pay_password(pay_password, confirm_pay_password)) return 4;
 
     copy_to_register_requests_data();
 
     DB& db = DB::getInstance();
-
-    // 将申请放入请求列表中
+    // insert the seller data to register request list
     db.insert_register_request_data(rrd);
 
-    return true;
+    return 0;
 }
 
 bool RegisterSeller::register_account(const std::string& account) {
@@ -133,6 +134,7 @@ bool RegisterSeller::register_pay_password(const std::string& pay_password, cons
         return false;
     }
 
+    seller.wallet.money = 0;
     seller.wallet.password = pay_password;
     return true;
 }

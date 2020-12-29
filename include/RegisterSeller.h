@@ -16,8 +16,12 @@ public:
     RegisterSeller();
     ~RegisterSeller();
 
-    //
-    bool Register(const std::string& account,
+    // return 0, if you successfully apply to manager
+    // return 1, if account or shop_name already exists
+    // return 2, if password is illegal
+    // return 3, if address, owner name, phone or id number wrong
+    // return 4, if pay_password is illegal
+    int Register(const std::string& account,
                   const std::string& password,
                   const std::string& confirm_password,
                   const std::string& shop_name,

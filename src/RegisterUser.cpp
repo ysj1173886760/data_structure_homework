@@ -22,7 +22,7 @@ RegisterUser::~RegisterUser() {
 }
 
 
-bool RegisterUser::Register(const std::string& in_account,
+int RegisterUser::Register(const std::string& in_account,
                             const std::string& in_password,
                             const std::string& in_confirm_password,
                             const std::string& in_user_name,
@@ -32,16 +32,17 @@ bool RegisterUser::Register(const std::string& in_account,
                             const std::string& in_id_number,
                             const std::string& in_pay_password,
                             const std::string& in_pay_confirm_password) {
-    if (!(register_account(in_account) && register_password(in_password, in_confirm_password) &&
-        register_pay_password(in_pay_password, in_pay_confirm_password) && register_user_name(in_user_name) &&
-        register_real_name(in_real_name) && register_phone_number(in_phone_number) &&
-        register_email(in_email) && register_id_number(in_id_number))) return false;
+
+    if (!register_account(in_account) || !register_user_name(in_user_name)) return 1;
+    if (!register_password(in_password, in_confirm_password)) return 2;
+    if (!register_phone_number(in_phone_number) || !register_email(in_email) || !register_id_number(in_id_number)) return 3;
+    if (!register_pay_password(in_pay_password, in_confirm_password)) return 4;
 
     DB& db = DB::getInstance();
 
     db.insert_user_data(user);
 
-    return true;
+    return 0;
 }
 
 // if the account already exists, return false.

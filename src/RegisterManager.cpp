@@ -13,22 +13,17 @@ RegisterManager::RegisterManager() {
 }
 
 
-// 传入参数
-// 账号，密码，密码确认
-bool RegisterManager::Register(const std::string& account,
+int RegisterManager::Register(const std::string& account,
                                const std::string& password,
                                const std::string& confirm_password) {
     //
-    if (!(register_account(account) && register_password(password, confirm_password))) {
-        return false;
-    }
+    if (!register_account(account)) return 1;
+    if (!register_password(password, confirm_password)) return 2;
 
     DB& db = DB::getInstance();
-    db.open();
     db.insert_manager_data(manager);
-    db.close();
 
-    return true;
+    return 0;
 }
 
 //

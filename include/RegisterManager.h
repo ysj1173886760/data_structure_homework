@@ -12,7 +12,11 @@
 class RegisterManager {
 public:
     RegisterManager();
-    bool Register(const std::string&, const std::string&, const std::string&);
+
+    // return 0, if you register ok
+    // return 1, if the account already exists
+    // return 2, if the password is illegal
+    int Register(const std::string&, const std::string&, const std::string&);
 
     void print() {
         manager.print();
