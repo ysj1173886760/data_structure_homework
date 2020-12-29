@@ -109,5 +109,6 @@ target_link_libraries(seller_sys_test jsoncpp)
 
 add_executable(rbtree_test test/rbtree_test.cpp)
 
-add_executable(ui_test test/ui_test.cpp)
-target_link_libraries(ui_test ncurses)
+add_executable(ui_test test/ui_test.cpp src/DB.cpp
+                        src/IDgenerator.cpp src/BasicOperation.cpp)
+target_link_libraries(ui_test ncurses jsoncpp ${Boost_LIBRARIES} pthread)

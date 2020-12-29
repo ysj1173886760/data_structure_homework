@@ -6,8 +6,8 @@
 #include <string>
 
 namespace UI {
-    void mvwaddstring(WINDOW *win, int x, int y, std::string str) {
-        mvwaddstr(win, x, y, str.c_str());
+    void mvwaddstring(WINDOW *win, int x, int y, const std::string& str) {
+        mvwaddnstr(win, x, y, str.c_str(), str.size());
     }
     void mvwaddint(WINDOW *win, int x, int y, int value) {
         char *buffer = new char[80];
