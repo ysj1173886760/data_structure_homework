@@ -63,15 +63,41 @@ string GetModInfo(const string& name, ItemData& item) {
     return mods_info[choice-1];
 }
 
+void GetUserInfo(UserData& user) {
+    IDgenerator& g = IDgenerator::get_instance();
+    user.id = g.generateID(Type::User);
+    user.wallet.money = 1000;
+}
+
+void checkMessage(const string& user_id) {
+    DB& db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
+
+    if(user.message.empty()) {
+        cout << "no message" << endl;
+        return;
+    }
+
+    while(!user.message.empty()) {
+        string m = user.message.front();
+        cout << m << endl;
+        user.message.erase(user.message.begin());
+    }
+    db.modify_user_data(user.id, user);
+}
+
 int main() {
-    //先添加一个商家（之后换为注册环节）
     DB& db = DB::getInstance();
     db.open();
+
+    int choice;
     SellerData seller;
+    /*
+    //先添加一个商家（之后换为注册环节）
     GetSellerInfo(seller);
     string seller_id = db.insert_seller_data(seller);
 
-    //以商家身份登录
+    //商家身份 处理商品
     SellerSystem seller_sys;
     cout << "请选择你的操作: " << endl;
     cout << "1: 添加商品" << endl;
@@ -79,7 +105,6 @@ int main() {
     cout << "3: 修改商品" << endl;
     cout << "0: 结束操作" << endl;
 
-    int choice;
     cin >> choice;
     ItemData item;
     string rm_name, mod_name, mod_info;
@@ -111,12 +136,70 @@ int main() {
         cout << "0: 结束操作" << endl;
         cin >> choice;
     }
+    */
 
+    ServiceSystem ser_sys;
+//    //顾客身份 买
+    vector<SellerData> sellers = db.select_all_seller_data();
+    seller = sellers[0];
+
+    UserData user;
+    vector<UserData> users = db.select_all_user_data();
+    user = users[0];
+//    GetUserInfo(user);
+//    string user_id = db.insert_user_data(user);
+
+//    cout << "1: 查看消息" << endl;
+//    cout << "2: 添加购物车" << endl;
+//    cout << "3: 删除购物车" << endl;
+//    cout << "4: 提交订单" << endl;
+//    cout << "0: 结束操作" << endl;
+//    cin >> choice;
+//
+//    int add_num, rm_num;
+//    string add_item_name, rm_item_name;
+//    vector<ItemData> items;
+//    while(choice) {
+//        switch (choice) {
+//            case 1:
+//                checkMessage(user.id);
+//                break;
+//            case 2:
+//                cout << "请输入要添加的商品名称：";
+//                cin >> add_item_name;
+//                cout << "请输入要添加商品的数量：";
+//                cin >> add_num;
+//                ser_sys.insert_shop_list(user.id, seller.shop_name, add_item_name, add_num);
+//                break;
+//            case 3:
+//                cout << "请输入要删除的商品名称：";
+//                cin >> rm_item_name;
+//                cout << "请输入要删除的商品数量：";
+//                cin >> rm_num;
+//                ser_sys.remove_shop_list(user.id, seller.shop_name, rm_item_name, rm_num);
+//                break;
+//            case 4:
+//                ser_sys.submit_shop_list(user.id, seller.id);
+//                break;
+//            default:
+//                cout << "ERROR : wrong choice!!!" << endl;
+//                break;
+//        }
+//
+//        cout << "1: 查看消息" << endl;
+//        cout << "2: 添加购物车" << endl;
+//        cout << "3: 删除购物车" << endl;
+//        cout << "4: 提交订单" << endl;
+//        cout << "0: 结束操作" << endl;
+//        cin >> choice;
+//    }
+//
+//    ser_sys.deal_BuyItemRequest(seller.id);
+//    db.close();
+
+    seller.wallet.money = 1000;
+    db.modify_seller_data(seller.id, seller);
+    Order order = user.current_order[0];
+    ser_sys.returnItem(user.id, order);
     db.close();
 }
-
-
-
-
-
-

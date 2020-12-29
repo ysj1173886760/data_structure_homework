@@ -11,8 +11,10 @@ bool SellerSystem::insert_item(const std::string& seller_id, ItemData& add_item)
 
     ItemData item;
     if(!op.GetItem(seller.shop_name, add_item.name, item)) {
+        //db.open();
         add_item.owner = seller.shop_name;
         db.insert_item_data(add_item);
+        //db.close();
         return true;
     }
     return false;
@@ -25,7 +27,9 @@ bool SellerSystem::remove_item(const std::string& seller_id, const std::string& 
 
     ItemData item;
     if(op.GetItem(seller.shop_name, rm_name, item)) {
+        //db.open();
         db.delete_item_data(item.id);
+        //db.close();
         return true;
     }
 
