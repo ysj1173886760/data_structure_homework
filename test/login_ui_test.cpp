@@ -17,6 +17,7 @@
 #include "RegisterManager.h"
 #include "LoginManager.h"
 #include "LoginSeller.h"
+#include "ManagerOperation.h"
 
 enum {
     COMMAND_QUIT = 1,
@@ -31,20 +32,40 @@ enum {
     COMMAND_RETRY,
     COMMAND_STATUS,
     COMMAND_CLEAR,
-    COMMAND_LOGOUT
+    COMMAND_LOGOUT,
+    COMMAND_LIST,
+    COMMAND_REMOVE,
+    COMMAND_ADD,
+    COMMAND_ACCEPT,
+    COMMAND_REJECT,
+    COMMAND_NEXT,
+    COMMAND_PREVIOUS,
+    COMMAND_DETAIL
 };
 
-enum Status{
+enum Status {
     STATUS_MANAGER = 1,
     STATUS_USER,
     STATUS_SELLER,
     STATUS_TOURIST
 };
 
+enum DataType {
+    TYPE_REGISTER_REQUEST = 1,
+    TYPE_NONE
+};
+
 std::unordered_map<std::string, int> mp;
 
 RandomGenerator &ran_generator = RandomGenerator::getInstance();
 BasicOperation BasicOp;
+
+struct LIST {
+    std::vector<RegisterRequestData> register_request_list;
+
+    enum DataType type;
+    int curr_row, max_row;
+}ui_list;
 
 struct STATUS {
     std::string id;
@@ -54,6 +75,10 @@ struct STATUS {
 }status;
 
 void init() {
+    ui_list.type = TYPE_NONE;
+    ui_list.max_row = 0;
+    ui_list.curr_row = 0;
+
     status.type = STATUS_TOURIST;
 
     mp["quit"] = COMMAND_QUIT;
@@ -69,6 +94,14 @@ void init() {
     mp["status"] = COMMAND_STATUS;
     mp["clear"] = COMMAND_CLEAR;
     mp["logout"] = COMMAND_LOGOUT;
+    mp["ls"] = COMMAND_LIST;
+    mp["add"] = COMMAND_ADD;
+    mp["rm"] = COMMAND_REMOVE;
+    mp["accept"] = COMMAND_ACCEPT;
+    mp["reject"] = COMMAND_REJECT;
+    mp["next"] = COMMAND_NEXT;
+    mp["previous"] = COMMAND_PREVIOUS;
+    mp["detail"] = COMMAND_DETAIL;
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -81,6 +114,18 @@ void err_command(const std::string &command) {
 
 void err_system() {
     printf("Something wrong with the system, please contact us.\n");
+}
+
+void err_permit() {
+    printf("You Don`t Have The Permission To Execute This Command.\n");
+}
+
+void err_using(const std::string &commands) {
+    printf("Error using commands %s.\n", commands.c_str());
+}
+
+void err_arg_type(const std::string &main_command, const std::string &expect) {
+    printf("Error %s arg type, Expect %s.\n", main_command.c_str(), expect.c_str());
 }
 
 std::vector<std::string> prepare_command(std::string str) {
@@ -459,6 +504,166 @@ void logout() {
     printf("Logout Success.\n");
 }
 
+void print_list(int i) {
+    switch (ui_list.type) {
+        case TYPE_REGISTER_REQUEST:
+            printf("account: %s shop_name: %s.\n",
+                   ui_list.register_request_list[i].account.c_str(),
+                   ui_list.register_request_list[i].shop_name.c_str());
+            break;
+
+        default:
+            break;
+    }
+}
+
+void do_next() {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("next");
+        return;
+    }
+    if (ui_list.curr_row < ui_list.max_row) {
+        int maxx = min(ui_list.max_row, ui_list.curr_row + 10);
+        while (ui_list.curr_row < maxx) {
+            print_list(ui_list.curr_row);
+            ui_list.curr_row++;
+        }
+    } else {
+        printf("Already at the bottom of the list.\n");
+    }
+}
+
+void manager_list() {
+    ManagerOperation managerOperation;
+    ui_list.register_request_list = managerOperation.view_application_list();
+    ui_list.type = TYPE_REGISTER_REQUEST;
+    ui_list.max_row = ui_list.register_request_list.size();
+    ui_list.curr_row = 0;
+
+    if (ui_list.max_row == 0) {
+        printf("No more register request.\n");
+        return;
+    }
+    // default to print next 10 info
+    do_next();
+}
+
+void do_list() {
+    switch (status.type) {
+        case STATUS_MANAGER:
+            manager_list();
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
+}
+
+void print_detail(int i) {
+    switch (ui_list.type) {
+        case TYPE_REGISTER_REQUEST:
+            ui_list.register_request_list[i].print();
+            break;
+
+        default:
+            break;
+    }
+}
+
+// TODO: check the previous command
+
+void do_previous() {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("previous");
+        return;
+    }
+    if (ui_list.curr_row > 0) {
+        int minn = max(0, ui_list.curr_row - 10);
+        while (ui_list.curr_row > minn) {
+            ui_list.curr_row--;
+            print_list(ui_list.curr_row);
+        }
+    } else {
+        printf("Already at the top of the list.\n");
+    }
+}
+
+void do_add() {
+    switch (status.type) {
+        case STATUS_MANAGER:
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
+}
+
+void do_remove() {
+    switch (status.type) {
+        case STATUS_MANAGER:
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
+}
+
+void do_accept() {
+    switch (status.type) {
+        case STATUS_MANAGER:
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
+}
+
+void do_reject() {
+    switch (status.type) {
+        case STATUS_MANAGER:
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
+}
+
+bool str2int(const std::string &str, int &value) {
+    value = 0;
+    for (const auto &x : str) {
+        if (x > '9' || x < '0') return false;
+        value = value * 10 + (x - '0');
+    }
+    return true;
+}
+
+void do_detail(const std::vector<std::string> &commands) {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("detail");
+        return;
+    }
+    if (commands.size() != 2) {
+        err_arg_num("detail", 1, commands.size() - 1);
+        return;
+    }
+    int ptr = 0;
+    if (!str2int(commands[1], ptr)) {
+        err_arg_type("detail", "int");
+        return;
+    }
+    ptr--;
+    if (ptr >= 0 && ptr < ui_list.max_row) {
+        print_detail(ptr);
+    } else {
+        printf("Index out of range.\n");
+    }
+}
+
 bool execute_command(char *input) {
     std::vector<std::string> commands = prepare_command(std::string(input));
 
@@ -477,7 +682,7 @@ bool execute_command(char *input) {
         case COMMAND_LOGIN:
             do_login(commands);
             break;
-
+            //TODO: check args num
         case COMMAND_STATUS:
             print_status();
             break;
@@ -488,6 +693,38 @@ bool execute_command(char *input) {
 
         case COMMAND_LOGOUT:
             logout();
+            break;
+
+        case COMMAND_LIST:
+            do_list();
+            break;
+
+        case COMMAND_ADD:
+            do_add();
+            break;
+
+        case COMMAND_REMOVE:
+            do_remove();
+            break;
+
+        case COMMAND_ACCEPT:
+            do_accept();
+            break;
+
+        case COMMAND_REJECT:
+            do_reject();
+            break;
+
+        case COMMAND_NEXT:
+            do_next();
+            break;
+
+        case COMMAND_PREVIOUS:
+            do_previous();
+            break;
+
+        case COMMAND_DETAIL:
+            do_detail(commands);
             break;
 
         default:

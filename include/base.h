@@ -413,7 +413,7 @@ public:
 
     void print() const {
         std::cout << "account: " << account << std::endl;
-        std::cout << "password: " << password << std::endl;
+//        std::cout << "password: " << password << std::endl;
         std::cout << "shop_name" << shop_name << std::endl;
         std::cout << "shop_address: " << shop_address << std::endl;
         std::cout << "shop_owner_name: " << shop_owner_name << std::endl;
