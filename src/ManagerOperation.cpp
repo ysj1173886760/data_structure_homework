@@ -5,11 +5,12 @@
 #include "ManagerOperation.h"
 #include "Email.cpp"
 
-ManagerOperation::ManagerOperation() {
-
+ManagerOperation & ManagerOperation::getInstance() {
+    static ManagerOperation obj;
+    return obj;
 }
 
-    // return vector about register_request_data
+// return vector about register_request_data
 std::vector<RegisterRequestData> ManagerOperation::view_application_list() {
     DB& db = DB::getInstance();
     return db.select_all_register_request_data();

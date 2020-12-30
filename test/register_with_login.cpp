@@ -142,13 +142,14 @@ int main() {
 //        std::cout << "no" << std::endl;
 //    }
 
-//    ManagerOperation p;
-//    if (p.remove_user("shrimp", "1953663575@qq.com")) {
-//        std::cout << "ok" << std::endl;
-//    }
-//    else {
-//        std::cout << "no" << std::endl;
-//    }
+    ManagerOperation& p = ManagerOperation::getInstance();
+
+    if (p.remove_user("shrimp", "1953663575@qq.com")) {
+        std::cout << "ok" << std::endl;
+    }
+    else {
+        std::cout << "no" << std::endl;
+    }
 
 //    LoginManager l;
 //    int a = l.ForgotPassword("account", "password", "shrimp", "xjz1953663575", "xjz1953663575");

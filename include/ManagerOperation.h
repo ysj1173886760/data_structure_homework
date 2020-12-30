@@ -14,7 +14,7 @@
 
 class ManagerOperation {
 public:
-    ManagerOperation();
+    static ManagerOperation& getInstance();
 
     // return vector about register_request_data
     std::vector<RegisterRequestData> view_application_list();
@@ -56,6 +56,7 @@ public:
                         const std::string& root_password,
                         const std::string& manager_account);
 private:
+    ManagerOperation() = default;
 
     // return a object about seller data
     SellerData copy_request_to_seller(const RegisterRequestData& rqd);
