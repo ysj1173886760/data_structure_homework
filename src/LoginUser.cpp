@@ -110,15 +110,53 @@ int LoginUser::ForgotPassword(const std::string &account,
 
                         return 0; // ok change
                     }
-                    else return -4; // password is illegal
+                    else return 4; // password is illegal
                 }
-                else return -3; // email is wrong
+                else return 3; // email is wrong
             }
-            else return -2; // verification error
+            else return 2; // verification error
         } // it.account == account
     }
 
-    return -1;
+    return 1;
+}
+
+int LoginUser::ForgotPayPassword(const std::string &account,
+                                 const std::string &password,
+                                 const std::string &real_name,
+                                 const std::string &id_number,
+                                 const std::string &email,
+                                 const std::string &new_pay_password,
+                                 const std::string &new_confirm_pay_password) {
+    for (auto it : all_user_data) {
+
+        if (it.account == account) {
+
+            if (it.password == password) {
+
+                if (it.real_name == real_name && it.id_number == id_number) {
+
+                    if (it.email == email) {
+
+                        if (OkPayPassword(new_pay_password, new_confirm_pay_password)) {
+                            it.wallet.password = new_pay_password;
+
+                            DB& db = DB::getInstance();
+                            db.modify_user_data(it.id, it);
+
+                            return 0; // ok change
+                        }
+                        else return 4; // pay password is illegal
+                    }
+                    else return 3; // email is wrong
+                }
+                else return 2; // verification is wrong.
+            }
+            else return 1; // password is wrong
+        }
+    }
+
+    return 1; // account is wrong
 }
 
 // password rule

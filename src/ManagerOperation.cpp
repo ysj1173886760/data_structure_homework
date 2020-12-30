@@ -9,6 +9,7 @@ ManagerOperation::ManagerOperation() {
 
 }
 
+    // return vector about register_request_data
 std::vector<RegisterRequestData> ManagerOperation::view_application_list() {
     DB& db = DB::getInstance();
     return db.select_all_register_request_data();
@@ -69,9 +70,10 @@ bool ManagerOperation::register_manager(const std::string& account,
     // root manager's account and password
     if (account == "account" && password == "password") {
         RegisterManager rm;
-        if (rm.Register(new_guy_account, new_guy_password, new_guy_confirm_password)) {
-            return true;
-        }
+
+        int err = rm.Register(new_guy_account, new_guy_password, new_guy_confirm_password);
+        if (err == 0) return true;
+        else return false;
     }
     //
     return false;

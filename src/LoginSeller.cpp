@@ -30,31 +30,60 @@ int LoginSeller::ChangePassword(const std::string &account,
                                 const std::string &new_password,
                                 const std::string &new_confirm_password) {
     for (auto it : all_seller_data) {
-        if (it.account == account && it.password == password) {
+        if (it.account == account) {
 
-            if (it.shop_owner_name == shop_owner_name
-            && it.shop_owner_phone_number == shop_owner_phone_number) {
+            if (it.password == password) {
+                if (it.shop_owner_name == shop_owner_name
+                    && it.shop_owner_phone_number == shop_owner_phone_number) {
 
-                if (ok_password(new_password, new_confirm_password)) {
-                    it.password = new_password;
+                    if (ok_password(new_password, new_confirm_password)) {
+                        it.password = new_password;
 
-                    DB& db = DB::getInstance();
-                    db.modify_seller_data(it.id, it);
+                        DB& db = DB::getInstance();
+                        db.modify_seller_data(it.id, it);
 
-                    return 0;
+                        return 0;
+                    }
+                    else return -3; // illegal password.
                 }
-                else return -3; // illegal password.
+                else return -2; // verification information error
             }
-            else {
-                return -2;
-            } // verification information error
+           else return -1; // password is wrong
         }
-        else {
-            return -1;
-        } // password is wrong.
     }
 
-    return -1;
+    return -1; // account is wrong
+}
+
+int LoginSeller::ChangePayPassword(const std::string &account,
+                                   const std::string &password,
+                                   const std::string &pay_password,
+                                   const std::string &shop_owner_name,
+                                   const std::string &shop_owner_phone_number,
+                                   const std::string &new_pay_password,
+                                   const std::string &new_confirm_pay_password) {
+    //
+    for (auto it : all_seller_data) {
+        if (it.account == account) {
+            if (it.password == password && it.wallet.password == pay_password) {
+                if (it.shop_owner_name == shop_owner_name && it.shop_owner_phone_number == shop_owner_phone_number) {
+                    if (ok_pay_password(new_pay_password, new_confirm_pay_password)) {
+                        it.wallet.password = new_pay_password;
+
+                        DB& db = DB::getInstance();
+                        db.modify_seller_data(it.id, it);
+
+                        return 0; // ok change
+                    }
+                    else return 3; // pay password is illegal
+                }
+                else return 2; // verification wrong
+            }
+            else return 1; // password or pay password wrong
+        }
+    }
+
+    return 1; // account is wrong
 }
 
 int LoginSeller::ForgotPassword(const std::string &account,
@@ -82,6 +111,42 @@ int LoginSeller::ForgotPassword(const std::string &account,
                 else return 3; // password is illegal
             }
             else return 2; // verification error
+        }
+    }
+
+    return 1; // account is wrong
+}
+
+
+int LoginSeller::ForgotPayPassword(const std::string &account,
+                                   const std::string &password,
+                                   const std::string &shop_name,
+                                   const std::string &shop_owner_name,
+                                   const std::string &shop_owner_phone_number,
+                                   const std::string &shop_owner_id_number,
+                                   const std::string &new_pay_password,
+                                   const std::string &new_confirm_pay_password) {
+
+    for (auto it : all_seller_data) {
+        if (it.account == account) {
+            if (it.password == password) {
+                if (it.shop_name == shop_name
+                && it.shop_owner_name == shop_owner_name
+                && it.shop_owner_phone_number == shop_owner_phone_number
+                && it.shop_owner_id_number == shop_owner_id_number) {
+                    if (ok_pay_password(new_pay_password, new_confirm_pay_password)) {
+                        it.wallet.password = new_pay_password;
+
+                        DB& db = DB::getInstance();
+                        db.modify_seller_data(it.id, it);
+
+                        return 0; // ok change
+                    }
+                    else return 3; // pay password is illegal
+                }
+                else return 2; // verification wrong
+            }
+            else return 1; // password is wrong
         }
     }
 
