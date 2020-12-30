@@ -116,6 +116,8 @@ bool ManagerOperation::remove_seller(const std::string &seller_account,
 bool ManagerOperation::remove_manager(const std::string &root_account,
                                       const std::string &root_password,
                                       const std::string &manager_account) {
+    if (manager_account == "account") return false;
+
     if (root_account == "account" && root_password == "password") {
         std::vector<ManagerData> all_manager_data;
 
