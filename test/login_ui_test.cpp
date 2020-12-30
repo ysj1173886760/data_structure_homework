@@ -128,6 +128,15 @@ void err_arg_type(const std::string &main_command, const std::string &expect) {
     printf("Error %s arg type, Expect %s.\n", main_command.c_str(), expect.c_str());
 }
 
+bool str2int(const std::string &str, int &value) {
+    value = 0;
+    for (const auto &x : str) {
+        if (x > '9' || x < '0') return false;
+        value = value * 10 + (x - '0');
+    }
+    return true;
+}
+
 std::vector<std::string> prepare_command(std::string str) {
     vector<string> res;
     int lst = 0;
@@ -445,6 +454,10 @@ void do_login(const std::vector<std::string> &commands) {
         return;
     }
 
+    if (status.type != STATUS_TOURIST) {
+        printf("Error, you have to logout first.\n");
+    }
+
     switch (mp[commands[1]]) {
         case COMMAND_SELLER:
             seller_login(commands);
@@ -501,13 +514,18 @@ void logout() {
     status.id = "";
     status.account = "";
     status.name = "";
+
+    ui_list.type = TYPE_NONE;
+    ui_list.max_row = 0;
+    ui_list.curr_row = 0;
+
     printf("Logout Success.\n");
 }
 
 void print_list(int i) {
     switch (ui_list.type) {
         case TYPE_REGISTER_REQUEST:
-            printf("account: %s shop_name: %s.\n",
+            printf("%d: account: %s shop_name: %s.\n", i + 1,
                    ui_list.register_request_list[i].account.c_str(),
                    ui_list.register_request_list[i].shop_name.c_str());
             break;
@@ -589,9 +607,33 @@ void do_previous() {
     }
 }
 
-void do_add() {
+void manager_add(const std::vector<std::string> &commands) {
+    if (commands.size() != 3) {
+        err_arg_num("add", 2, commands.size() - 1);
+        return;
+    }
+
+    if (status.account != "account") {
+        printf("only root manager can add new manager.\n");
+        return;
+    }
+
+    ManagerOperation managerOperation;
+    bool res = managerOperation.register_manager("account", "password",
+                                                 commands[1],
+                                                 commands[2],
+                                                 commands[2]);
+    if (res) {
+        printf("Add new manager success.\n");
+    } else {
+        printf("Add new manager failed.\n");
+    }
+}
+
+void do_add(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
+            manager_add(commands);
             break;
 
         default:
@@ -600,9 +642,88 @@ void do_add() {
     }
 }
 
-void do_remove() {
+void delete_user(const std::vector<std::string> &commands) {
+    if (commands.size() != 4) {
+        err_arg_num("rm user", 2, commands.size() - 2);
+        return;
+    }
+
+    ManagerOperation managerOperation;
+    bool res = managerOperation.remove_user(commands[2], commands[3]);
+    if (res) {
+        printf("delete user success.\n");
+    } else {
+        printf("delete user failed.\n");
+    }
+}
+
+void delete_seller(const std::vector<std::string> &commands) {
+    if (commands.size() != 5) {
+        err_arg_num("rm seller", 3, commands.size() - 2);
+        return;
+    }
+
+    ManagerOperation managerOperation;
+    bool res = managerOperation.remove_seller(commands[1],
+                                              commands[2],
+                                              commands[3]);
+    if (res) {
+        printf("delete seller success.\n");
+    } else {
+        printf("delete seller failed.\n");
+    }
+}
+
+void delete_manager(const std::vector<std::string> &commands) {
+    if (commands.size() != 3) {
+        err_arg_num("rm manager", 1, commands.size() - 2);
+        return;
+    }
+
+    if (status.account != "account") {
+        printf("only root manager can delete manager.\n");
+        return;
+    }
+
+    ManagerOperation managerOperation;
+    bool res = managerOperation.remove_manager("account",
+                                               "password",
+                                               commands[2]);
+    if (res) {
+        printf("delete manager success.\n");
+    } else {
+        printf("delete manager failed.\n");
+    }
+}
+
+void manager_remove(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_USER:
+            delete_user(commands);
+            break;
+
+        case COMMAND_SELLER:
+            delete_seller(commands);
+            break;
+
+        case COMMAND_MANAGER:
+            delete_manager(commands);
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
+void do_remove(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
+            manager_remove(commands);
             break;
 
         default:
@@ -611,9 +732,37 @@ void do_remove() {
     }
 }
 
-void do_accept() {
+void update_manager_ui_list() {
+    ManagerOperation managerOperation;
+    ui_list.register_request_list = managerOperation.view_application_list();
+    ui_list.curr_row = 0;
+    ui_list.max_row = ui_list.register_request_list.size();
+}
+
+void manager_accept(const std::vector<std::string> &commands) {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("accept");
+        return;
+    }
+    if (commands.size() != 3) {
+        err_arg_num("accept", 2, commands.size() - 1);
+        return;
+    }
+
+    ManagerOperation managerOperation;
+    bool res = managerOperation.accept_shop_application(commands[1], commands[2]);
+    if (res) {
+        printf("Accept shop application success.\n");
+        update_manager_ui_list();
+    } else {
+        printf("Accept shop application failed.\n");
+    }
+}
+
+void do_accept(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
+            manager_accept(commands);
             break;
 
         default:
@@ -622,24 +771,36 @@ void do_accept() {
     }
 }
 
-void do_reject() {
+void manager_reject(const std::vector<std::string> &commands) {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("reject");
+        return;
+    }
+    if (commands.size() != 3) {
+        err_arg_num("reject", 2, commands.size() - 1);
+        return;
+    }
+
+    ManagerOperation managerOperation;
+    bool res = managerOperation.reject_shop_application(commands[1], commands[2]);
+    if (res) {
+        printf("Reject shop application success.\n");
+        update_manager_ui_list();
+    } else {
+        printf("Reject shop application failed.\n");
+    }
+}
+
+void do_reject(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
+            manager_reject(commands);
             break;
 
         default:
             err_permit();
             break;
     }
-}
-
-bool str2int(const std::string &str, int &value) {
-    value = 0;
-    for (const auto &x : str) {
-        if (x > '9' || x < '0') return false;
-        value = value * 10 + (x - '0');
-    }
-    return true;
 }
 
 void do_detail(const std::vector<std::string> &commands) {
@@ -700,19 +861,19 @@ bool execute_command(char *input) {
             break;
 
         case COMMAND_ADD:
-            do_add();
+            do_add(commands);
             break;
 
         case COMMAND_REMOVE:
-            do_remove();
+            do_remove(commands);
             break;
 
         case COMMAND_ACCEPT:
-            do_accept();
+            do_accept(commands);
             break;
 
         case COMMAND_REJECT:
-            do_reject();
+            do_reject(commands);
             break;
 
         case COMMAND_NEXT:
