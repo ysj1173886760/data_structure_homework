@@ -120,3 +120,25 @@ std::string BasicOperation::get_user_id_by_account(const std::string &account) {
     }
     return "";
 }
+
+std::string BasicOperation::get_manager_id_by_account(const std::string &account) {
+    DB &db = DB::getInstance();
+    vector<ManagerData> managers = db.select_all_manager_data();
+    for (const auto &x : managers) {
+        if (x.account == account) {
+            return x.id;
+        }
+    }
+    return "";
+}
+
+std::string BasicOperation::get_seller_id_by_account(const std::string &account) {
+    DB &db = DB::getInstance();
+    vector<SellerData> sellers = db.select_all_seller_data();
+    for (const auto &x : sellers) {
+        if (x.account == account) {
+            return x.id;
+        }
+    }
+    return "";
+}
