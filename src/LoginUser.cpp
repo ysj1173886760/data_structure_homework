@@ -18,12 +18,12 @@ bool LoginUser::Login(const std::string& account, const std::string& password) {
     //
     for (const auto& it : all_user_data) {
         if (it.account == account && it.password == password) {
-            std::cout << "login successfully!" << std::endl;
+//            std::cout << "login successfully!" << std::endl;
             return true;
         }
     }
 
-    std::cout << "login error!" << std::endl;
+//    std::cout << "login error!" << std::endl;
     return false;
 }
 

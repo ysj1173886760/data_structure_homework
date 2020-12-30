@@ -65,10 +65,10 @@ bool RegisterSeller::register_account(const std::string& account) {
 
 bool RegisterSeller::register_password(const std::string& password, const std::string& confirm_password) {
 
-    // password rule
-    if (password != confirm_password) {
-        return false;
-    }
+    // add some password rule
+    // password length must be greater than 8 bits and less than 16 bits.
+    if (password != confirm_password) return false;
+    if (password.size() < 8 || password.size() > 16) return false;
 
     seller.password = password;
     return true;
@@ -129,10 +129,13 @@ bool RegisterSeller::register_shop_owner_id_number(const std::string& shop_owner
 
 bool RegisterSeller::register_pay_password(const std::string& pay_password, const std::string& confirm_pay_password) {
 
-    // pay password rule
-    if (pay_password != confirm_pay_password) {
-        return false;
-    }
+    // add some pay password rule.
+    // only support number password, and password length must be 6.
+    std::regex regex_pay_password("\\d*");
+
+    if (pay_password.size() != 6) return false;
+    if (pay_password != confirm_pay_password) return false;
+    if (!std::regex_match(pay_password, regex_pay_password)) return false;
 
     seller.wallet.money = 0;
     seller.wallet.password = pay_password;

@@ -3,6 +3,7 @@
 //
 
 #include "ManagerOperation.h"
+#include "Email.cpp"
 
 ManagerOperation::ManagerOperation() {
 
@@ -86,6 +87,9 @@ bool ManagerOperation::remove_user(const std::string &user_account,
     for (const auto& it : all_user_data) {
         if (it.account == user_account && it.email == user_email) {
             // maybe can add a remind email
+            Email email;
+            std::string content = "Your account is deleted!\r\naccount: " + user_account;
+            email.send_email(user_email, "Attention", content);
             db.delete_user_data(it.id);
             return true;
         }

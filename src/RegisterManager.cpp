@@ -43,10 +43,10 @@ bool RegisterManager::register_account(const std::string& account) {
 //
 bool RegisterManager::register_password(const std::string& password, const std::string& confirm_password) {
 
-    // password rule
-    if (password != confirm_password) {
-        return false;
-    }
+    // add some password rule
+    // password length must be greater than 8 bits and less than 16 bits.
+    if (password != confirm_password) return false;
+    if (password.size() < 8 || password.size() > 16) return false;
 
     manager.password = password;
     return true;
