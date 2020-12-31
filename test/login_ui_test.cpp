@@ -18,6 +18,7 @@
 #include "LoginManager.h"
 #include "LoginSeller.h"
 #include "ManagerOperation.h"
+#include "SellerSystem.h"
 
 enum {
     COMMAND_QUIT = 1,
@@ -40,7 +41,9 @@ enum {
     COMMAND_REJECT,
     COMMAND_NEXT,
     COMMAND_PREVIOUS,
-    COMMAND_DETAIL
+    COMMAND_DETAIL,
+    COMMAND_MODIFY,
+    COMMAND_ITEM
 };
 
 enum Status {
@@ -102,6 +105,8 @@ void init() {
     mp["next"] = COMMAND_NEXT;
     mp["previous"] = COMMAND_PREVIOUS;
     mp["detail"] = COMMAND_DETAIL;
+    mp["modify"] = COMMAND_MODIFY;
+    mp["item"] = COMMAND_ITEM;
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -134,6 +139,25 @@ bool str2int(const std::string &str, int &value) {
         if (x > '9' || x < '0') return false;
         value = value * 10 + (x - '0');
     }
+    return true;
+}
+
+bool str2double(const std::string &str, double &value) {
+    bool dig = false;
+    int dig_size = 0;
+    double sum = 0;
+    for (char i : str) {
+        if (i >= '0' && i <= '9') {
+            if (dig) dig_size++;
+            sum = sum * 10 + (i - '0');
+        } else if (i == '.') {
+            if (dig) return false;
+            dig = true;
+        } else {
+            return false;
+        }
+    }
+    value = sum / pow(10, dig_size);
     return true;
 }
 
@@ -552,7 +576,7 @@ void do_next() {
 }
 
 void manager_list() {
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     ui_list.register_request_list = managerOperation.view_application_list();
     ui_list.type = TYPE_REGISTER_REQUEST;
     ui_list.max_row = ui_list.register_request_list.size();
@@ -618,7 +642,7 @@ void manager_add(const std::vector<std::string> &commands) {
         return;
     }
 
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     bool res = managerOperation.register_manager("account", "password",
                                                  commands[1],
                                                  commands[2],
@@ -648,7 +672,7 @@ void delete_user(const std::vector<std::string> &commands) {
         return;
     }
 
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     bool res = managerOperation.remove_user(commands[2], commands[3]);
     if (res) {
         printf("delete user success.\n");
@@ -663,7 +687,7 @@ void delete_seller(const std::vector<std::string> &commands) {
         return;
     }
 
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     bool res = managerOperation.remove_seller(commands[1],
                                               commands[2],
                                               commands[3]);
@@ -685,7 +709,7 @@ void delete_manager(const std::vector<std::string> &commands) {
         return;
     }
 
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     bool res = managerOperation.remove_manager("account",
                                                "password",
                                                commands[2]);
@@ -699,6 +723,7 @@ void delete_manager(const std::vector<std::string> &commands) {
 void manager_remove(const std::vector<std::string> &commands) {
     if (commands.size() < 2) {
         printf("too few arguments.\n");
+        return;
     }
 
     switch (mp[commands[1]]) {
@@ -733,7 +758,7 @@ void do_remove(const std::vector<std::string> &commands) {
 }
 
 void update_manager_ui_list() {
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     ui_list.register_request_list = managerOperation.view_application_list();
     ui_list.curr_row = 0;
     ui_list.max_row = ui_list.register_request_list.size();
@@ -749,7 +774,7 @@ void manager_accept(const std::vector<std::string> &commands) {
         return;
     }
 
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     bool res = managerOperation.accept_shop_application(commands[1], commands[2]);
     if (res) {
         printf("Accept shop application success.\n");
@@ -781,7 +806,7 @@ void manager_reject(const std::vector<std::string> &commands) {
         return;
     }
 
-    ManagerOperation managerOperation;
+    ManagerOperation &managerOperation = ManagerOperation::getInstance();
     bool res = managerOperation.reject_shop_application(commands[1], commands[2]);
     if (res) {
         printf("Reject shop application success.\n");
@@ -822,6 +847,87 @@ void do_detail(const std::vector<std::string> &commands) {
         print_detail(ptr);
     } else {
         printf("Index out of range.\n");
+    }
+}
+
+// modify item name which detail
+void modify_item(const std::vector<std::string> &commands) {
+    if (commands.size() != 5) {
+        err_arg_num("modify item", 3, commands.size() - 2);
+        return;
+    }
+
+    SellerSystem sellerSystem;
+    ItemData itemData;
+
+    if (commands[3] == "price") {
+        if (!str2double(commands[4], itemData.price)) {
+            err_arg_type("modify item price", "double");
+            return;
+        }
+        bool res = sellerSystem.modify_item(commands[2], itemData, "price");
+        if (res) {
+            printf("modify price complete.\n");
+        } else {
+            printf("modify price failed.\n");
+        }
+        return;
+    }
+
+    if (commands[3] == "store") {
+        if (!str2int(commands[4], itemData.store_num)) {
+            err_arg_type("modify item store", "int");
+            return;
+        }
+        bool res = sellerSystem.modify_item(commands[2], itemData, "store_num");
+        if (res) {
+            printf("modify store complete.\n");
+        } else {
+            printf("modify store failed.\n");
+        }
+        return;
+    }
+
+    if (commands[3] == "des") {
+        itemData.des = commands[4];
+        bool res = sellerSystem.modify_item(commands[2], itemData, "des");
+        if (res) {
+            printf("modify des complete.\n");
+        } else {
+            printf("modify des failed.\n");
+        }
+        return;
+    }
+
+    err_command(commands[3]);
+}
+
+void seller_modify(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_ITEM:
+            modify_item(commands);
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
+void do_modify(const std::vector<std::string> &commands) {
+    switch (status.type) {
+        case STATUS_SELLER:
+            seller_modify(commands);
+            break;
+
+        default:
+            err_permit();
+            break;
     }
 }
 
@@ -888,6 +994,9 @@ bool execute_command(char *input) {
             do_detail(commands);
             break;
 
+        case COMMAND_MODIFY:
+            do_modify(commands);
+
         default:
             err_command(commands[0]);
             break;
@@ -904,7 +1013,7 @@ int main() {
     puts("Online Shopping System Version 0.1");
     puts("Enter help to see manual");
 
-    while (1) {
+    while (true) {
         char *input = readline("OSS> ");
         add_history(input);
 

@@ -3,7 +3,7 @@
 //
 
 #include "ManagerOperation.h"
-#include "Email.cpp"
+#include "Email.h"
 
 ManagerOperation & ManagerOperation::getInstance() {
     static ManagerOperation obj;

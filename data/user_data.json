@@ -1,22 +1,5 @@
 [
 	{
-		"account" : "1173886760",
-		"age" : "",
-		"current_order" : null,
-		"email" : "1173886760@qq.com",
-		"gender" : "",
-		"history_item" : null,
-		"history_order" : null,
-		"id" : "120201229220721",
-		"id_number" : "130602200009150939",
-		"message" : null,
-		"password" : "15130410553",
-		"phone_number" : "15130410553",
-		"real_name" : "sheep",
-		"shop_list" : null,
-		"user_name" : "sheep"
-	},
-	{
 		"account" : "123456",
 		"age" : "",
 		"current_order" : null,
