@@ -32,6 +32,7 @@ public:
     std::string get_user_id_by_account(const std::string &account);
     std::string get_seller_id_by_account(const std::string &account);
     std::string get_manager_id_by_account(const std::string &account);
+    std::string get_seller_id_by_name(const std::string &name);
 };
 
 

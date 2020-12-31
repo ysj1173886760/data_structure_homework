@@ -1,17 +1,72 @@
 [
 	{
-		"account" : "123456",
+		"account" : "sheep3",
 		"age" : "",
-		"current_order" : null,
+		"current_order" : 
+		[
+			{
+				"buy_num" : 3,
+				"id" : "520201231231049",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20201231231049"
+			}
+		],
 		"email" : "1173886760@qq.com",
 		"gender" : "",
 		"history_item" : null,
 		"history_order" : null,
+		"id" : "120201231230758",
+		"id_number" : "130602200009150939",
+		"message" : null,
+		"password" : "123456789",
+		"phone_number" : "15130410553",
+		"real_name" : "sheep3",
+		"shop_list" : null,
+		"user_name" : "sheep3",
+		"wallet" : 
+		{
+			"money" : 40.0,
+			"password" : "123456"
+		}
+	},
+	{
+		"account" : "123456",
+		"age" : "",
+		"current_order" : 
+		[
+			{
+				"buy_num" : 2,
+				"id" : "520201231230343",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20201231230343"
+			}
+		],
+		"email" : "1173886760@qq.com",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : 
+		[
+			{
+				"buy_num" : 1,
+				"id" : "520201231221205",
+				"item_id" : "420201229153041",
+				"price" : 25.0,
+				"time" : "20201231221205"
+			}
+		],
 		"id" : "120201231193112",
 		"id_number" : "130602200009150939",
 		"message" : 
 		[
-			"your 1 new_2 have arrived, pls check"
+			"your 1 new_2 have arrived, pls check",
+			"you have cost 25.000000 in test_shop_name",
+			"your 1 new_3 have arrived, pls check",
+			"your 1 new_2 have arrived, pls check",
+			"your 2 new_2 have arrived, pls check",
+			"your 4 new_2 have arrived, pls check",
+			"sorry, because under stock, your BuyItemRequest of new_2 is rejected and we have repay you"
 		],
 		"password" : "123456789",
 		"phone_number" : "15130410553",
@@ -20,7 +75,38 @@
 		"user_name" : "sheep",
 		"wallet" : 
 		{
-			"money" : 100.0,
+			"money" : 35.0,
+			"password" : "123456"
+		}
+	},
+	{
+		"account" : "sheep",
+		"age" : "",
+		"current_order" : 
+		[
+			{
+				"buy_num" : 4,
+				"id" : "520201231230956",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20201231230956"
+			}
+		],
+		"email" : "1173886760@qq.com",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "120201231230656",
+		"id_number" : "130602200009150939",
+		"message" : null,
+		"password" : "123456789",
+		"phone_number" : "15130410553",
+		"real_name" : "sheep2",
+		"shop_list" : null,
+		"user_name" : "sheep2",
+		"wallet" : 
+		{
+			"money" : 20.0,
 			"password" : "123456"
 		}
 	}

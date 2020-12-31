@@ -37,6 +37,7 @@ public:
     void deal_BuyItemRequest(const std::string&);
     //顾客退还商品
     bool returnItem(const std::string&, const Order&);
+    bool confirm(const std::string &, const Order&);
 };
 
 

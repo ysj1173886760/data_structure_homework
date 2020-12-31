@@ -21,6 +21,7 @@
 #include "SellerSystem.h"
 #include "ServiceSystem.h"
 #include "MoneySystem.h"
+#include "QuestionSystem.h"
 
 enum {
     COMMAND_QUIT = 1,
@@ -54,7 +55,12 @@ enum {
     COMMAND_TRANSFER,
     COMMAND_ORDER,
     COMMAND_CONFIRM,
-    COMMAND_RETURN
+    COMMAND_RETURN,
+    COMMAND_MESSAGE,//TODO:message
+    COMMAND_ASK,
+    COMMAND_ASSET,
+    COMMAND_CLEAN,
+    COMMAND_FORGET
 };
 
 enum {
@@ -75,6 +81,7 @@ enum Status {
 enum DataType {
     TYPE_REGISTER_REQUEST = 1,
     TYPE_ORDER,
+    TYPE_MESSAGE,
     TYPE_ITEM_DATA,
     TYPE_NONE
 };
@@ -88,6 +95,7 @@ struct LIST {
     std::vector<RegisterRequestData> register_request_list;
     std::vector<ItemData> item_data_list;
     std::vector<Order> order_list;
+    std::vector<std::string> message_list;
 
     enum DataType type;
     int curr_row, max_row;
@@ -139,6 +147,11 @@ void init() {
     mp["transfer"] = COMMAND_TRANSFER;
     mp["confirm"] = COMMAND_CONFIRM;
     mp["return"] = COMMAND_RETURN;
+    mp["message"] = COMMAND_MESSAGE;
+    mp["asset"] = COMMAND_ASSET;
+    mp["ask"] = COMMAND_ASK;
+    mp["clean"] = COMMAND_CLEAN;
+    mp["forget"] = COMMAND_FORGET;
 
     mp["-l"] = ARG_LABEL;
     mp["-s"] = ARG_SHOP;
@@ -342,6 +355,38 @@ void user_register() {
     } while (res);
 
     printf("Registration complete.\n");
+}
+
+void user_forget() {
+    std::string identify_code = ran_generator.getIdentifyCode(6);
+    std::string input_code;
+    std::string account;
+    Email mail;
+
+    int code = 0;
+
+    printf("Please input your account.\n");
+    std::cin >> account;
+
+    std::string id = BasicOp.get_user_id_by_account(account);
+    if (id.empty()) {
+        printf("wrong account.\n");
+        return;
+    }
+
+    DB &db = DB::getInstance();
+    UserData userData = db.select_user_data(id);
+    std::string email =  userData.email;
+
+    if (mail.send_email(email, "--password--", userData.password)) {
+        printf("Your password has been sent to your email.\n");
+    } else {
+        printf("Error sending mail.\n");
+    }
+}
+
+void seller_forget() {
+    printf("not implemented yet.\n");
 }
 
 void seller_register() {
@@ -602,6 +647,10 @@ void print_list(int i) {
                    ui_list.item_data_list[i].store_num);
             break;
 
+        case TYPE_MESSAGE:
+            printf("%s\n", ui_list.message_list[i].c_str());
+            break;
+
         case TYPE_ORDER:
             printf("%d: name: %s price: %.2f time: %s buy_num: %d.\n",
                    i + 1,
@@ -705,6 +754,21 @@ void list_buy_request() {
     }
 }
 
+void list_seller_message() {
+    DB &db = DB::getInstance();
+    ui_list.message_list = db.select_seller_data(status.id).message;
+    ui_list.type = TYPE_ORDER;
+    ui_list.max_row = ui_list.order_list.size();
+    ui_list.curr_row = 0;
+
+    if (ui_list.max_row == 0) {
+        printf("No more messages.\n");
+        return;
+    }
+
+    do_next();
+}
+
 void seller_list(const std::vector<std::string> &commands) {
     if (commands.size() < 2) {
         printf("too few arguments.\n");
@@ -718,6 +782,10 @@ void seller_list(const std::vector<std::string> &commands) {
 
         case COMMAND_ORDER:
             list_buy_request();
+            break;
+
+        case COMMAND_MESSAGE:
+            list_seller_message();
             break;
 
         default:
@@ -777,6 +845,21 @@ void list_order(const std::vector<std::string> &commands) {
     }
 }
 
+void list_user_message(const std::vector<std::string> &commands) {
+     DB &db = DB::getInstance();
+     ui_list.message_list = db.select_user_data(status.id).message;
+     ui_list.type = TYPE_ORDER;
+     ui_list.max_row = ui_list.order_list.size();
+     ui_list.curr_row = 0;
+
+     if (ui_list.max_row == 0) {
+         printf("No more messages.\n");
+         return;
+     }
+
+     do_next();
+}
+
 void user_list(const std::vector<std::string> &commands) {
     if (commands.size() < 2) {
         printf("too few arguments.\n");
@@ -790,6 +873,10 @@ void user_list(const std::vector<std::string> &commands) {
 
         case COMMAND_ORDER:
             list_order(commands);
+            break;
+
+        case COMMAND_MESSAGE:
+            list_user_message(commands);
             break;
 
         default:
@@ -1530,7 +1617,7 @@ void do_transfer(const std::vector<std::string> &commands) {
     }
 }
 
-void do_confirm(const std::vector<std::string> &commands) {
+void seller_confirm(const std::vector<std::string> &commands) {
     if (commands.size() > 1) {
         printf("too many arugments.\n");
         return;
@@ -1543,6 +1630,49 @@ void do_confirm(const std::vector<std::string> &commands) {
 
     ServiceSystem serviceSystem;
     serviceSystem.deal_BuyItemRequest(status.id);
+}
+
+void user_confirm(const std::vector<std::string> &commands) {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("confirm");
+        return;
+    }
+    if (commands.size() != 2) {
+        err_arg_num("confirm", 1, commands.size() - 1);
+        return;
+    }
+    int ptr = 0;
+    if (!str2int(commands[1], ptr)) {
+        err_arg_type("confirm", "int");
+        return;
+    }
+    if (ui_list.type != TYPE_ORDER) {
+        printf("You have to use ls first.\n");
+        return;
+    }
+    ptr--;
+    if (ptr >= 0 && ptr < ui_list.max_row) {
+        ServiceSystem serviceSystem;
+        bool res = serviceSystem.confirm(status.id, ui_list.order_list[ptr]);
+    } else {
+        printf("Index out of range.\n");
+    }
+}
+
+void do_confirm(const std::vector<std::string> &commands) {
+    switch (status.type) {
+        case STATUS_SELLER:
+            seller_confirm(commands);
+            break;
+
+        case STATUS_USER:
+            user_confirm(commands);
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
 }
 
 void do_return(const std::vector<std::string> &commands) {
@@ -1579,10 +1709,128 @@ void do_return(const std::vector<std::string> &commands) {
     }
 }
 
+void do_ask(const std::vector<std::string> &commands) {
+    if (commands.size() != 3) {
+        err_arg_num("ask", 2, commands.size() - 1);
+        return;
+    }
+
+    std::string name = BasicOp.get_seller_id_by_name(commands[1]);
+    if (name.empty()) {
+        printf("Cannot find this shop.\n");
+        return;
+    }
+
+    QuestionSystem questionSystem;
+    printf("%s", questionSystem.GetAnswer(name, commands[2]).c_str());
+}
+
+void do_asset(const std::vector<std::string> &commands) {
+    if (commands.size() > 1) {
+        printf("too many arguments.\n");
+        return;
+    }
+
+    DB &db = DB::getInstance();
+    Wallet wallet;
+
+    switch (status.type) {
+        case STATUS_TOURIST:
+            err_permit();
+            return;
+
+        case STATUS_MANAGER:
+            printf("You don`t need money.\n");
+            return;
+
+        case STATUS_USER:
+            wallet = db.select_user_data(status.id).wallet;
+            break;
+
+        case STATUS_SELLER:
+            wallet = db.select_user_data(status.id).wallet;
+            break;
+
+        default:
+            err_system();
+            return;
+    }
+
+    printf("Money: %.2f.\n", wallet.money);
+
+}
+
+void do_clean() {
+    DB &db = DB::getInstance();
+    if (status.type == STATUS_SELLER) {
+        SellerData sellerData = db.select_seller_data(status.id);
+        sellerData.message.clear();
+        db.modify_seller_data(sellerData.id, sellerData);
+        printf("clean complete.\n");
+        return;
+    }
+
+    if (status.type == STATUS_USER) {
+        UserData userData = db.select_user_data(status.id);
+        userData.message.clear();
+        db.modify_user_data(userData.id, userData);
+        printf("clean complete.\n");
+        return;
+    }
+
+    err_permit();
+
+}
+
+void forget(const std::vector<std::string> &commands) {
+    if (commands.size() != 2) {
+        err_arg_num("forget", 1, commands.size() - 1);
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_USER:
+            user_forget();
+            break;
+
+        case COMMAND_SELLER:
+            seller_forget();
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
+void do_forget(const std::vector<std::string> &commands) {
+    switch (status.type) {
+        case STATUS_USER:
+            printf("Why are you doing this?.\n");
+            break;
+
+        case STATUS_SELLER:
+            printf("Why are you doing this?.\n");
+            break;
+
+        case STATUS_MANAGER:
+            printf("Please contact root manager.\n");
+            break;
+
+        case STATUS_TOURIST:
+            forget(commands);
+            break;
+
+        default:
+            err_system();
+            break;
+    }
+}
+
 bool execute_command(char *input) {
     std::vector<std::string> commands = prepare_command(std::string(input));
 
-    // chech whether to clear ui_list
+    // check whether to clear ui_list
     bool clear_ui_list = false;
     // if there`s no command, just quit
     if (commands.empty()) return true;
@@ -1682,6 +1930,22 @@ bool execute_command(char *input) {
         case COMMAND_RETURN:
             do_return(commands);
             clear_ui_list = true;
+            break;
+
+        case COMMAND_ASK:
+            do_ask(commands);
+            break;
+
+        case COMMAND_ASSET:
+            do_asset(commands);
+            break;
+
+        case COMMAND_CLEAN:
+            do_clean();
+            break;
+
+        case COMMAND_FORGET:
+            do_forget(commands);
             break;
 
         default:

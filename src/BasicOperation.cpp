@@ -147,3 +147,14 @@ std::string BasicOperation::get_seller_id_by_account(const std::string &account)
     }
     return "";
 }
+
+std::string BasicOperation::get_seller_id_by_name(const std::string &name) {
+    DB &db = DB::getInstance();
+    vector<SellerData> sellers = db.select_all_seller_data();
+    for (const auto &x : sellers) {
+        if (x.shop_name == name) {
+            return x.id;
+        }
+    }
+    return "";
+}
