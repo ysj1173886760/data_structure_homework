@@ -91,6 +91,13 @@ public:
         std::cout << "time: " << time << std::endl;
         std::cout << "buy_num: " << buy_num << std::endl;
     }
+
+    bool operator==(const Order &rhs) {
+        return (item_id == rhs.item_id) &&
+                (price == rhs.price) &&
+                (time == rhs.time) &&
+                (buy_num == rhs.buy_num);
+    }
 };
 
 class Wallet {

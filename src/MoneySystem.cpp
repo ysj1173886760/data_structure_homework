@@ -11,11 +11,13 @@ bool MoneySystem::RechargeMoney(const std::string& id, double money) {
     if(type == Type::User) {
         UserData user = db.select_user_data(id);
         user.wallet.money += money;
+        db.modify_user_data(user.id, user);
         return true;
     }
     else if(type == Type::Seller) {
         SellerData seller = db.select_seller_data(id);
         seller.wallet.money += money;
+        db.modify_seller_data(seller.id, seller);
         return true;
     }
     else {
@@ -33,6 +35,7 @@ bool MoneySystem::WithdrawMoney(const std::string& id, double money) {
         UserData user = db.select_user_data(id);
         if(user.wallet.money - money >= 0) {
             user.wallet.money -= money;
+            db.modify_user_data(user.id, user);
         }
         else {
             std::cout << "ERROR : you don't have enough money" << std::endl;
@@ -42,6 +45,7 @@ bool MoneySystem::WithdrawMoney(const std::string& id, double money) {
     else if(type == Type::Seller) {
         SellerData seller = db.select_seller_data(id);
         seller.wallet.money -= money;
+        db.modify_seller_data(seller.id, seller);
     }
     else {
         std::cout << "ERROR : this id didn't support withdraw money operation!!!" << std::endl;

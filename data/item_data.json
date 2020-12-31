@@ -1,17 +1,13 @@
 [
 	{
-		"des" : "asd",
-		"id" : "420201231105711",
-		"label" : 
-		[
-			"haha",
-			"heihei"
-		],
-		"name" : "asd",
-		"owner" : "qwe",
-		"price" : 2.0,
+		"des" : "",
+		"id" : "420201229153041",
+		"label" : null,
+		"name" : "new_3",
+		"owner" : "test_shop_name",
+		"price" : 25.0,
 		"sell_num" : 0,
-		"store_num" : 1
+		"store_num" : 20
 	},
 	{
 		"des" : "zxc",
@@ -30,16 +26,6 @@
 		"store_num" : 4
 	},
 	{
-		"des" : "",
-		"id" : "420201229153041",
-		"label" : null,
-		"name" : "new_3",
-		"owner" : "test_shop_name",
-		"price" : 25.0,
-		"sell_num" : 0,
-		"store_num" : 20
-	},
-	{
 		"des" : "asd",
 		"id" : "420201231101410",
 		"label" : 
@@ -51,6 +37,30 @@
 		"price" : 1.1299999999999999,
 		"sell_num" : 0,
 		"store_num" : 5
+	},
+	{
+		"des" : "",
+		"id" : "420201229150058",
+		"label" : null,
+		"name" : "new_2",
+		"owner" : "test_shop_name",
+		"price" : 20.0,
+		"sell_num" : 0,
+		"store_num" : 6
+	},
+	{
+		"des" : "asd",
+		"id" : "420201231105711",
+		"label" : 
+		[
+			"haha",
+			"heihei"
+		],
+		"name" : "asd",
+		"owner" : "qwe",
+		"price" : 2.0,
+		"sell_num" : 0,
+		"store_num" : 1
 	},
 	{
 		"des" : "new",
@@ -74,15 +84,5 @@
 		"price" : 100.0,
 		"sell_num" : 0,
 		"store_num" : 0
-	},
-	{
-		"des" : "",
-		"id" : "420201229150058",
-		"label" : null,
-		"name" : "new_2",
-		"owner" : "test_shop_name",
-		"price" : 20.0,
-		"sell_num" : 0,
-		"store_num" : 5
 	}
 ]

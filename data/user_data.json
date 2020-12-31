@@ -9,7 +9,10 @@
 		"history_order" : null,
 		"id" : "120201231193112",
 		"id_number" : "130602200009150939",
-		"message" : null,
+		"message" : 
+		[
+			"your 1 new_2 have arrived, pls check"
+		],
 		"password" : "123456789",
 		"phone_number" : "15130410553",
 		"real_name" : "sheep",
@@ -17,7 +20,7 @@
 		"user_name" : "sheep",
 		"wallet" : 
 		{
-			"money" : 0.0,
+			"money" : 100.0,
 			"password" : "123456"
 		}
 	}

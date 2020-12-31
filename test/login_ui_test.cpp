@@ -51,13 +51,18 @@ enum {
     COMMAND_SUBMIT,
     COMMAND_CHARGE,
     COMMAND_WITHDRAW,
-    COMMAND_TRANSFER
+    COMMAND_TRANSFER,
+    COMMAND_ORDER,
+    COMMAND_CONFIRM,
+    COMMAND_RETURN
 };
 
 enum {
     ARG_LABEL = 1,
     ARG_SHOP,
-    ARG_PART
+    ARG_PART,
+    ARG_CURRENT,
+    ARG_HISTORY
 };
 
 enum Status {
@@ -69,6 +74,7 @@ enum Status {
 
 enum DataType {
     TYPE_REGISTER_REQUEST = 1,
+    TYPE_ORDER,
     TYPE_ITEM_DATA,
     TYPE_NONE
 };
@@ -81,6 +87,7 @@ BasicOperation BasicOp;
 struct LIST {
     std::vector<RegisterRequestData> register_request_list;
     std::vector<ItemData> item_data_list;
+    std::vector<Order> order_list;
 
     enum DataType type;
     int curr_row, max_row;
@@ -127,12 +134,17 @@ void init() {
     mp["cart"] = COMMAND_CART;
     mp["submit"] = COMMAND_SUBMIT;
     mp["charge"] = COMMAND_CHARGE;
+    mp["order"] = COMMAND_ORDER;
     mp["withdraw"] = COMMAND_WITHDRAW;
     mp["transfer"] = COMMAND_TRANSFER;
+    mp["confirm"] = COMMAND_CONFIRM;
+    mp["return"] = COMMAND_RETURN;
 
     mp["-l"] = ARG_LABEL;
     mp["-s"] = ARG_SHOP;
     mp["-p"] = ARG_PART;
+    mp["-c"] = ARG_CURRENT;
+    mp["-h"] = ARG_HISTORY;
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -573,6 +585,7 @@ void logout() {
 }
 
 void print_list(int i) {
+    DB &db = DB::getInstance();
     switch (ui_list.type) {
         case TYPE_REGISTER_REQUEST:
             printf("%d: account: %s shop_name: %s.\n", i + 1,
@@ -587,6 +600,15 @@ void print_list(int i) {
                    ui_list.item_data_list[i].price,
                    ui_list.item_data_list[i].sell_num,
                    ui_list.item_data_list[i].store_num);
+            break;
+
+        case TYPE_ORDER:
+            printf("%d: name: %s price: %.2f time: %s buy_num: %d.\n",
+                   i + 1,
+                   db.select_item_data(ui_list.order_list[i].item_id).name.c_str(),
+                   ui_list.order_list[i].price,
+                   ui_list.order_list[i].time.c_str(),
+                   ui_list.order_list[i].buy_num);
             break;
 
         default:
@@ -663,6 +685,26 @@ void list_cart() {
     }
 }
 
+void print_buy_request(const BuyItemRequestData &x) {
+    DB &db = DB::getInstance();
+    printf("item_name: %s\n", db.select_item_data(x.item_id).name.c_str());
+    printf("remark: %s\n", x.remark.c_str());
+    printf("user_name: %s\n", db.select_user_data(x.user_id).user_name.c_str());
+    printf("time: %s\n", x.time.c_str());
+    printf("buy_num: %d\n", x.buy_num);
+    printf("price: %.2f\n", x.price);
+}
+
+void list_buy_request() {
+    std::vector<BuyItemRequestData> buy_item_request;
+    DB &db = DB::getInstance();
+    buy_item_request = db.select_seller_data(status.id).buy_item_request_list;
+
+    for (const auto &x : buy_item_request) {
+        print_buy_request(x);
+    }
+}
+
 void seller_list(const std::vector<std::string> &commands) {
     if (commands.size() < 2) {
         printf("too few arguments.\n");
@@ -674,8 +716,63 @@ void seller_list(const std::vector<std::string> &commands) {
             list_item();
             break;
 
+        case COMMAND_ORDER:
+            list_buy_request();
+            break;
+
         default:
             err_command(commands[1]);
+            break;
+    }
+}
+
+void list_current_order() {
+    DB &db = DB::getInstance();
+    ui_list.order_list = db.select_user_data(status.id).current_order;
+    ui_list.type = TYPE_ORDER;
+    ui_list.max_row = ui_list.order_list.size();
+    ui_list.curr_row = 0;
+
+    if (ui_list.max_row == 0) {
+        printf("No more current order.\n");
+        return;
+    }
+
+    do_next();
+}
+
+void list_history_order() {
+    DB &db = DB::getInstance();
+    ui_list.order_list = db.select_user_data(status.id).history_order;
+    ui_list.type = TYPE_ORDER;
+    ui_list.max_row = ui_list.order_list.size();
+    ui_list.curr_row = 0;
+
+    if (ui_list.max_row == 0) {
+        printf("You don`t have history order yet.\n");
+        return;
+    }
+
+    do_next();
+}
+
+void list_order(const std::vector<std::string> &commands) {
+    if (commands.size() != 3) {
+        err_arg_num("list order", 1, commands.size() - 2);
+        return;
+    }
+
+    switch (mp[commands[2]]) {
+        case ARG_CURRENT:
+            list_current_order();
+            break;
+
+        case ARG_HISTORY:
+            list_history_order();
+            break;
+
+        default:
+            err_command(commands[2]);
             break;
     }
 }
@@ -689,6 +786,10 @@ void user_list(const std::vector<std::string> &commands) {
     switch (mp[commands[1]]) {
         case COMMAND_CART:
             list_cart();
+            break;
+
+        case COMMAND_ORDER:
+            list_order(commands);
             break;
 
         default:
@@ -727,7 +828,12 @@ void print_detail(int i) {
             ui_list.item_data_list[i].print();
             break;
 
+        case TYPE_ORDER:
+            ui_list.order_list[i].print();
+            break;
+
         default:
+            err_system();
             break;
     }
 }
@@ -1424,6 +1530,55 @@ void do_transfer(const std::vector<std::string> &commands) {
     }
 }
 
+void do_confirm(const std::vector<std::string> &commands) {
+    if (commands.size() > 1) {
+        printf("too many arugments.\n");
+        return;
+    }
+
+    if (status.type != STATUS_SELLER) {
+        err_permit();
+        return;
+    }
+
+    ServiceSystem serviceSystem;
+    serviceSystem.deal_BuyItemRequest(status.id);
+}
+
+void do_return(const std::vector<std::string> &commands) {
+    if (ui_list.type == TYPE_NONE) {
+        err_using("return");
+        return;
+    }
+    if (commands.size() != 2) {
+        err_arg_num("return", 1, commands.size() - 1);
+        return;
+    }
+    int ptr = 0;
+    if (!str2int(commands[1], ptr)) {
+        err_arg_type("return", "int");
+        return;
+    }
+
+    if (ui_list.type != TYPE_ORDER) {
+        printf("You have to list order first.\n");
+        return;
+    }
+
+    ptr--;
+    if (ptr >= 0 && ptr < ui_list.max_row) {
+        ServiceSystem serviceSystem;
+        bool res = serviceSystem.returnItem(status.id, ui_list.order_list[ptr]);
+        if (res) {
+            printf("return order complete.\n");
+        } else {
+            printf("return order failed.\n");
+        }
+    } else {
+        printf("Index out of range.\n");
+    }
+}
+
 bool execute_command(char *input) {
     std::vector<std::string> commands = prepare_command(std::string(input));
 
@@ -1517,6 +1672,16 @@ bool execute_command(char *input) {
 
         case COMMAND_TRANSFER:
             do_transfer(commands);
+            break;
+
+        case COMMAND_CONFIRM:
+            do_confirm(commands);
+            clear_ui_list = true;
+            break;
+
+        case COMMAND_RETURN:
+            do_return(commands);
+            clear_ui_list = true;
             break;
 
         default:

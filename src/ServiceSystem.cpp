@@ -250,6 +250,7 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             add.price = user.shop_list[i].price;
 //            std::cout << "please input remark : ";
 //            std::cin >> add.remark;
+            add.remark = remark;
             add.id = generator.generateID(Type::BuyItemRequest);
             seller.buy_item_request_list.push_back(add);
 
@@ -261,10 +262,14 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             message_sys.SendMessage(user.id, user_info);
 
             db.modify_seller_data(seller.id, seller);
+        } else {
+            return false;
         }
     }
 
+
     user.shop_list.swap(user.current_order);
+    db.modify_user_data(user.id, user);
 
     return true;
     //感觉给商家留言没啥必要 先留着吧
@@ -353,8 +358,16 @@ bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
                 item.store_num += order.buy_num;
                 MessageSystem message_sys;
                 message_sys.SendMessage(seller.id, info);
+            } else {
+                return false;
             }
 
+            for (int i = 0; i < user.current_order.size(); i++) {
+                if (user.current_order[i] == order) {
+                    user.current_order.erase(user.current_order.begin() + i);
+                }
+            }
+            db.modify_user_data(user.id, user);
             db.modify_item_data(item.id, item);
             return true;
         }
@@ -363,3 +376,4 @@ bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
     else
         return false;
 }
+
