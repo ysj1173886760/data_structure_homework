@@ -5,7 +5,7 @@
 		"change_item_request_list" : null,
 		"discount" : null,
 		"history_order" : null,
-		"id" : "220201229153003",
+		"id" : "220201231145844",
 		"message" : null,
 		"password" : "123456789",
 		"question_list" : null,
@@ -13,7 +13,12 @@
 		"shop_name" : "test_shop_name",
 		"shop_owner_id_number" : "",
 		"shop_owner_name" : "",
-		"shop_owner_phone_number" : ""
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
 	},
 	{
 		"account" : "",
@@ -21,7 +26,7 @@
 		"change_item_request_list" : null,
 		"discount" : null,
 		"history_order" : null,
-		"id" : "220201229153344",
+		"id" : "220201231103120",
 		"message" : null,
 		"password" : "123456789",
 		"question_list" : null,
@@ -29,6 +34,158 @@
 		"shop_name" : "test_shop_name",
 		"shop_owner_id_number" : "",
 		"shop_owner_name" : "",
-		"shop_owner_phone_number" : ""
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1010.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231145954",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231145922",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231145826",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231150025",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231150003",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231162149",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231162044",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 1000.0,
+			"password" : ""
+		}
 	}
 ]

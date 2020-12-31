@@ -11,6 +11,7 @@
 
 class MessageSystem {
 public:
+    //传入接收信息的人的ID、信息内容
     void SendMessage(const std::string&, const std::string&);
 };
 

@@ -11,10 +11,9 @@ bool SellerSystem::insert_item(const std::string& seller_id, ItemData& add_item)
 
     ItemData item;
     if(!op.GetItem(seller.shop_name, add_item.name, item)) {
-        //db.open();
+
         add_item.owner = seller.shop_name;
         db.insert_item_data(add_item);
-        //db.close();
         return true;
     }
     return false;

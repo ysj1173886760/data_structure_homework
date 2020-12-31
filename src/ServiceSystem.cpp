@@ -9,7 +9,61 @@ bool cmp(const std::pair<double, int>& p1, const std::pair<double, int>& p2) {
     return p1.first > p2.first;
 }
 
-std::string ServiceSystem::GetHighestSim(const std::vector<std::string>& v, const std::string& s) {
+void GetNext(std::string t, vector<int>& next)
+{
+    next[0] = -1;
+    next[1] = 0;
+    int k;
+    for (int j = 2;t[j] != '\0';j++) {
+        k=next[j-1];
+        if (k == -1) {
+            next[j]=0;
+            continue;
+        }
+        else {
+            while (t[j-1] != t[k] && k!=-1)
+                k=next[k];
+            if(t[j-1] == t[k])
+                next[j]=k+1;
+            else
+                next[j] = 0;
+        }
+    }
+}
+
+bool KMP(std::string s, std::string t)
+{
+    vector<int> next(100);
+    GetNext(t, next);
+
+    int i=0,j=0;
+    while (s[i]!='\0' && t[j] != '\0') {
+        if (s[i] == t[j]) {
+            i++;
+            j++;
+        }
+        else {
+            j = next[j];
+            if (-1 == j){
+                i++;
+                j++;
+            }
+        }
+    }
+    if (t[j] == '\0')
+        return true;
+    else
+        return false;
+}
+
+bool ServiceSystem::CmpSameLabel(const std::vector<std::string>& v, const std::string& s) {
+    for(int i=0; i<v.size(); i++)
+        if(v[i] == s)
+            return true;
+    return false;
+}
+
+vector<std::string> ServiceSystem::GetHighestSim(const std::vector<std::string>& v, const std::string& s) {
     BasicOperation op;
     std::vector<std::pair<double, int>> sim;
     for(int i=0; i<v.size(); i++) {
@@ -18,16 +72,27 @@ std::string ServiceSystem::GetHighestSim(const std::vector<std::string>& v, cons
         add.second = i;
         sim.push_back(add);
     }
+
     sort(sim.begin(), sim.end(), cmp);
-    if(sim[0].first == 1)
-        return v[sim[0].second];
-    else {
-        std::cout << "Did you mean " << v[sim[0].second] << "?" << std::endl;
-        return v[sim[0].second];
-    }
+
+    vector<std::string> sort_by_sim;
+    for(int i=0; i<sim.size(); i++)
+        sort_by_sim.push_back(v[sim[i].second]);
+
+    return sort_by_sim;
 }
 
-std::vector<ItemData> ServiceSystem::display_shop(const std::string& shop_name) {
+vector<std::string> ServiceSystem::GetSamePart(const std::vector<std::string>& v, const std::string& s) {
+    vector<std::string> sort_by_part;
+
+    for(int i=0; i<v.size(); i++)
+        if(KMP(v[i], s))
+            sort_by_part.push_back(v[i]);
+
+    return sort_by_part;
+}
+
+std::vector<ItemData> ServiceSystem::search_shop(const std::string& shop_name) {
     BasicOperation op;
     DB &db = DB::getInstance();
     vector<SellerData> sellers = db.select_all_seller_data();
@@ -42,15 +107,43 @@ std::vector<ItemData> ServiceSystem::display_shop(const std::string& shop_name) 
     return items;
 }
 
-std::vector<ItemData> ServiceSystem::display_item(const std::string& item_name) {
+std::vector<ItemData> ServiceSystem::search_item_sim(const std::string& item_name) {
     BasicOperation op;
     DB &db = DB::getInstance();
     vector<ItemData> items = db.select_all_item_data();
     vector<ItemData> ret_items;
     for(int i=0; i<items.size(); i++) {
-        if(op.GetWordsSim(items[i].name, item_name) > 0.8)
+        if(op.GetWordsSim(items[i].name, item_name) > 0.5)
             ret_items.push_back(items[i]);
     }
+    return ret_items;
+}
+
+std::vector<ItemData> ServiceSystem::search_item_part(const std::string& item_name) {
+    DB& db = DB::getInstance();
+
+    vector<ItemData> ret_items;
+    vector<ItemData> items = db.select_all_item_data();
+
+    for(int i=0; i<items.size(); i++) {
+        if(KMP(items[i].name, item_name))
+            ret_items.push_back(items[i]);
+    }
+
+    return ret_items;
+}
+
+std::vector<ItemData> ServiceSystem::search_item_label(const std::string& label) {
+    DB& db = DB::getInstance();
+
+    vector<ItemData> ret_items;
+    vector<ItemData> items = db.select_all_item_data();
+
+    for(int i=0; i<items.size(); i++) {
+        if(CmpSameLabel(items[i].label, label))
+            ret_items.push_back(items[i]);
+    }
+
     return ret_items;
 }
 
@@ -127,6 +220,9 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
     double cost = op.GetCost(user_id);
     MoneySystem money_sys;
     if(money_sys.TransferMoney(user.id, seller.id, cost)) {
+
+        user = db.select_user_data(user_id);
+        seller = db.select_seller_data(shop_id);
 
         for(int i=0; i<user.shop_list.size(); i++) {
             BuyItemRequestData add;
@@ -233,13 +329,12 @@ void ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
         if(op.GetSeller(item.owner, seller)) {
 
             MoneySystem money_sys;
-            if (money_sys.TransferMoney(seller.id, user.id, item.price)) {
+            if (money_sys.TransferMoney(seller.id, user.id, order.price*order.buy_num)) {
                 item.store_num += order.buy_num;
                 MessageSystem message_sys;
                 message_sys.SendMessage(seller.id, info);
             }
 
-            item.store_num+=order.buy_num;
             db.modify_item_data(item.id, item);
         }
     }

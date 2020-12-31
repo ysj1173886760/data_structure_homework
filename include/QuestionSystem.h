@@ -11,9 +11,10 @@
 
 class QuestionSystem {
 private:
-    //传递所问商家的编号以及问题
+    //传递所问商家的编号以及关键字（将问题拆成一个个单词的vec）
     bool CheckKeyWord(const std::vector<std::string>&, const std::vector<std::string>&);
 public:
+    //传入商家的ID以及问题
     std::string GetAnswer(const std::string&, const std::string&);
 };
 
