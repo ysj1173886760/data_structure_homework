@@ -248,6 +248,7 @@ void DB::save_user_data(const std::string &filename) {
         wallet.clear();
         wallet["password"] = value.wallet.password;
         wallet["money"] = value.wallet.money;
+        new_user_data["wallet"] = wallet;
 
         root.append(new_user_data);
     }
@@ -801,6 +802,7 @@ void DB::save_seller_data(const std::string &filename) {
         wallet.clear();
         wallet["password"] = value.wallet.password;
         wallet["money"] = value.wallet.money;
+        new_seller_data["wallet"] = wallet;
 
         root.append(new_seller_data);
     }

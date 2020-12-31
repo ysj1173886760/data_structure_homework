@@ -11,11 +11,11 @@
 
 class MoneySystem {
 public:
-    //顾客充值
+    //传入ID、金额（ID可为顾客or商家）
     bool RechargeMoney(const std::string&, double);
-    //（顾客或商家）提现
+    //传入ID、金额（ID可为顾客or商家）
     bool WithdrawMoney(const std::string&, double);
-    //两人（顾客或商家）之间的转账
+    //传入转账双方的ID，金额（双方可为顾客or商家）
     bool TransferMoney(const std::string&, const std::string&, double);
 };
 
