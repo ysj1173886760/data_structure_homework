@@ -117,7 +117,7 @@ void ServiceSystem::remove_shop_list(const std::string& user_id, const std::stri
     }
 }
 
-void ServiceSystem::submit_shop_list(const std::string &user_id, const std::string &shop_id) {
+void ServiceSystem::submit_shop_list(const std::string &user_id, const std::string &shop_id, const std::string &remark) {
     BasicOperation op;
     DB &db = DB::getInstance();
     IDgenerator& generator = IDgenerator::get_instance();
@@ -135,8 +135,9 @@ void ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             add.item_id = user.shop_list[i].item_id;
             add.time = user.shop_list[i].time;
             add.price = user.shop_list[i].price;
-            std::cout << "please input remark : ";
-            std::cin >> add.remark;
+//            std::cout << "please input remark : ";
+//            std::cin >> add.remark;
+            add.remark = remark;
             add.id = generator.generateID(Type::BuyItemRequest);
             seller.buy_item_request_list.push_back(add);
             db.modify_seller_data(seller.id, seller);

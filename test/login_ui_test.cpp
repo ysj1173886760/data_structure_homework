@@ -46,6 +46,8 @@ enum {
     COMMAND_MODIFY,
     COMMAND_ITEM,
     COMMAND_FIND,
+    COMMAND_CART,
+    COMMAND_SUBMIT
 };
 
 enum Status {
@@ -112,6 +114,8 @@ void init() {
     mp["modify"] = COMMAND_MODIFY;
     mp["item"] = COMMAND_ITEM;
     mp["find"] = COMMAND_FIND;
+    mp["cart"] = COMMAND_CART;
+    mp["submit"] = COMMAND_SUBMIT;
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -618,6 +622,30 @@ void list_item() {
     do_next();
 }
 
+void print_order(Order order) {
+    DB &db = DB::getInstance();
+    ItemData itemData = db.select_item_data(order.item_id);
+    std::string name = itemData.name;
+    std::string shop_name = itemData.owner;
+
+    printf("name: %s\n", name.c_str());
+    printf("shop_name: %s\n", shop_name.c_str());
+    printf("price: %.2f\n", order.price);
+    printf("buy_num: %d\n", order.buy_num);
+    printf("time: %s\n", order.time.c_str());
+
+}
+
+void list_cart() {
+    std::vector<Order> shop_list;
+    DB &db = DB::getInstance();
+    shop_list = db.select_user_data(status.id).shop_list;
+
+    for (const auto &x : shop_list) {
+        print_order(x);
+    }
+}
+
 void seller_list(const std::vector<std::string> &commands) {
     if (commands.size() < 2) {
         printf("too few arguments.\n");
@@ -635,6 +663,23 @@ void seller_list(const std::vector<std::string> &commands) {
     }
 }
 
+void user_list(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_CART:
+            list_cart();
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
 void do_list(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
@@ -643,6 +688,10 @@ void do_list(const std::vector<std::string> &commands) {
 
         case STATUS_SELLER:
             seller_list(commands);
+            break;
+
+        case STATUS_USER:
+            user_list(commands);
             break;
 
         default:
@@ -787,6 +836,67 @@ void seller_add(const std::vector<std::string> &commands) {
             break;
 
         default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
+// add cart shop_name item_name num
+void add_shop_list(const std::vector<std::string> &commands) {
+    if (commands.size() != 5) {
+        err_arg_num("add cart", 3, commands.size() - 2);
+        return;
+    }
+
+    int num = 0;
+    if (!str2int(commands[4], num)) {
+        err_arg_type("add cart num", "int");
+        return;
+    }
+
+    ServiceSystem serviceSystem;
+    bool res = serviceSystem.insert_shop_list(status.id, commands[2], commands[3], num);
+    if (res) {
+        printf("add cart complete.\n");
+    } else {
+        printf("add cart failed.\n");
+    };
+}
+
+void delete_shop_list(const std::vector<std::string> &commands) {
+    if (commands.size() != 5) {
+        err_arg_num("rm cart", 3, commands.size() - 2);
+        return;
+    }
+
+    int num = 0;
+    if (!str2int(commands[4], num)) {
+        err_arg_type("rm cart num", "int");
+        return;
+    }
+
+    ServiceSystem serviceSystem;
+    bool res = serviceSystem.remove_shop_list(status.id, commands[2], commands[3], num);
+    if (res) {
+        printf("rm cart complete.\n");
+    } else {
+        printf("rm cart failed.\n");
+    };
+}
+
+void user_add(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_CART:
+            add_shop_list(commands);
+            break;
+
+        default:
+            err_command(commands[1]);
             break;
     }
 }
@@ -799,6 +909,10 @@ void do_add(const std::vector<std::string> &commands) {
 
         case STATUS_SELLER:
             seller_add(commands);
+            break;
+
+        case STATUS_USER:
+            user_add(commands);
             break;
 
         default:
@@ -918,6 +1032,23 @@ void seller_remove(const std::vector<std::string> &commands) {
     }
 }
 
+void user_remove(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_CART:
+            delete_shop_list(commands);
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
 void do_remove(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
@@ -926,6 +1057,10 @@ void do_remove(const std::vector<std::string> &commands) {
 
         case STATUS_SELLER:
             seller_remove(commands);
+            break;
+
+        case STATUS_USER:
+            user_remove(commands);
             break;
 
         default:
@@ -1135,6 +1270,22 @@ void do_modify(const std::vector<std::string> &commands) {
     }
 }
 
+void submit_order() {
+
+}
+
+void do_submit(const std::vector<std::string> &commands) {
+    switch (status.type) {
+        case STATUS_USER:
+            submit_order();
+            break;
+
+        default:
+            err_permit();
+            break;
+    }
+}
+
 bool execute_command(char *input) {
     std::vector<std::string> commands = prepare_command(std::string(input));
 
@@ -1204,6 +1355,10 @@ bool execute_command(char *input) {
 
         case COMMAND_FIND:
             do_find(commands);
+            break;
+
+        case COMMAND_SUBMIT:
+            do_submit(commands);
             break;
 
         default:
