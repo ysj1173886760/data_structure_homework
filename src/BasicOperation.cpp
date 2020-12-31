@@ -85,13 +85,18 @@ bool BasicOperation::GetItem(const std::string& shop_name, const std::string& it
     return false;
 }
 
-double BasicOperation::GetCost(const std::string& user_id) {
+double BasicOperation::GetCost(const std::string& user_id, const std::string& seller_name) {
     DB &db = DB::getInstance();
     UserData user = db.select_user_data(user_id);
 
     double cost = 0;
-    for(int i=0; i<user.shop_list.size(); i++)
-        cost += (user.shop_list[i].price * user.shop_list[i].buy_num);
+    for(int i=0; i<user.shop_list.size(); i++) {
+        std::string item_id = user.shop_list[i].item_id;
+        ItemData item = db.select_item_data(item_id);
+
+        if (item.owner == seller_name)
+            cost += (user.shop_list[i].price * user.shop_list[i].buy_num);
+    }
 
     return cost;
 }

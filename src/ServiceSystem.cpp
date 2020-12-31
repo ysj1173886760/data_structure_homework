@@ -159,7 +159,9 @@ int item_in_shop_list(const std::string& user_id, const std::string& item_id) {
     return -1;
 }
 
-void ServiceSystem::insert_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
+//异常一：买的商品超过了已有的库存
+//异常二：买的商品不存在于该商家中（异常在GetItem函数中处理）
+bool ServiceSystem::insert_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
     BasicOperation op;
     DB &db = DB::getInstance();
     IDgenerator& generator = IDgenerator::get_instance();
@@ -168,8 +170,10 @@ void ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
     ItemData item;
     if(op.GetItem(shop_name, item_name, item)) {
         int tar = item_in_shop_list(user_id, item.id);
-        if(item.store_num < num)
-            std::cout << "ERROR : under stock!!!" << std::endl;
+        if(item.store_num < num) {
+            //std::cout << "ERROR : under stock!!!" << std::endl;
+            return false;
+        }
 
         //如果所购买的物品已经处在购物车中，则增加数量即可
         else if(tar!=-1)
@@ -186,9 +190,12 @@ void ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
             db.modify_user_data(user.id, user);
         }
     }
+
+    return true;
 }
 
-void ServiceSystem::remove_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
+//异常三：删除的商品不存在与购物车中
+bool ServiceSystem::remove_shop_list(const std::string& user_id, const std::string& shop_name, const std::string& item_name, int num) {
     BasicOperation op;
     DB &db = DB::getInstance();
     IDgenerator& generator = IDgenerator::get_instance();
@@ -205,53 +212,67 @@ void ServiceSystem::remove_shop_list(const std::string& user_id, const std::stri
             db.modify_user_data(user_id, user);
         }
 
-        else
+        else {
+            return false;
             std::cout << "ERROR : you are removing sth doesn't in the shop_list!!!" << std::endl;
+        }
     }
+
+    return true;
 }
 
-void ServiceSystem::submit_shop_list(const std::string &user_id, const std::string &shop_id) {
+//异常四：提交订单的花销超出自己钱包的money（在transfer中处理）
+bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::string& remark) {
     BasicOperation op;
     DB &db = DB::getInstance();
     IDgenerator& generator = IDgenerator::get_instance();
     UserData user = db.select_user_data(user_id);
-    SellerData seller = db.select_seller_data(shop_id);
 
-    double cost = op.GetCost(user_id);
-    MoneySystem money_sys;
-    if(money_sys.TransferMoney(user.id, seller.id, cost)) {
+    for(int i=0; i<user.shop_list.size(); i++) {
+        std::string item_id = user.shop_list[i].item_id;
+        ItemData item = db.select_item_data(item_id);
+        std::string shop_name = item.owner;
+        SellerData seller;
+        op.GetSeller(shop_name, seller);
 
-        user = db.select_user_data(user_id);
-        seller = db.select_seller_data(shop_id);
+        double cost = user.shop_list[i].price * user.shop_list[i].buy_num;
+        MoneySystem money_sys;
+        if (money_sys.TransferMoney(user.id, seller.id, cost)) {
 
-        for(int i=0; i<user.shop_list.size(); i++) {
+            user = db.select_user_data(user_id);
+            seller = db.select_seller_data(seller.id);
+
             BuyItemRequestData add;
             add.user_id = user_id;
             add.buy_num = user.shop_list[i].buy_num;
             add.item_id = user.shop_list[i].item_id;
             add.time = user.shop_list[i].time;
             add.price = user.shop_list[i].price;
-            std::cout << "please input remark : ";
-            std::cin >> add.remark;
+//            std::cout << "please input remark : ";
+//            std::cin >> add.remark;
             add.id = generator.generateID(Type::BuyItemRequest);
             seller.buy_item_request_list.push_back(add);
+
+            db.modify_seller_data(seller.id, seller);
+            db.modify_user_data(user.id, user);
+
+            MessageSystem message_sys;
+            std::string user_info = "you have cost " + to_string(cost) + " in " + seller.shop_name;
+            message_sys.SendMessage(user.id, user_info);
+
             db.modify_seller_data(seller.id, seller);
         }
-
-        user.shop_list.swap(user.current_order);
-        db.modify_user_data(user.id, user);
-
-        MessageSystem message_sys;
-        std::string user_info = "you have cost " + to_string(cost) + " in " + seller.shop_name;
-        message_sys.SendMessage(user.id, user_info);
-
-        db.modify_seller_data(seller.id, seller);
     }
+
+    user.shop_list.swap(user.current_order);
+
+    return true;
     //感觉给商家留言没啥必要 先留着吧
     //std::string seller_info = "you have got " + to_string(cost);
     //seller.message.push_back(seller_info);
 }
 
+//显示一：购买清单为空显示 无购买请求
 void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
     BasicOperation op;
     MessageSystem message_sys;
@@ -293,7 +314,6 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
     }
 
     seller.buy_item_request_list.clear();
-    //db.modify_user_data(user.id, user);
     db.modify_seller_data(seller.id, seller);
 }
 
@@ -311,7 +331,7 @@ int item_in_current_list(const std::string& user_id, const std::string& item_id)
     return -1;
 }
 
-void ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
+bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
     BasicOperation op;
     DB &db = DB::getInstance();
     UserData user = db.select_user_data(user_id);
@@ -336,6 +356,10 @@ void ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
             }
 
             db.modify_item_data(item.id, item);
+            return true;
         }
+        return false;
     }
+    else
+        return false;
 }
