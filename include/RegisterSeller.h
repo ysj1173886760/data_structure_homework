@@ -13,8 +13,8 @@
 // seller register need to apply to manager
 class RegisterSeller {
 public:
-    RegisterSeller();
-    ~RegisterSeller();
+    RegisterSeller() = default;
+    ~RegisterSeller() = default;
 
     // return 0, if you successfully apply to manager
     // return 1, if account or shop_name already exists
