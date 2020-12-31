@@ -363,3 +363,18 @@ bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
     else
         return false;
 }
+
+bool confirm(const std::string& user_id, const Order& order) {
+    DB& db = DB::getInstance();
+    std::string item_id = order.item_id;
+    UserData user = db.select_user_data(user_id);
+
+    int tar = item_in_current_list(user_id, item_id);
+
+    if(tar!=-1) {
+        user.current_order.erase(user.current_order.begin() + tar);
+        user.history_order.push_back(order);
+        return true;
+    } else
+        return false;
+}
