@@ -19,6 +19,7 @@
 #include "LoginSeller.h"
 #include "ManagerOperation.h"
 #include "SellerSystem.h"
+#include "ServiceSystem.h"
 
 enum {
     COMMAND_QUIT = 1,
@@ -43,7 +44,8 @@ enum {
     COMMAND_PREVIOUS,
     COMMAND_DETAIL,
     COMMAND_MODIFY,
-    COMMAND_ITEM
+    COMMAND_ITEM,
+    COMMAND_FIND,
 };
 
 enum Status {
@@ -55,6 +57,7 @@ enum Status {
 
 enum DataType {
     TYPE_REGISTER_REQUEST = 1,
+    TYPE_ITEM_DATA,
     TYPE_NONE
 };
 
@@ -65,6 +68,7 @@ BasicOperation BasicOp;
 
 struct LIST {
     std::vector<RegisterRequestData> register_request_list;
+    std::vector<ItemData> item_data_list;
 
     enum DataType type;
     int curr_row, max_row;
@@ -107,6 +111,7 @@ void init() {
     mp["detail"] = COMMAND_DETAIL;
     mp["modify"] = COMMAND_MODIFY;
     mp["item"] = COMMAND_ITEM;
+    mp["find"] = COMMAND_FIND;
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -554,7 +559,17 @@ void print_list(int i) {
                    ui_list.register_request_list[i].shop_name.c_str());
             break;
 
+        case TYPE_ITEM_DATA:
+            printf("%d: name: %s price: %.2f sell_num: %d store_num: %d.\n",
+                   i + 1,
+                   ui_list.item_data_list[i].name.c_str(),
+                   ui_list.item_data_list[i].price,
+                   ui_list.item_data_list[i].sell_num,
+                   ui_list.item_data_list[i].store_num);
+            break;
+
         default:
+            err_system();
             break;
     }
 }
@@ -590,10 +605,44 @@ void manager_list() {
     do_next();
 }
 
-void do_list() {
+void list_item() {
+    ui_list.item_data_list = BasicOp.GetShopItems(status.id);
+    ui_list.type = TYPE_ITEM_DATA;
+    ui_list.max_row = ui_list.item_data_list.size();
+    ui_list.curr_row = 0;
+
+    if (ui_list.max_row == 0) {
+        printf("You don`t have items yet.\n");
+        return;
+    }
+    do_next();
+}
+
+void seller_list(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_ITEM:
+            list_item();
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
+void do_list(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
             manager_list();
+            break;
+
+        case STATUS_SELLER:
+            seller_list(commands);
             break;
 
         default:
@@ -606,6 +655,10 @@ void print_detail(int i) {
     switch (ui_list.type) {
         case TYPE_REGISTER_REQUEST:
             ui_list.register_request_list[i].print();
+            break;
+
+        case TYPE_ITEM_DATA:
+            ui_list.item_data_list[i].print();
             break;
 
         default:
@@ -833,10 +886,46 @@ void manager_remove(const std::vector<std::string> &commands) {
     }
 }
 
+void item_remove(const std::vector<std::string> &commands) {
+    if (commands.size() != 3) {
+        err_arg_num("rm item", 1, commands.size() - 2);
+        return;
+    }
+
+    SellerSystem sellerSystem;
+    bool res = sellerSystem.remove_item(status.id, commands[2]);
+    if (res) {
+        printf("Remove Item Complete.\n");
+    } else {
+        printf("Remove Item Failed.\n");
+    }
+}
+
+void seller_remove(const std::vector<std::string> &commands) {
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    switch(mp[commands[1]]) {
+        case COMMAND_ITEM:
+            item_remove(commands);
+            break;
+
+        default:
+            err_command(commands[1]);
+            break;
+    }
+}
+
 void do_remove(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
             manager_remove(commands);
+            break;
+
+        case STATUS_SELLER:
+            seller_remove(commands);
             break;
 
         default:
@@ -938,6 +1027,32 @@ void do_detail(const std::vector<std::string> &commands) {
     }
 }
 
+// find name
+void do_find(const std::vector<std::string> &commands) {
+    if (status.type != STATUS_USER) {
+        err_permit();
+        return;
+    }
+
+    if (commands.size() < 2) {
+        printf("too few arguments.\n");
+        return;
+    }
+
+    ServiceSystem serviceSystem;
+    ui_list.item_data_list = serviceSystem.display_item(commands[1]);
+    ui_list.type = TYPE_ITEM_DATA;
+    ui_list.max_row = ui_list.item_data_list.size();
+    ui_list.curr_row = 0;
+
+    if (ui_list.max_row == 0) {
+        printf("no matching items.\n");
+        return;
+    }
+
+    do_next();
+}
+
 // modify item name which detail
 void modify_item(const std::vector<std::string> &commands) {
     if (commands.size() != 5) {
@@ -947,13 +1062,14 @@ void modify_item(const std::vector<std::string> &commands) {
 
     SellerSystem sellerSystem;
     ItemData itemData;
+    itemData.name = commands[2];
 
     if (commands[3] == "price") {
         if (!str2double(commands[4], itemData.price)) {
             err_arg_type("modify item price", "double");
             return;
         }
-        bool res = sellerSystem.modify_item(commands[2], itemData, "price");
+        bool res = sellerSystem.modify_item(status.id, itemData, "price");
         if (res) {
             printf("modify price complete.\n");
         } else {
@@ -967,7 +1083,7 @@ void modify_item(const std::vector<std::string> &commands) {
             err_arg_type("modify item store", "int");
             return;
         }
-        bool res = sellerSystem.modify_item(commands[2], itemData, "store_num");
+        bool res = sellerSystem.modify_item(status.id, itemData, "store_num");
         if (res) {
             printf("modify store complete.\n");
         } else {
@@ -978,7 +1094,7 @@ void modify_item(const std::vector<std::string> &commands) {
 
     if (commands[3] == "des") {
         itemData.des = commands[4];
-        bool res = sellerSystem.modify_item(commands[2], itemData, "des");
+        bool res = sellerSystem.modify_item(status.id, itemData, "des");
         if (res) {
             printf("modify des complete.\n");
         } else {
@@ -1051,7 +1167,7 @@ bool execute_command(char *input) {
             break;
 
         case COMMAND_LIST:
-            do_list();
+            do_list(commands);
             break;
 
         case COMMAND_ADD:
@@ -1084,6 +1200,11 @@ bool execute_command(char *input) {
 
         case COMMAND_MODIFY:
             do_modify(commands);
+            break;
+
+        case COMMAND_FIND:
+            do_find(commands);
+            break;
 
         default:
             err_command(commands[0]);
