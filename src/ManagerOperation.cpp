@@ -151,5 +151,6 @@ SellerData ManagerOperation::copy_request_to_seller(const RegisterRequestData& r
     seller.shop_owner_name = rqd.shop_owner_name;
     seller.shop_owner_phone_number = rqd.shop_owner_phone_number;
     seller.shop_owner_id_number = rqd.shop_owner_id_number;
+    seller.wallet = rqd.wallet;
     return seller;
 }

@@ -870,6 +870,11 @@ void DB::load_register_request_data(const std::string &filename) {
         new_register_request_data.account = temp["account"].asString();
         new_register_request_data.shop_name = temp["shop_name"].asString();
 
+        Wallet wallet;
+        wallet.money = temp["wallet"]["money"].asDouble();
+        wallet.password = temp["wallet"]["password"].asString();
+        new_register_request_data.wallet = wallet;
+
         this->register_request_data[id] = new_register_request_data;
     }
 }
@@ -889,6 +894,12 @@ void DB::save_register_request_data(const std::string &filename) {
         new_register_request_data["shop_owner_name"] = value.shop_owner_name;
         new_register_request_data["shop_owner_phone_number"] = value.shop_owner_phone_number;
         new_register_request_data["shop_owner_id_number"] = value.shop_owner_id_number;
+
+        Json::Value wallet;
+        wallet.clear();
+        wallet["password"] = value.wallet.password;
+        wallet["money"] = value.wallet.money;
+        new_register_request_data["wallet"] = wallet;
 
         root.append(new_register_request_data);
     }

@@ -392,6 +392,7 @@ public:
     std::string shop_owner_name;
     std::string shop_owner_phone_number;
     std::string shop_owner_id_number;
+    Wallet wallet;
 
     using Base::Base;
     explicit RegisterRequestData(std::string _account = "",

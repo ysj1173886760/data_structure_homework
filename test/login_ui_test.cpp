@@ -654,10 +654,98 @@ void manager_add(const std::vector<std::string> &commands) {
     }
 }
 
+void add_item() {
+    ItemData itemData;
+    printf("Please Enter New Item Name.\n");
+    std::cin >> itemData.name;
+    printf("Please Enter New Item description.\n");
+    std::cin >> itemData.des;
+
+    printf("Please Enter New Item Price.\n");
+    std::string price;
+    std::cin >> price;
+    while (true) {
+        if (!str2double(price, itemData.price)) {
+            err_arg_type("item price", "double");
+            std::cin >> price;
+        } else {
+            break;
+        }
+    }
+
+    printf("Please Enter New Item Store Num.\n");
+    std::string store;
+    std::cin >> store;
+    while (true) {
+        if (!str2int(store, itemData.store_num)) {
+            err_arg_type("item store", "int");
+            std::cin >> store;
+        } else {
+            break;
+        }
+    }
+
+    printf("Please Enter New Item Label Num.\n");
+    int label_num = 0;
+    std::string label_num_str;
+    std::cin >> label_num_str;
+    while (true) {
+        if (!str2int(label_num_str, label_num)) {
+            err_arg_type("label num", "int");
+            std::cin >> label_num_str;
+        } else if (label_num < 1){
+            printf("New Item Label Must Have At Least 1 Label.\n");
+            std::cin >> label_num_str;
+        } else {
+            break;
+        }
+    }
+
+    printf("Please Enter %d Label.\n", label_num);
+    std::vector<std::string> label(label_num);
+    for (int i = 0; i < label_num; i++) {
+        std::cin >> label[i];
+    }
+    itemData.label = label;
+
+    itemData.sell_num = 0;
+    DB &db = DB::getInstance();
+    itemData.owner = db.select_seller_data(status.id).shop_name;
+
+    SellerSystem sellerSystem;
+    bool res = sellerSystem.insert_item(status.id, itemData);
+    if (res) {
+        printf("insert new item complete.\n");
+    } else {
+        printf("insert new item failed.\n");
+    }
+}
+
+// add item
+void seller_add(const std::vector<std::string> &commands) {
+    if (commands.size() != 2) {
+        err_arg_num("add", 1, commands.size() - 1);
+        return;
+    }
+
+    switch (mp[commands[1]]) {
+        case COMMAND_ITEM:
+            add_item();
+            break;
+
+        default:
+            break;
+    }
+}
+
 void do_add(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_MANAGER:
             manager_add(commands);
+            break;
+
+        case STATUS_SELLER:
+            seller_add(commands);
             break;
 
         default:

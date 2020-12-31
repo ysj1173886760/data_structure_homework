@@ -152,4 +152,5 @@ void RegisterSeller::copy_to_register_requests_data() {
     rrd.shop_owner_name = seller.shop_owner_name;
     rrd.shop_owner_phone_number = seller.shop_owner_phone_number;
     rrd.shop_owner_id_number = seller.shop_owner_id_number;
+    rrd.wallet = seller.wallet;
 }

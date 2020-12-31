@@ -14,6 +14,11 @@
 		"phone_number" : "15130410553",
 		"real_name" : "123",
 		"shop_list" : null,
-		"user_name" : "123"
+		"user_name" : "123",
+		"wallet" : 
+		{
+			"money" : 0.0,
+			"password" : ""
+		}
 	}
 ]
