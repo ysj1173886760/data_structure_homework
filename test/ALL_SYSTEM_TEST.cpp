@@ -147,67 +147,74 @@ int main() {
 //    }
 
     ServiceSystem ser_sys;
-//    //顾客身份 买
-    vector<SellerData> sellers = db.select_all_seller_data();
-    seller = sellers[0];
 
-    UserData user;
-//    vector<UserData> users = db.select_all_user_data();
-//    user = users[0];
-    GetUserInfo(user);
-    string user_id = db.insert_user_data(user);
-
-    cout << "1: 查看消息" << endl;
-    cout << "2: 添加购物车" << endl;
-    cout << "3: 删除购物车" << endl;
-    cout << "4: 提交订单" << endl;
-    cout << "5: 显示订单" << endl;
-    cout << "0: 结束操作" << endl;
-    cin >> choice;
-
-    int add_num, rm_num;
-    string add_item_name, rm_item_name;
-    vector<ItemData> items;
-    while(choice) {
-        switch (choice) {
-            case 1:
-                checkMessage(user.id);
-                break;
-            case 2:
-                cout << "请输入要添加的商品名称：";
-                cin >> add_item_name;
-                cout << "请输入要添加商品的数量：";
-                cin >> add_num;
-                ser_sys.insert_shop_list(user.id, seller.shop_name, add_item_name, add_num);
-                break;
-            case 3:
-                cout << "请输入要删除的商品名称：";
-                cin >> rm_item_name;
-                cout << "请输入要删除的商品数量：";
-                cin >> rm_num;
-                ser_sys.remove_shop_list(user.id, seller.shop_name, rm_item_name, rm_num);
-                break;
-            case 4:
-                ser_sys.submit_shop_list(user.id, seller.id);
-                break;
-            case 5:
-                display_shop_list(user.id);
-                break;
-            default:
-                cout << "ERROR : wrong choice!!!" << endl;
-                break;
-        }
-
-        cout << "1: 查看消息" << endl;
-        cout << "2: 添加购物车" << endl;
-        cout << "3: 删除购物车" << endl;
-        cout << "4: 提交订单" << endl;
-        cout << "5: 显示订单" << endl;
-        cout << "0: 结束操作" << endl;
-        cin >> choice;
+    std::vector<ItemData> items = ser_sys.search_item_label("food");
+    for(int i=0; i<items.size(); i++) {
+        items[i].print();
+        cout << endl;
     }
 
-    ser_sys.deal_BuyItemRequest(seller.id);
+//    //顾客身份 买
+//    vector<SellerData> sellers = db.select_all_seller_data();
+//    seller = sellers[0];
+
+//    UserData user;
+//    vector<UserData> users = db.select_all_user_data();
+//    user = users[0];
+//    GetUserInfo(user);
+//    string user_id = db.insert_user_data(user);
+//
+//    cout << "1: 查看消息" << endl;
+//    cout << "2: 添加购物车" << endl;
+//    cout << "3: 删除购物车" << endl;
+//    cout << "4: 提交订单" << endl;
+//    cout << "5: 显示订单" << endl;
+//    cout << "0: 结束操作" << endl;
+//    cin >> choice;
+//
+//    int add_num, rm_num;
+//    string add_item_name, rm_item_name;
+//    vector<ItemData> items;
+//    while(choice) {
+//        switch (choice) {
+//            case 1:
+//                checkMessage(user.id);
+//                break;
+//            case 2:
+//                cout << "请输入要添加的商品名称：";
+//                cin >> add_item_name;
+//                cout << "请输入要添加商品的数量：";
+//                cin >> add_num;
+//                ser_sys.insert_shop_list(user.id, seller.shop_name, add_item_name, add_num);
+//                break;
+//            case 3:
+//                cout << "请输入要删除的商品名称：";
+//                cin >> rm_item_name;
+//                cout << "请输入要删除的商品数量：";
+//                cin >> rm_num;
+//                ser_sys.remove_shop_list(user.id, seller.shop_name, rm_item_name, rm_num);
+//                break;
+//            case 4:
+//                ser_sys.submit_shop_list(user.id, seller.id);
+//                break;
+//            case 5:
+//                display_shop_list(user.id);
+//                break;
+//            default:
+//                cout << "ERROR : wrong choice!!!" << endl;
+//                break;
+//        }
+//
+//        cout << "1: 查看消息" << endl;
+//        cout << "2: 添加购物车" << endl;
+//        cout << "3: 删除购物车" << endl;
+//        cout << "4: 提交订单" << endl;
+//        cout << "5: 显示订单" << endl;
+//        cout << "0: 结束操作" << endl;
+//        cin >> choice;
+//    }
+//
+//    ser_sys.deal_BuyItemRequest(seller.id);
 
     /*测试一：
     顾客买了一件，商家处理，不退货    ok

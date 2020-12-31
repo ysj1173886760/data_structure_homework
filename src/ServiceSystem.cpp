@@ -56,6 +56,13 @@ bool KMP(std::string s, std::string t)
         return false;
 }
 
+bool ServiceSystem::CmpSameLabel(const std::vector<std::string>& v, const std::string& s) {
+    for(int i=0; i<v.size(); i++)
+        if(v[i] == s)
+            return true;
+    return false;
+}
+
 vector<std::string> ServiceSystem::GetHighestSim(const std::vector<std::string>& v, const std::string& s) {
     BasicOperation op;
     std::vector<std::pair<double, int>> sim;
@@ -85,7 +92,7 @@ vector<std::string> ServiceSystem::GetSamePart(const std::vector<std::string>& v
     return sort_by_part;
 }
 
-std::vector<ItemData> ServiceSystem::display_shop(const std::string& shop_name) {
+std::vector<ItemData> ServiceSystem::search_shop(const std::string& shop_name) {
     BasicOperation op;
     DB &db = DB::getInstance();
     vector<SellerData> sellers = db.select_all_seller_data();
@@ -100,27 +107,40 @@ std::vector<ItemData> ServiceSystem::display_shop(const std::string& shop_name) 
     return items;
 }
 
-std::vector<ItemData> ServiceSystem::display_item_sim(const std::string& item_name) {
+std::vector<ItemData> ServiceSystem::search_item_sim(const std::string& item_name) {
     BasicOperation op;
     DB &db = DB::getInstance();
     vector<ItemData> items = db.select_all_item_data();
     vector<ItemData> ret_items;
     for(int i=0; i<items.size(); i++) {
-        if(op.GetWordsSim(items[i].name, item_name) > 0.8)
+        if(op.GetWordsSim(items[i].name, item_name) > 0.5)
             ret_items.push_back(items[i]);
     }
     return ret_items;
 }
 
-std::vector<ItemData> ServiceSystem::display_item_part(const std::string& item_name) {
-    BasicOperation op;
-    DB &db = DB::getInstance();
+std::vector<ItemData> ServiceSystem::search_item_part(const std::string& item_name) {
+    DB& db = DB::getInstance();
 
     vector<ItemData> ret_items;
     vector<ItemData> items = db.select_all_item_data();
 
     for(int i=0; i<items.size(); i++) {
         if(KMP(items[i].name, item_name))
+            ret_items.push_back(items[i]);
+    }
+
+    return ret_items;
+}
+
+std::vector<ItemData> ServiceSystem::search_item_label(const std::string& label) {
+    DB& db = DB::getInstance();
+
+    vector<ItemData> ret_items;
+    vector<ItemData> items = db.select_all_item_data();
+
+    for(int i=0; i<items.size(); i++) {
+        if(CmpSameLabel(items[i].label, label))
             ret_items.push_back(items[i]);
     }
 
