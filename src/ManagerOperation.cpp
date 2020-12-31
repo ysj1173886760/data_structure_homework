@@ -3,11 +3,14 @@
 //
 
 #include "ManagerOperation.h"
+#include "Email.cpp"
 
-ManagerOperation::ManagerOperation() {
-
+ManagerOperation & ManagerOperation::getInstance() {
+    static ManagerOperation obj;
+    return obj;
 }
 
+// return vector about register_request_data
 std::vector<RegisterRequestData> ManagerOperation::view_application_list() {
     DB& db = DB::getInstance();
     return db.select_all_register_request_data();
@@ -68,9 +71,10 @@ bool ManagerOperation::register_manager(const std::string& account,
     // root manager's account and password
     if (account == "account" && password == "password") {
         RegisterManager rm;
-        if (rm.Register(new_guy_account, new_guy_password, new_guy_confirm_password)) {
-            return true;
-        }
+
+        int err = rm.Register(new_guy_account, new_guy_password, new_guy_confirm_password);
+        if (err == 0) return true;
+        else return false;
     }
     //
     return false;
@@ -86,6 +90,9 @@ bool ManagerOperation::remove_user(const std::string &user_account,
     for (const auto& it : all_user_data) {
         if (it.account == user_account && it.email == user_email) {
             // maybe can add a remind email
+            Email email;
+            std::string content = "Your account is deleted!\r\naccount: " + user_account;
+            email.send_email(user_email, "Attention", content);
             db.delete_user_data(it.id);
             return true;
         }
@@ -116,6 +123,8 @@ bool ManagerOperation::remove_seller(const std::string &seller_account,
 bool ManagerOperation::remove_manager(const std::string &root_account,
                                       const std::string &root_password,
                                       const std::string &manager_account) {
+    if (manager_account == "account") return false;
+
     if (root_account == "account" && root_password == "password") {
         std::vector<ManagerData> all_manager_data;
 

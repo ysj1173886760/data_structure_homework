@@ -53,11 +53,25 @@ public:
                        const std::string& email,
                        const std::string& new_password,
                        const std::string& new_confirm_password);
+
+    // maybe we can add a email verification code
+    // return 0, if you get your pay password successfully.
+    // return 1, account or password wrong
+    // return 2, verification information is wrong
+    // return 3, email is wrong
+    // return 4, pay password is illegal
+    int ForgotPayPassword(const std::string& account,
+                          const std::string& password,
+                          const std::string& real_name,
+                          const std::string& id_number,
+                          const std::string& email,
+                          const std::string& new_pay_password,
+                          const std::string& new_confirm_pay_password);
 private:
     std::vector<UserData> all_user_data;
 
-    bool OkPassword(const std::string& password, const std::string& confirm_password);
-    bool OkPayPassword(const std::string& pay_password, const std::string& confirm_pay_password);
+    static bool OkPassword(const std::string& password, const std::string& confirm_password);
+    static bool OkPayPassword(const std::string& pay_password, const std::string& confirm_pay_password);
 };
 
 

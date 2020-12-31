@@ -140,8 +140,8 @@ bool Email::_send_email_head() {
     str += "SUBJECT: " + title + "\r\n";
     str += "MIME-Version: 1.0";
     str += "\r\n";
-    str += "Content-Type: text/plain;";
-    str +="\r\n";
+    str += "Content-Type: multipart/mixed;boundary=123456";
+    str +="\r\n\r\n";
     if (!_send(str)) return false;
 
     return true;
@@ -149,10 +149,16 @@ bool Email::_send_email_head() {
 
 bool Email::_send_email_text() {
     std::string str;
+    str = "--123456\r\n";
     str += "Content-Type: text/plain;";
-    str += "charset=\"utf-8\"\r\n";
+    str += "charset=\"utf-8\"\r\n\r\n";
     str += content;
+    str += "\r\n\r\n";
+    if (!_send(str)) return false;
+    str.clear();
+    str += "--123456--";
     str += "\r\n.\r\n";
+//    std::cout << content << std::endl;
     if (!_send(str) || !_recv()) return false;
     str.clear();
     str = "QUIT\r\n";

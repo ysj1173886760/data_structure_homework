@@ -36,7 +36,7 @@ int RegisterUser::Register(const std::string& in_account,
     if (!register_account(in_account) || !register_user_name(in_user_name)) return 1;
     if (!register_password(in_password, in_confirm_password)) return 2;
     if (!register_phone_number(in_phone_number) || !register_email(in_email) || !register_id_number(in_id_number)) return 3;
-    if (!register_pay_password(in_pay_password, in_confirm_password)) return 4;
+    if (!register_pay_password(in_pay_password, in_pay_confirm_password)) return 4;
 
     DB& db = DB::getInstance();
 
