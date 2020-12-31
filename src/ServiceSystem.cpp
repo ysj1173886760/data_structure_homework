@@ -272,6 +272,20 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
     //seller.message.push_back(seller_info);
 }
 
+int item_in_current_list(const std::string& user_id, const std::string& item_id) {
+    BasicOperation op;
+    DB &db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
+
+    for(int i=0; i<user.current_order.size(); i++) {
+        if(user.current_order[i].item_id == item_id) {
+            user.current_order.erase(user.current_order.begin()+i);
+            return i;
+        }
+    }
+    return -1;
+}
+
 //显示一：购买清单为空显示 无购买请求
 void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
     BasicOperation op;
@@ -288,47 +302,36 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
 
     for(int i=0; i<seller.buy_item_request_list.size(); i++) {
         ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
+        UserData user = db.select_user_data(seller.buy_item_request_list[i].user_id);
 
-        int del=0;
         //库存不足 需要退货
         if(item.store_num < seller.buy_item_request_list[i].buy_num) {
-            user.current_order.erase(user.current_order.begin()+i-del);
+            int tar = item_in_current_list(user.id, item.id);
+            user.current_order.erase(user.current_order.begin() + tar);
 
             MoneySystem money_sys;
-            if(money_sys.TransferMoney(seller.id, user.id, item.price)) {
+
+            if(money_sys.TransferMoney(seller.id, user.id, item.price * seller.buy_item_request_list[i].buy_num)) {
 
                 std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
-                                   " is rejected and we have repay you";
+                                       " is rejected and we have repay you";
                 message_sys.SendMessage(user.id, info);
-                del++;
             }
         }
 
         else {
-            item.store_num-=seller.buy_item_request_list[i].buy_num;
+            item.store_num -= seller.buy_item_request_list[i].buy_num;
             std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
                     + item.name + " have arrived, pls check";
             message_sys.SendMessage(user.id, info);
             db.modify_item_data(item.id, item);
         }
+
+        db.modify_user_data(user.id, user);
     }
 
     seller.buy_item_request_list.clear();
     db.modify_seller_data(seller.id, seller);
-}
-
-int item_in_current_list(const std::string& user_id, const std::string& item_id) {
-    BasicOperation op;
-    DB &db = DB::getInstance();
-    UserData user = db.select_user_data(user_id);
-
-    for(int i=0; i<user.current_order.size(); i++) {
-        if(user.current_order[i].item_id == item_id) {
-            user.current_order.erase(user.current_order.begin()+i);
-            return i;
-        }
-    }
-    return -1;
 }
 
 bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {

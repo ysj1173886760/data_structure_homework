@@ -1,37 +1,138 @@
 [
 	{
-		"account" : "",
+		"account" : "sheep",
 		"age" : "",
 		"current_order" : 
 		[
 			{
-				"buy_num" : 1,
-				"id" : "520201231103129",
-				"item_id" : "420201231085347",
-				"price" : 10.0,
-				"time" : "20201231103129"
+				"buy_num" : 4,
+				"id" : "520201231230956",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20201231230956"
 			}
 		],
-		"email" : "",
+		"email" : "1173886760@qq.com",
 		"gender" : "",
 		"history_item" : null,
 		"history_order" : null,
-		"id" : "120201231103120",
-		"id_number" : "",
+		"id" : "120201231230656",
+		"id_number" : "130602200009150939",
 		"message" : 
 		[
-			"you have cost 10.000000 in test_shop_name",
-			"your 1 a have arrived, pls check"
+			"you have cost 40.000000 in test_shop_name"
 		],
-		"password" : "",
-		"phone_number" : "",
-		"real_name" : "",
-		"shop_list" : null,
-		"user_name" : "",
+		"password" : "123456789",
+		"phone_number" : "15130410553",
+		"real_name" : "sheep2",
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 2,
+				"id" : "520210101001440",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20210101001440"
+			}
+		],
+		"user_name" : "sheep2",
 		"wallet" : 
 		{
-			"money" : 0.0,
-			"password" : ""
+			"money" : 960.0,
+			"password" : "123456"
+		}
+	},
+	{
+		"account" : "123456",
+		"age" : "",
+		"current_order" : 
+		[
+			{
+				"buy_num" : 2,
+				"id" : "520201231230343",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20201231230343"
+			}
+		],
+		"email" : "1173886760@qq.com",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : 
+		[
+			{
+				"buy_num" : 1,
+				"id" : "520201231221205",
+				"item_id" : "420201229153041",
+				"price" : 25.0,
+				"time" : "20201231221205"
+			}
+		],
+		"id" : "120201231193112",
+		"id_number" : "130602200009150939",
+		"message" : 
+		[
+			"your 1 new_2 have arrived, pls check",
+			"you have cost 25.000000 in test_shop_name",
+			"your 1 new_3 have arrived, pls check",
+			"your 1 new_2 have arrived, pls check",
+			"your 2 new_2 have arrived, pls check",
+			"your 4 new_2 have arrived, pls check",
+			"sorry, because under stock, your BuyItemRequest of new_2 is rejected and we have repay you",
+			"you have cost 80.000000 in test_shop_name"
+		],
+		"password" : "123456789",
+		"phone_number" : "15130410553",
+		"real_name" : "sheep",
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 4,
+				"id" : "520210101001440",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20210101001440"
+			}
+		],
+		"user_name" : "sheep",
+		"wallet" : 
+		{
+			"money" : 920.0,
+			"password" : "123456"
+		}
+	},
+	{
+		"account" : "sheep3",
+		"age" : "",
+		"current_order" : null,
+		"email" : "1173886760@qq.com",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "120201231230758",
+		"id_number" : "130602200009150939",
+		"message" : 
+		[
+			"you have cost 60.000000 in test_shop_name"
+		],
+		"password" : "123456789",
+		"phone_number" : "15130410553",
+		"real_name" : "sheep3",
+		"shop_list" : 
+		[
+			{
+				"buy_num" : 3,
+				"id" : "520210101001440",
+				"item_id" : "420201229150058",
+				"price" : 20.0,
+				"time" : "20210101001440"
+			}
+		],
+		"user_name" : "sheep3",
+		"wallet" : 
+		{
+			"money" : 940.0,
+			"password" : "123456"
 		}
 	}
 ]
