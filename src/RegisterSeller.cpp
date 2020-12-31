@@ -32,6 +32,11 @@ int RegisterSeller::Register(const std::string& account,
                               const std::string& shop_owner_id_number,
                               const std::string& pay_password,
                               const std::string& confirm_pay_password) {
+
+    DB& db = DB::getInstance();
+
+    all_seller_data = db.select_all_seller_data();
+
     //
     if (!register_account(account) || !register_shop_name(shop_name)) return 1;
     if (!register_password(password, confirm_password)) return 2;
@@ -100,9 +105,9 @@ bool RegisterSeller::register_shop_owner_name(const std::string& shop_owner_name
 }
 
 bool RegisterSeller::register_shop_owner_phone_number(const std::string& shop_owner_phone_number) {
-
-    // std::regex phone_regex("^1(3\\d|47|5([0-3]|[5-9])|8(0|2|[5-9]))\\d{8}$");
-    std::regex phone_regex("(.*)");
+    // a regex about phone
+     std::regex phone_regex("^1(3\\d|47|5([0-3]|[5-9])|8(0|2|[5-9]))\\d{8}$");
+     // std::regex phone_regex("(.*)");
 
     //
     if (!std::regex_match(shop_owner_phone_number, phone_regex)) {
@@ -114,9 +119,9 @@ bool RegisterSeller::register_shop_owner_phone_number(const std::string& shop_ow
 }
 
 bool RegisterSeller::register_shop_owner_id_number(const std::string& shop_owner_id_number) {
-
-//    std::regex id_number_regex("^([1-9]\\d{5}[12]\\d{3}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])\\d{3}[0-9xX])$");
-    std::regex id_number_regex("(.*)");
+    // a regex about id number
+    std::regex id_number_regex("^([1-9]\\d{5}[12]\\d{3}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])\\d{3}[0-9xX])$");
+    // std::regex id_number_regex("(.*)");
 
     //
     if (!std::regex_match(shop_owner_id_number, id_number_regex)) {
@@ -154,3 +159,4 @@ void RegisterSeller::copy_to_register_requests_data() {
     rrd.shop_owner_id_number = seller.shop_owner_id_number;
     rrd.wallet = seller.wallet;
 }
+

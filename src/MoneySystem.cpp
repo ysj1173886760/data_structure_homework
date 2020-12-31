@@ -4,13 +4,18 @@
 
 #include "MoneySystem.h"
 
-bool MoneySystem::RechargeMoney(const std::string& user_id, double money) {
+bool MoneySystem::RechargeMoney(const std::string& id, double money) {
     DB& db = DB::getInstance();
     IDgenerator& generator = IDgenerator::get_instance();
-    Type type = generator.GetType(user_id);
+    Type type = generator.GetType(id);
     if(type == Type::User) {
-        UserData user = db.select_user_data(user_id);
+        UserData user = db.select_user_data(id);
         user.wallet.money += money;
+        return true;
+    }
+    else if(type == Type::Seller) {
+        SellerData seller = db.select_seller_data(id);
+        seller.wallet.money += money;
         return true;
     }
     else {
@@ -61,6 +66,7 @@ bool MoneySystem::TransferMoney(const std::string& id_1, const std::string& id_2
                 std::cout << "ERROR : you don't have enough money" << std::endl;
                 return false;
             }
+            db.modify_user_data(user.id, user);
             //TODO : 发消息
         }
 
@@ -72,17 +78,20 @@ bool MoneySystem::TransferMoney(const std::string& id_1, const std::string& id_2
                 std::cout << "ERROR : you don't have enough money" << std::endl;
                 return false;
             }
+            db.modify_seller_data(seller.id, seller);
         }
 
         if (type_2 == Type::User) {
             UserData user = db.select_user_data(id_2);
             user.wallet.money += money;
+            db.modify_user_data(user.id, user);
             //TODO : 发消息
         }
 
         else {
             SellerData seller = db.select_seller_data(id_2);
             seller.wallet.money += money;
+            db.modify_seller_data(seller.id, seller);
         }
     }
 

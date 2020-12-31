@@ -12,8 +12,8 @@
 
 class RegisterUser {
 public:
-    RegisterUser();
-    ~RegisterUser();
+    RegisterUser() = default;
+    ~RegisterUser() = default;
 
     // if you register successfully, will return 0.
     // the account or user_name already exists, return 1.
@@ -42,6 +42,7 @@ private:
     bool register_email(const std::string& in_email);
     bool register_id_number(const std::string& in_id_number);
     bool register_pay_password(const std::string& in_pay_password, const std::string& in_pay_confirm_password);
+
     UserData user;
     std::vector<UserData> all_user_data;
 };

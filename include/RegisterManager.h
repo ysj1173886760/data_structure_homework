@@ -11,7 +11,7 @@
 
 class RegisterManager {
 public:
-    RegisterManager();
+    RegisterManager() = default;
 
     // return 0, if you register ok
     // return 1, if the account already exists

@@ -66,7 +66,7 @@ string GetModInfo(const string& name, ItemData& item) {
 void GetUserInfo(UserData& user) {
     IDgenerator& g = IDgenerator::get_instance();
     user.id = g.generateID(Type::User);
-    user.wallet.money = 1000;
+    user.wallet.money = 10;
 }
 
 void checkMessage(const string& user_id) {
@@ -86,73 +86,89 @@ void checkMessage(const string& user_id) {
     db.modify_user_data(user.id, user);
 }
 
+void display_shop_list(const string& user_id) {
+    DB& db = DB::getInstance();
+    UserData user = db.select_user_data(user_id);
+
+    for(int i=0; i<user.shop_list.size(); i++) {
+        user.shop_list[i].print();
+    }
+}
+
 int main() {
     DB& db = DB::getInstance();
     db.open();
 
     int choice;
     SellerData seller;
-    /*
+
     //先添加一个商家（之后换为注册环节）
     GetSellerInfo(seller);
     string seller_id = db.insert_seller_data(seller);
 
     //商家身份 处理商品
-    SellerSystem seller_sys;
-    cout << "请选择你的操作: " << endl;
-    cout << "1: 添加商品" << endl;
-    cout << "2: 删除商品" << endl;
-    cout << "3: 修改商品" << endl;
-    cout << "0: 结束操作" << endl;
-
-    cin >> choice;
-    ItemData item;
-    string rm_name, mod_name, mod_info;
-    while(choice) {
-        switch (choice) {
-            case 1:
-                GetItemInfo(item);
-                seller_sys.insert_item(seller_id, item);
-                break;
-            case 2:
-                cout << "请输入删除商品的名称：" << endl;
-                cin >> rm_name;
-                seller_sys.remove_item(seller_id, rm_name);
-                break;
-            case 3:
-                cout << "请输入修改商品的名称：" << endl;
-                cin >> mod_name;
-                mod_info = GetModInfo(mod_name, item);
-                seller_sys.modify_item(seller_id, item, mod_info);
-                break;
-            default:
-                cout << "ERROR : wrong choice!!!" << endl;
-                break;
-        }
-        cout << "请选择你的操作: " << endl;
-        cout << "1: 添加商品" << endl;
-        cout << "2: 删除商品" << endl;
-        cout << "3: 修改商品" << endl;
-        cout << "0: 结束操作" << endl;
-        cin >> choice;
-    }
-    */
+//    SellerSystem seller_sys;
+//    cout << "请选择你的操作: " << endl;
+//    cout << "1: 添加商品" << endl;
+//    cout << "2: 删除商品" << endl;
+//    cout << "3: 修改商品" << endl;
+//    cout << "0: 结束操作" << endl;
+//
+//    cin >> choice;
+//    ItemData item;
+//    string rm_name, mod_name, mod_info;
+//    while(choice) {
+//        switch (choice) {
+//            case 1:
+//                GetItemInfo(item);
+//                seller_sys.insert_item(seller_id, item);
+//                break;
+//            case 2:
+//                cout << "请输入删除商品的名称：" << endl;
+//                cin >> rm_name;
+//                seller_sys.remove_item(seller_id, rm_name);
+//                break;
+//            case 3:
+//                cout << "请输入修改商品的名称：" << endl;
+//                cin >> mod_name;
+//                mod_info = GetModInfo(mod_name, item);
+//                seller_sys.modify_item(seller_id, item, mod_info);
+//                break;
+//            default:
+//                cout << "ERROR : wrong choice!!!" << endl;
+//                break;
+//        }
+//        cout << "请选择你的操作: " << endl;
+//        cout << "1: 添加商品" << endl;
+//        cout << "2: 删除商品" << endl;
+//        cout << "3: 修改商品" << endl;
+//        cout << "0: 结束操作" << endl;
+//        cin >> choice;
+//    }
 
     ServiceSystem ser_sys;
-//    //顾客身份 买
-    vector<SellerData> sellers = db.select_all_seller_data();
-    seller = sellers[0];
 
-    UserData user;
-    vector<UserData> users = db.select_all_user_data();
-    user = users[0];
+    std::vector<ItemData> items = ser_sys.search_item_label("food");
+    for(int i=0; i<items.size(); i++) {
+        items[i].print();
+        cout << endl;
+    }
+
+//    //顾客身份 买
+//    vector<SellerData> sellers = db.select_all_seller_data();
+//    seller = sellers[0];
+
+//    UserData user;
+//    vector<UserData> users = db.select_all_user_data();
+//    user = users[0];
 //    GetUserInfo(user);
 //    string user_id = db.insert_user_data(user);
-
+//
 //    cout << "1: 查看消息" << endl;
 //    cout << "2: 添加购物车" << endl;
 //    cout << "3: 删除购物车" << endl;
 //    cout << "4: 提交订单" << endl;
+//    cout << "5: 显示订单" << endl;
 //    cout << "0: 结束操作" << endl;
 //    cin >> choice;
 //
@@ -181,6 +197,9 @@ int main() {
 //            case 4:
 //                ser_sys.submit_shop_list(user.id, seller.id);
 //                break;
+//            case 5:
+//                display_shop_list(user.id);
+//                break;
 //            default:
 //                cout << "ERROR : wrong choice!!!" << endl;
 //                break;
@@ -190,16 +209,25 @@ int main() {
 //        cout << "2: 添加购物车" << endl;
 //        cout << "3: 删除购物车" << endl;
 //        cout << "4: 提交订单" << endl;
+//        cout << "5: 显示订单" << endl;
 //        cout << "0: 结束操作" << endl;
 //        cin >> choice;
 //    }
 //
 //    ser_sys.deal_BuyItemRequest(seller.id);
-//    db.close();
 
-    seller.wallet.money = 1000;
-    db.modify_seller_data(seller.id, seller);
+    /*测试一：
+    顾客买了一件，商家处理，不退货    ok
+     */
+    /*测试二：
+    顾客买了两件，商家处理，退货一件    ok
+    user = db.select_user_data(user.id);
     Order order = user.current_order[0];
     ser_sys.returnItem(user.id, order);
+     */
+    /*测试三：
+    顾客买了多件，钱不够，商家不处理订单
+     */
+
     db.close();
 }

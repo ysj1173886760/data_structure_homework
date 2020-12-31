@@ -6,21 +6,18 @@
 #include <string>
 #include <regex>
 
-RegisterManager::RegisterManager() {
-    DB& db = DB::getInstance();
-
-    all_manager_data = db.select_all_manager_data();
-}
-
 
 int RegisterManager::Register(const std::string& account,
                                const std::string& password,
                                const std::string& confirm_password) {
+    DB& db = DB::getInstance();
+
+    all_manager_data = db.select_all_manager_data();
+
     //
     if (!register_account(account)) return 1;
     if (!register_password(password, confirm_password)) return 2;
 
-    DB& db = DB::getInstance();
     db.insert_manager_data(manager);
 
     return 0;
@@ -28,6 +25,10 @@ int RegisterManager::Register(const std::string& account,
 
 //
 bool RegisterManager::register_account(const std::string& account) {
+
+    DB& db = DB::getInstance();
+
+    all_manager_data = db.select_all_manager_data();
 
     // the account already exists
     for (const auto& it : all_manager_data) {

@@ -15,7 +15,40 @@
 		"real_name" : "123",
 		"shop_list" : null,
 		"user_name" : "123",
-		"wallet" : 
+		"wallet" :
+		{
+			"money" : 0.0,
+			"password" : ""
+		}
+		"account" : "",
+		"age" : "",
+		"current_order" :
+		[
+			{
+				"buy_num" : 1,
+				"id" : "520201231103129",
+				"item_id" : "420201231085347",
+				"price" : 10.0,
+				"time" : "20201231103129"
+			}
+		],
+		"email" : "",
+		"gender" : "",
+		"history_item" : null,
+		"history_order" : null,
+		"id" : "120201231103120",
+		"id_number" : "",
+		"message" :
+		[
+			"you have cost 10.000000 in test_shop_name",
+			"your 1 a have arrived, pls check"
+		],
+		"password" : "",
+		"phone_number" : "",
+		"real_name" : "",
+		"shop_list" : null,
+		"user_name" : "",
+		"wallet" :
 		{
 			"money" : 0.0,
 			"password" : ""

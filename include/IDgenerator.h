@@ -20,7 +20,9 @@ public:
         return instance;
     }
 
+    //传入不同的数据类型，返回ID
     std::string generateID(Type type);
+    //传入ID，返回不同的数据类型
     Type GetType(const std::string&);
 };
 
