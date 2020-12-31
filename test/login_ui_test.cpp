@@ -20,6 +20,7 @@
 #include "ManagerOperation.h"
 #include "SellerSystem.h"
 #include "ServiceSystem.h"
+#include "MoneySystem.h"
 
 enum {
     COMMAND_QUIT = 1,
@@ -47,7 +48,16 @@ enum {
     COMMAND_ITEM,
     COMMAND_FIND,
     COMMAND_CART,
-    COMMAND_SUBMIT
+    COMMAND_SUBMIT,
+    COMMAND_CHARGE,
+    COMMAND_WITHDRAW,
+    COMMAND_TRANSFER
+};
+
+enum {
+    ARG_LABEL = 1,
+    ARG_SHOP,
+    ARG_PART
 };
 
 enum Status {
@@ -116,6 +126,13 @@ void init() {
     mp["find"] = COMMAND_FIND;
     mp["cart"] = COMMAND_CART;
     mp["submit"] = COMMAND_SUBMIT;
+    mp["charge"] = COMMAND_CHARGE;
+    mp["withdraw"] = COMMAND_WITHDRAW;
+    mp["transfer"] = COMMAND_TRANSFER;
+
+    mp["-l"] = ARG_LABEL;
+    mp["-s"] = ARG_SHOP;
+    mp["-p"] = ARG_PART;
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -1175,13 +1192,37 @@ void do_find(const std::vector<std::string> &commands) {
     }
 
     ServiceSystem serviceSystem;
-    ui_list.item_data_list = serviceSystem.display_item(commands[1]);
+    if (commands.size() == 2) {
+        // sim by default
+        ui_list.item_data_list = serviceSystem.search_item_sim(commands[1]);
+    } else if (commands.size() == 3) {
+        switch (mp[commands[2]]) {
+            case ARG_PART:
+                ui_list.item_data_list = serviceSystem.search_item_part(commands[1]);
+                break;
+
+            case ARG_SHOP:
+                ui_list.item_data_list = serviceSystem.search_shop(commands[1]);
+                break;
+
+            case ARG_LABEL:
+                ui_list.item_data_list = serviceSystem.search_item_label(commands[1]);
+                break;
+
+            default:
+                err_command(commands[2]);
+                break;
+        }
+    } else {
+        printf("error arg num.\n");
+        return;
+    }
     ui_list.type = TYPE_ITEM_DATA;
     ui_list.max_row = ui_list.item_data_list.size();
     ui_list.curr_row = 0;
 
     if (ui_list.max_row == 0) {
-        printf("no matching items.\n");
+        printf("no matching results.\n");
         return;
     }
 
@@ -1270,14 +1311,86 @@ void do_modify(const std::vector<std::string> &commands) {
     }
 }
 
-void submit_order() {
+void do_charge(const std::vector<std::string> &commands) {
+    if (commands.size() != 2) {
+        err_arg_num("charge", 1, commands.size() - 1);
+        return;
+    }
 
+    double money;
+    if (!str2double(commands[1], money)) {
+        err_arg_type("charge", "double");
+        return;
+    }
+
+    if (status.type == STATUS_MANAGER) {
+        printf("you don`t have to charge.\n");
+        return;
+    }
+
+    if (status.type == STATUS_TOURIST) {
+        err_permit();
+        return;
+    }
+
+    MoneySystem moneySystem;
+    bool res = moneySystem.RechargeMoney(status.id, money);
+    if (res) {
+        printf("charge money complete.\n");
+    } else {
+        printf("charge money failed.\n");
+    }
+}
+
+void do_withdraw(const std::vector<std::string> &commands) {
+    if (commands.size() != 2) {
+        err_arg_num("charge", 1, commands.size() - 1);
+        return;
+    }
+
+    if (status.type == STATUS_MANAGER) {
+        printf("no you don`t want to do this.\n");
+        return;
+    }
+
+    if (status.type == STATUS_TOURIST) {
+        err_permit();
+        return;
+    }
+
+    double money;
+    if (!str2double(commands[1], money)) {
+        err_arg_type("charge", "double");
+        return;
+    }
+    MoneySystem moneySystem;
+    bool res = moneySystem.WithdrawMoney(status.id, money);
+    if (res) {
+        printf("withdraw money complete.\n");
+    } else {
+        printf("withdraw money failed.\n");
+    }
+}
+
+void submit_order(const std::vector<std::string> &commands) {
+    if (commands.size() != 2) {
+        err_arg_num("submit", 1, commands.size() - 1);
+        return;
+    }
+
+    ServiceSystem serviceSystem;
+    bool res = serviceSystem.submit_shop_list(status.id, commands[1]);
+    if (res) {
+        printf("Order submit complete.\n");
+    } else {
+        printf("Order submit failed.\n");
+    }
 }
 
 void do_submit(const std::vector<std::string> &commands) {
     switch (status.type) {
         case STATUS_USER:
-            submit_order();
+            submit_order(commands);
             break;
 
         default:
@@ -1286,9 +1399,36 @@ void do_submit(const std::vector<std::string> &commands) {
     }
 }
 
+void do_transfer(const std::vector<std::string> &commands) {
+    if (commands.size() != 3) {
+        err_arg_num("transfer", 2, commands.size() - 1);
+        return;
+    }
+
+    if (status.type == STATUS_TOURIST || status.type == STATUS_MANAGER) {
+        err_permit();
+        return;
+    }
+
+    double money;
+    if (!str2double(commands[2], money)) {
+        err_arg_type("charge", "double");
+        return;
+    }
+    MoneySystem moneySystem;
+    bool res = moneySystem.TransferMoney(status.id, commands[1], money);
+    if (res) {
+        printf("transfer money complete.\n");
+    } else {
+        printf("transfer money failed.\n");
+    }
+}
+
 bool execute_command(char *input) {
     std::vector<std::string> commands = prepare_command(std::string(input));
 
+    // chech whether to clear ui_list
+    bool clear_ui_list = false;
     // if there`s no command, just quit
     if (commands.empty()) return true;
     // commands[0] is main command
@@ -1323,18 +1463,22 @@ bool execute_command(char *input) {
 
         case COMMAND_ADD:
             do_add(commands);
+            clear_ui_list = true;
             break;
 
         case COMMAND_REMOVE:
             do_remove(commands);
+            clear_ui_list = true;
             break;
 
         case COMMAND_ACCEPT:
             do_accept(commands);
+            clear_ui_list = true;
             break;
 
         case COMMAND_REJECT:
             do_reject(commands);
+            clear_ui_list = true;
             break;
 
         case COMMAND_NEXT:
@@ -1351,6 +1495,7 @@ bool execute_command(char *input) {
 
         case COMMAND_MODIFY:
             do_modify(commands);
+            clear_ui_list = true;
             break;
 
         case COMMAND_FIND:
@@ -1359,12 +1504,33 @@ bool execute_command(char *input) {
 
         case COMMAND_SUBMIT:
             do_submit(commands);
+            clear_ui_list = true;
+            break;
+
+        case COMMAND_WITHDRAW:
+            do_withdraw(commands);
+            break;
+
+        case COMMAND_CHARGE:
+            do_charge(commands);
+            break;
+
+        case COMMAND_TRANSFER:
+            do_transfer(commands);
             break;
 
         default:
             err_command(commands[0]);
             break;
     }
+
+    // hope this will work
+    if (clear_ui_list) {
+        ui_list.type = TYPE_NONE;
+        ui_list.max_row = 0;
+        ui_list.curr_row = 0;
+    }
+
     return true;
 }
 

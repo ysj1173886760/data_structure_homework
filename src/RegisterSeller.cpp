@@ -6,15 +6,15 @@
 #include <string>
 #include <regex>
 
-RegisterSeller::RegisterSeller() {
-    DB& db = DB::getInstance();
-
-    all_seller_data = db.select_all_seller_data();
-}
-
-RegisterSeller::~RegisterSeller() {
-
-}
+//RegisterSeller::RegisterSeller() {
+//    DB& db = DB::getInstance();
+//
+//    all_seller_data = db.select_all_seller_data();
+//}
+//
+//RegisterSeller::~RegisterSeller() {
+//
+//}
 
 
 // return 0, if you successfully apply to manager
@@ -48,7 +48,6 @@ int RegisterSeller::Register(const std::string& account,
 
     copy_to_register_requests_data();
 
-    DB& db = DB::getInstance();
     // insert the seller data to register request list
     db.insert_register_request_data(rrd);
 
