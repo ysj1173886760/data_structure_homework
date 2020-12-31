@@ -386,7 +386,57 @@ void user_forget() {
 }
 
 void seller_forget() {
-    printf("not implemented yet.\n");
+    std::string account, shop_name, shop_owner_name,
+                shop_owner_phone_number,
+                shop_owner_id_number,
+                new_password,
+                new_confirm_password;
+
+    printf("Please Enter Your Account.\n");
+    std::cin >> account;
+    printf("Please Enter Your Shop Name.\n");
+    std::cin >> shop_name;
+    printf("Please Enter Your Shop Owner Name.\n");
+    std::cin >> shop_owner_name;
+    printf("Please Enter Your Shop Owner ID Number.\n");
+    std::cin >> shop_owner_id_number;
+    printf("Please Enter Your New Password.\n");
+
+    system("stty -echo");
+    std::cin >> new_password;
+    printf("Please Confirm Your Password.\n");
+    std::cin >> new_confirm_password;
+    system("stty echo");
+
+    LoginSeller loginSeller;
+    int res = loginSeller.ForgotPassword(account,
+                                         shop_name,
+                                         shop_owner_name,
+                                         shop_owner_phone_number,
+                                         shop_owner_id_number,
+                                         new_password,
+                                         new_confirm_password);
+    switch (res) {
+        case 0:
+            printf("Change Password Succeed.\n");
+            break;
+
+        case 1:
+            printf("Wrong Account.\n");
+            break;
+
+        case 2:
+            printf("Verification error.\n");
+            break;
+
+        case 3:
+            printf("Illegal Password.\n");
+            break;
+
+        default:
+            err_system();
+            break;
+    }
 }
 
 void seller_register() {
