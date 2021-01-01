@@ -171,7 +171,7 @@ bool ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
     if(op.GetItem(shop_name, item_name, item)) {
         int tar = item_in_shop_list(user_id, item.id);
         if(item.store_num < num) {
-            //std::cout << "ERROR : under stock!!!" << std::endl;
+            std::cout << "ERROR : under stock!!!" << std::endl;
             return false;
         }
 
@@ -225,8 +225,14 @@ bool ServiceSystem::remove_shop_list(const std::string& user_id, const std::stri
 bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::string& remark) {
     BasicOperation op;
     DB &db = DB::getInstance();
-    IDgenerator& generator = IDgenerator::get_instance();
+    IDgenerator &generator = IDgenerator::get_instance();
     UserData user = db.select_user_data(user_id);
+
+    double sum_cost = op.GetCost(user.id);
+    if (sum_cost > user.wallet.money) {
+        std::cout << "ERROR : you don't have enough money" << std::endl;
+        return false;
+    }
 
     for(int i=0; i<user.shop_list.size(); i++) {
         std::string item_id = user.shop_list[i].item_id;
@@ -239,7 +245,7 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
         MoneySystem money_sys;
         if (money_sys.TransferMoney(user.id, seller.id, cost)) {
 
-            user = db.select_user_data(user_id);
+            //user = db.select_user_data(user_id);
             seller = db.select_seller_data(seller.id);
 
             BuyItemRequestData add;
@@ -255,7 +261,9 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             seller.buy_item_request_list.push_back(add);
 
             db.modify_seller_data(seller.id, seller);
-            db.modify_user_data(user.id, user);
+           // db.modify_user_data(user.id, user);
+
+           // user = db.select_user_data(user.id);
 
             MessageSystem message_sys;
             std::string user_info = "you have cost " + to_string(cost) + " in " + seller.shop_name;
@@ -268,7 +276,14 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
     }
 
 
-    user.shop_list.swap(user.current_order);
+    user = db.select_user_data(user.id);
+
+    for(int i=0; i<user.shop_list.size(); i++) {
+        Order order = user.shop_list[i];
+        user.current_order.push_back(order);
+    }
+    user.shop_list.clear();
+
     db.modify_user_data(user.id, user);
 
     return true;
@@ -303,11 +318,12 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
         return;
     }
 
+    UserData user = db.select_user_data(seller.buy_item_request_list[0].user_id);
+
     for(int i=0; i<seller.buy_item_request_list.size(); i++) {
         ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
         UserData user = db.select_user_data(seller.buy_item_request_list[i].user_id);
 
-        int del=0;
         //库存不足 需要退货
         if(item.store_num < seller.buy_item_request_list[i].buy_num) {
             int tar = item_in_current_list(user.id, item.id);
@@ -318,14 +334,14 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
             if(money_sys.TransferMoney(seller.id, user.id, item.price * seller.buy_item_request_list[i].buy_num)) {
 
                 std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
-                                   " is rejected and we have repay you";
+                                       " is rejected and we have repay you";
                 message_sys.SendMessage(user.id, info);
-                del++;
             }
         }
 
         else {
             item.store_num -= seller.buy_item_request_list[i].buy_num;
+            item.sell_num += seller.buy_item_request_list[i].buy_num;
             std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
                     + item.name + " have arrived, pls check";
             message_sys.SendMessage(user.id, info);
@@ -359,6 +375,8 @@ bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
             MoneySystem money_sys;
             if (money_sys.TransferMoney(seller.id, user.id, order.price*order.buy_num)) {
                 item.store_num += order.buy_num;
+                item.sell_num -= order.buy_num;
+
                 MessageSystem message_sys;
                 message_sys.SendMessage(seller.id, info);
             } else {

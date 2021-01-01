@@ -25,7 +25,7 @@ public:
     //传入商家的名称，商品的名称，返回的对应商品的信息存在第三个参数中
     bool GetItem(const std::string&, const std::string&, ItemData&);
     //传入顾客的ID与商家的名称，返回该顾客的订单花费
-    double GetCost(const std::string&, const std::string&);
+    double GetCost(const std::string&);
     //传入商家的名称，将商家的信息存在第二个参数中
     bool GetSeller(const std::string&, SellerData&);
     //传入顾客的账号，返回顾客的ID
