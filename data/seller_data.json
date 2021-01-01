@@ -1,58 +1,5 @@
 [
 	{
-		"account" : "qwe",
-		"buy_item_request_list" : null,
-		"change_item_request_list" : null,
-		"discount" : null,
-		"history_order" : null,
-		"id" : "220201231102904",
-		"message" : null,
-		"password" : "123456789",
-		"question_list" : null,
-		"shop_address" : "qwe",
-		"shop_name" : "qwe",
-		"shop_owner_id_number" : "130602200009150939",
-		"shop_owner_name" : "qwe",
-		"shop_owner_phone_number" : "15130410553",
-		"wallet" : 
-		{
-			"money" : 0.0,
-			"password" : ""
-		}
-	},
-	{
-		"account" : "test_shop",
-		"buy_item_request_list" : 
-		[
-			{
-				"buy_num" : 2,
-				"id" : "720210101103300",
-				"item_id" : "420201229153041",
-				"price" : 25.0,
-				"remark" : "s",
-				"time" : "20210101102808",
-				"user_id" : "120201231193112"
-			}
-		],
-		"change_item_request_list" : null,
-		"discount" : null,
-		"history_order" : null,
-		"id" : "220201231103120",
-		"message" : null,
-		"password" : "123456789",
-		"question_list" : null,
-		"shop_address" : "DB university",
-		"shop_name" : "test_shop_name",
-		"shop_owner_id_number" : "",
-		"shop_owner_name" : "",
-		"shop_owner_phone_number" : "",
-		"wallet" : 
-		{
-			"money" : 395.0,
-			"password" : ""
-		}
-	},
-	{
 		"account" : "123456",
 		"buy_item_request_list" : null,
 		"change_item_request_list" : null,
@@ -87,6 +34,48 @@
 		"shop_name" : "sheep2",
 		"shop_owner_id_number" : "130602200009150939",
 		"shop_owner_name" : "sheep2",
+		"shop_owner_phone_number" : "15130410553",
+		"wallet" : 
+		{
+			"money" : 0.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "test_shop",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231103120",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "DB university",
+		"shop_name" : "test_shop_name",
+		"shop_owner_id_number" : "",
+		"shop_owner_name" : "",
+		"shop_owner_phone_number" : "",
+		"wallet" : 
+		{
+			"money" : 675.0,
+			"password" : ""
+		}
+	},
+	{
+		"account" : "qwe",
+		"buy_item_request_list" : null,
+		"change_item_request_list" : null,
+		"discount" : null,
+		"history_order" : null,
+		"id" : "220201231102904",
+		"message" : null,
+		"password" : "123456789",
+		"question_list" : null,
+		"shop_address" : "qwe",
+		"shop_name" : "qwe",
+		"shop_owner_id_number" : "130602200009150939",
+		"shop_owner_name" : "qwe",
 		"shop_owner_phone_number" : "15130410553",
 		"wallet" : 
 		{

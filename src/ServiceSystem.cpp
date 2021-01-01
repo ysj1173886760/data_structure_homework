@@ -318,8 +318,6 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
         return;
     }
 
-    UserData user = db.select_user_data(seller.buy_item_request_list[0].user_id);
-
     for(int i=0; i<seller.buy_item_request_list.size(); i++) {
         ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
         UserData user = db.select_user_data(seller.buy_item_request_list[i].user_id);
@@ -335,7 +333,8 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
 
                 std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
                                        " is rejected and we have repay you";
-                message_sys.SendMessage(user.id, info);
+//                message_sys.SendMessage(user.id, info);
+                user.message.emplace_back(info);
             }
         }
 
@@ -344,10 +343,13 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
             item.sell_num += seller.buy_item_request_list[i].buy_num;
             std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
                     + item.name + " have arrived, pls check";
-            message_sys.SendMessage(user.id, info);
+//            message_sys.SendMessage(user.id, info);
+            user.message.emplace_back(info);
             db.modify_item_data(item.id, item);
         }
 
+        UserData new_user = db.select_user_data(user.id);
+        user.wallet = new_user.wallet;
         db.modify_user_data(user.id, user);
     }
 
