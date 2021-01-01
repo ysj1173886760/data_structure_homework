@@ -277,51 +277,6 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
     //seller.message.push_back(seller_info);
 }
 
-//显示一：购买清单为空显示 无购买请求
-void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
-    BasicOperation op;
-    MessageSystem message_sys;
-    DB &db = DB::getInstance();
-    SellerData seller = db.select_seller_data(seller_id);
-
-    if(seller.buy_item_request_list.size() == 0) {
-        std::cout << "NO BuyItemRequest";
-        return;
-    }
-
-
-    for(int i=0; i<seller.buy_item_request_list.size(); i++) {
-        ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
-
-        UserData user = db.select_user_data(seller.buy_item_request_list[i].user_id);
-        int del=0;
-        //库存不足 需要退货
-        if(item.store_num < seller.buy_item_request_list[i].buy_num) {
-            user.current_order.erase(user.current_order.begin()+i-del);
-
-            MoneySystem money_sys;
-            if(money_sys.TransferMoney(seller.id, user.id, item.price * seller.buy_item_request_list[i].buy_num)) {
-
-                std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
-                                   " is rejected and we have repay you";
-                message_sys.SendMessage(user.id, info);
-                del++;
-            }
-        }
-
-        else {
-            item.store_num-=seller.buy_item_request_list[i].buy_num;
-            std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
-                    + item.name + " have arrived, pls check";
-            message_sys.SendMessage(user.id, info);
-            db.modify_item_data(item.id, item);
-        }
-    }
-
-    seller.buy_item_request_list.clear();
-    db.modify_seller_data(seller.id, seller);
-}
-
 int item_in_current_list(const std::string& user_id, const std::string& item_id) {
     BasicOperation op;
     DB &db = DB::getInstance();
@@ -334,6 +289,54 @@ int item_in_current_list(const std::string& user_id, const std::string& item_id)
         }
     }
     return -1;
+}
+
+//显示一：购买清单为空显示 无购买请求
+void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
+    BasicOperation op;
+    MessageSystem message_sys;
+    DB &db = DB::getInstance();
+    SellerData seller = db.select_seller_data(seller_id);
+
+    if(seller.buy_item_request_list.size() == 0) {
+        std::cout << "NO BuyItemRequest";
+        return;
+    }
+
+    for(int i=0; i<seller.buy_item_request_list.size(); i++) {
+        ItemData item = db.select_item_data(seller.buy_item_request_list[i].item_id);
+        UserData user = db.select_user_data(seller.buy_item_request_list[i].user_id);
+
+        int del=0;
+        //库存不足 需要退货
+        if(item.store_num < seller.buy_item_request_list[i].buy_num) {
+            int tar = item_in_current_list(user.id, item.id);
+            user.current_order.erase(user.current_order.begin() + tar);
+
+            MoneySystem money_sys;
+
+            if(money_sys.TransferMoney(seller.id, user.id, item.price * seller.buy_item_request_list[i].buy_num)) {
+
+                std::string info = "sorry, because under stock, your BuyItemRequest of " + item.name +
+                                   " is rejected and we have repay you";
+                message_sys.SendMessage(user.id, info);
+                del++;
+            }
+        }
+
+        else {
+            item.store_num -= seller.buy_item_request_list[i].buy_num;
+            std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
+                    + item.name + " have arrived, pls check";
+            message_sys.SendMessage(user.id, info);
+            db.modify_item_data(item.id, item);
+        }
+
+        db.modify_user_data(user.id, user);
+    }
+
+    seller.buy_item_request_list.clear();
+    db.modify_seller_data(seller.id, seller);
 }
 
 bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
