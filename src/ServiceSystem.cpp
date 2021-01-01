@@ -171,7 +171,7 @@ bool ServiceSystem::insert_shop_list(const std::string& user_id, const std::stri
     if(op.GetItem(shop_name, item_name, item)) {
         int tar = item_in_shop_list(user_id, item.id);
         if(item.store_num < num) {
-            //std::cout << "ERROR : under stock!!!" << std::endl;
+            std::cout << "ERROR : under stock!!!" << std::endl;
             return false;
         }
 
@@ -245,7 +245,7 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
         MoneySystem money_sys;
         if (money_sys.TransferMoney(user.id, seller.id, cost)) {
 
-            user = db.select_user_data(user_id);
+            //user = db.select_user_data(user_id);
             seller = db.select_seller_data(seller.id);
 
             BuyItemRequestData add;
@@ -258,7 +258,9 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             seller.buy_item_request_list.push_back(add);
 
             db.modify_seller_data(seller.id, seller);
-            db.modify_user_data(user.id, user);
+           // db.modify_user_data(user.id, user);
+
+           // user = db.select_user_data(user.id);
 
             MessageSystem message_sys;
             std::string user_info = "you have cost " + to_string(cost) + " in " + seller.shop_name;
@@ -267,6 +269,8 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             db.modify_seller_data(seller.id, seller);
         }
     }
+
+    user = db.select_user_data(user.id);
 
     for(int i=0; i<user.shop_list.size(); i++) {
         Order order = user.shop_list[i];
@@ -331,6 +335,7 @@ void ServiceSystem::deal_BuyItemRequest(const std::string &seller_id) {
 
         else {
             item.store_num -= seller.buy_item_request_list[i].buy_num;
+            item.sell_num += seller.buy_item_request_list[i].buy_num;
             std::string info = "your " + to_string(seller.buy_item_request_list[i].buy_num) + " "
                     + item.name + " have arrived, pls check";
             message_sys.SendMessage(user.id, info);
@@ -364,6 +369,8 @@ bool ServiceSystem::returnItem(const std::string& user_id, const Order& order) {
             MoneySystem money_sys;
             if (money_sys.TransferMoney(seller.id, user.id, order.price*order.buy_num)) {
                 item.store_num += order.buy_num;
+                item.sell_num -= order.buy_num;
+
                 MessageSystem message_sys;
                 message_sys.SendMessage(seller.id, info);
             }
