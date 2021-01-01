@@ -60,7 +60,8 @@ enum {
     COMMAND_ASK,
     COMMAND_ASSET,
     COMMAND_CLEAN,
-    COMMAND_FORGET
+    COMMAND_FORGET,
+    COMMAND_HELP
 };
 
 enum {
@@ -152,12 +153,56 @@ void init() {
     mp["ask"] = COMMAND_ASK;
     mp["clean"] = COMMAND_CLEAN;
     mp["forget"] = COMMAND_FORGET;
+    mp["help"] = COMMAND_HELP;
 
     mp["-l"] = ARG_LABEL;
     mp["-s"] = ARG_SHOP;
     mp["-p"] = ARG_PART;
     mp["-c"] = ARG_CURRENT;
     mp["-h"] = ARG_HISTORY;
+}
+
+void do_help() {
+    printf("quit : to exit the system.\n");
+    printf("login : to login the system.\n");
+    printf("register : register new account.\n");
+    printf("user seller manager is arguments for login and register.\n");
+    printf("resend : resend the email.\n");
+    printf("change: to change the email.\n");
+    printf("back : back to the previous page when you registering.\n");
+    printf("retry : try again when you failed.\n");
+    printf("status : to check your login status.\n");
+    printf("clear : clear the screen.\n");
+    printf("logout : just logout.\n");
+    printf("ls : list the info you need, followed by arguments.\n");
+    printf("add : add something you need, followed by arguments, such as add manager add cart.\n");
+    printf("rm : same as previous one, delete something.\n");
+    printf("accept : accept the register request.\n");
+    printf("reject : reject the register request.\n");
+    printf("next : print next 10 info.\n");
+    printf("previous : print previous 10 info.\n");
+    printf("detail : show the detail, followed by a num.\n");
+    printf("modify : modify something you want, follow by arguments.\n");
+    printf("item : a argument, represent item.\n");
+    printf("find : find items.\n");
+    printf("cart : a argument, represent shop list.\n");
+    printf("submit : submit your orders.\n");
+    printf("charge : charge money.\n");
+    printf("withdraw : withdraw money.\n");
+    printf("order : a argument, represent orders.\n");
+    printf("transfer : transfer money to others.\n");
+    printf("confirm : confirm the order.\n");
+    printf("return : return the order.\n");
+    printf("message : a argument, represent messages.\n");
+    printf("asset : show your asset.\n");
+    printf("ask : ask questions.\n");
+    printf("clean : clean the messages.\n");
+    printf("forget : forget password.\n");
+    printf("-l : parameter, represent label.\n");
+    printf("-s : parameter, represent shop.\n");
+    printf("-p : parameter, represent part.\n");
+    printf("-c : parameter, represent current.\n");
+    printf("-h : parameter, represent history.\n");
 }
 
 void err_arg_num(const std::string &main_command, int expect, int now) {
@@ -807,8 +852,8 @@ void list_buy_request() {
 void list_seller_message() {
     DB &db = DB::getInstance();
     ui_list.message_list = db.select_seller_data(status.id).message;
-    ui_list.type = TYPE_ORDER;
-    ui_list.max_row = ui_list.order_list.size();
+    ui_list.type = TYPE_MESSAGE;
+    ui_list.max_row = ui_list.message_list.size();
     ui_list.curr_row = 0;
 
     if (ui_list.max_row == 0) {
@@ -898,8 +943,8 @@ void list_order(const std::vector<std::string> &commands) {
 void list_user_message(const std::vector<std::string> &commands) {
      DB &db = DB::getInstance();
      ui_list.message_list = db.select_user_data(status.id).message;
-     ui_list.type = TYPE_ORDER;
-     ui_list.max_row = ui_list.order_list.size();
+     ui_list.type = TYPE_MESSAGE;
+     ui_list.max_row = ui_list.message_list.size();
      ui_list.curr_row = 0;
 
      if (ui_list.max_row == 0) {
@@ -1996,6 +2041,10 @@ bool execute_command(char *input) {
 
         case COMMAND_FORGET:
             do_forget(commands);
+            break;
+
+        case COMMAND_HELP:
+            do_help();
             break;
 
         default:
