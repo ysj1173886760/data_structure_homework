@@ -225,8 +225,14 @@ bool ServiceSystem::remove_shop_list(const std::string& user_id, const std::stri
 bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::string& remark) {
     BasicOperation op;
     DB &db = DB::getInstance();
-    IDgenerator& generator = IDgenerator::get_instance();
+    IDgenerator &generator = IDgenerator::get_instance();
     UserData user = db.select_user_data(user_id);
+
+    double sum_cost = op.GetCost(user.id);
+    if (sum_cost > user.wallet.money) {
+        std::cout << "ERROR : you don't have enough money" << std::endl;
+        return false;
+    }
 
     for(int i=0; i<user.shop_list.size(); i++) {
         std::string item_id = user.shop_list[i].item_id;
@@ -248,8 +254,6 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
             add.item_id = user.shop_list[i].item_id;
             add.time = user.shop_list[i].time;
             add.price = user.shop_list[i].price;
-//            std::cout << "please input remark : ";
-//            std::cin >> add.remark;
             add.id = generator.generateID(Type::BuyItemRequest);
             seller.buy_item_request_list.push_back(add);
 
@@ -264,7 +268,13 @@ bool ServiceSystem::submit_shop_list(const std::string &user_id, const std::stri
         }
     }
 
-    user.shop_list.swap(user.current_order);
+    for(int i=0; i<user.shop_list.size(); i++) {
+        Order order = user.shop_list[i];
+        user.current_order.push_back(order);
+    }
+    user.shop_list.clear();
+
+    db.modify_user_data(user.id, user);
 
     return true;
     //感觉给商家留言没啥必要 先留着吧
